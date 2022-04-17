@@ -17,6 +17,21 @@
 // AdminLTE
 @import '../../vendor/almasaeed2010/adminlte/dist/css/adminlte.css';
 @import './component/float_button.scss';
+
+.preview_admin {
+    max-width: 300px !important;
+    max-height: 120px !important;
+    object-fit: cover;
+}
+
+.btn-circle {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px !important;
+    font-size: 18px !important;
+    line-height: 1.33 !important; 
+    border-radius: 25px !important;
+  }
 // Bootstrap
 // Already imported by AdminLTE
 //@import '~bootstrap/scss/bootstrap';

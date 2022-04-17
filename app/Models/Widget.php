@@ -9,5 +9,7 @@ class Widget extends Model
 {
     use HasFactory;
 
-    
+    protected $fillable = [
+        'id', 'name', 'execute_widget'
+    ];
 }

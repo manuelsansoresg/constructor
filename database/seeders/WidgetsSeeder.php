@@ -17,14 +17,18 @@ class WidgetsSeeder extends Seeder
     {
         $titulos = array('Encabezado', 'Slider', 'Título', 'Descripción', '2 columnas',
         'Parallax', 'Productos', 'Video', 'Galería', 'Contacto', 'Pie de página');
+       
+        $execute = array('header', 'carusel', '', '', '',
+        '', '', '', '', '', '');
         
-        foreach ($titulos as $titulo) {
+        foreach ($titulos as $key => $titulo) {
             $widget = new Widget();
             $widget->name = $titulo;
+            $widget->execute_widget = $execute[$key];
             $widget->save();
         }
-        /* $page = new Builder();
+        $page = new Builder();
         $page->name = 'Inicio';
-        $page->save(); */
+        $page->save();
     }
 }

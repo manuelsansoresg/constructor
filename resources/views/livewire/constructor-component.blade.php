@@ -71,8 +71,9 @@
                                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                             {{-- mywidgets --}}
                                             @foreach ($my_widgets as $my_widget)
+                                           
+                                            @if ($my_widget['id_rel'] == 1)
                                                 <?php $headers = $widget_builder->pageHeader($my_widget['widget_id'], 1) ?>
-                                                @if ($headers != null)
                                                     @foreach ($headers as $header)
                                                         <div class="card mt-5 shadow">
                                                             <div class="card-header">
@@ -80,11 +81,13 @@
                                                             </div>
                                                             <div class="card-body">
                                                                 <div class="row">
-                                                                    <div class="col-12 col-md-3">
-                                                                        <img src="{{ asset('storage/files/' . $header->image) }}" alt="Profiler"
-                                                                        class="img-fluid">
-                                    
-                                                                    </div>
+                                                                    @if ($header->image != '')
+                                                                        <div class="col-12 col-md-3">
+                                                                            <img src="{{ asset('files/' . $header->image) }}" alt="Profiler"
+                                                                            class="preview_admin">
+                                        
+                                                                        </div>
+                                                                    @endif
                                                                     <div class="col-12 col-md-6 text-center">
                                                                         {{ $header->title}}
                                                                     </div>
@@ -95,14 +98,28 @@
                                                                 </div>
                                                                 <div class="form-group mt-3 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $header->id }}, 1)">Borrar</button>
-                                                                        <button class="btn btn-outline-primary" wire:click='storeHeader()'>Editar</button>
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $header->id }}, 'Encabezado')">Borrar</button>
+                                                                        <button class="btn btn-outline-primary" wire:click='editWidget({{ $header->id }}, "Encabezado")'>Editar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     @endforeach
                                                 @endif
+                                                {{-- carusel --}}
+                                                @if ($my_widget['id_rel'] == 2)
+                                                    <?php $carusel_images = $widget_builder->pageCarusel($my_widget['widget_id'], 2) ?>
+                                                    <div class="card mt-5 shadow">
+                                                        <div class="card-header">
+                                                            <h5>Sección carusel</h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                        
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                {{-- carusel --}}
+                                                
                                             @endforeach
                                             {{-- mywidgets --}}
                                             {{-- seccion Encabezado --}}
@@ -117,6 +134,7 @@
                                                             <label for="InputWidget">Imagen</label>
                                                             <input type="file" class="form-control" wire:model='header_imagen'>
                                                         </div>
+                                                        
                                                         <div class="form-group">
                                                             <label for="InputWidget">*Título</label>
                                                             <input type="text" class="form-control" wire:model='header.title'>
@@ -156,6 +174,47 @@
                                                 </div>
                                             @endif
                                             {{-- /seccion Encabezado --}}
+
+                                            {{-- seccion carrusel --}}
+                                            @if ($widget == 2)
+                                            <div id="widget-carusel"></div>
+                                            <div class="card mt-5 shadow">
+                                                <div class="card-header">
+                                                    <h5>Sección encabezado</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="InputWidget">Imagen1</label>
+                                                        <input type="file" class="form-control" wire:model='carusel_imagen1'>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="InputWidget">Imagen2</label>
+                                                        <input type="file" class="form-control" wire:model='carusel_imagen2'>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="InputWidget">Imagen3</label>
+                                                        <input type="file" class="form-control" wire:model='carusel_imagen3'>
+                                                    </div>
+                                                    <div class="row ">
+                                                        <div class="col-12 text-center">
+                                                            <div wire:loading wire:target="storeCarusel">
+                                                                <div class="fa-3x">
+                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                                                </div>
+                                                            </div>
+                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group float-right">
+                                                        <button class="btn btn-outline-danger" wire:click="resetWidget">Cancelar</button>
+                                                        <button class="btn btn-outline-primary" wire:click='storeCarusel()'>Guardar</button>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+
+                                            @endif
+                                            {{-- seccion carrusel --}}
                                             
                                         </div>
                                         <div class="tab-pane fade" id="fondo" role="tabpanel" aria-labelledby="fondo-tab">...</div>
@@ -173,5 +232,5 @@
    </div>
 @include('page_modal')
 @include('section_modal')
-    <a href="#" onclick="modalSection()" class="btn-flotante"><i class="fas fa-plus"></i>Agregar sección</a>
+    <a href="#" onclick="modalSection()" class="btn-flotante btn btn-primary btn-circle mt-5"><i class="fas fa-plus"></i></a>
 </div>

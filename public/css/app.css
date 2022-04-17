@@ -61806,7 +61806,7 @@ a.text-muted:hover {
   padding: 18px 30px;
   /* Relleno del boton */
   position: fixed;
-  bottom: 40px;
+  bottom: 15px;
   right: 40px;
   transition: all 300ms ease 0ms;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -61828,4 +61828,19 @@ a.text-muted:hover {
     bottom: 20px;
     right: 20px;
   }
+}
+.preview_admin {
+  max-width: 300px !important;
+  max-height: 120px !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.btn-circle {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px !important;
+  font-size: 18px !important;
+  line-height: 1.33 !important;
+  border-radius: 25px !important;
 }

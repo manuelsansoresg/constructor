@@ -29,13 +29,14 @@ class WidgetHeader extends Model
         } else {
             $widget_header = new WidgetHeader($data);
             $widget_header->save();
+            $data_page = array(
+                'builder_id' => $page,
+                'widget_id' => $widget_header->id,
+                'id_rel' => 1
+            );
+            WidgetBuilder::saveEdit($data_page);
         }
-        $data_page = array(
-            'builder_id' => $page,
-            'id_rel' => 1,
-            'widget_id' => $widget_header->id
-        );
-        WidgetBuilder::saveEdit($data_page);
+        
         return $widget_header;
     }
 }
