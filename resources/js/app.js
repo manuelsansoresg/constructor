@@ -4,8 +4,13 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel';
 require('./components/title')
+
+
 
 /* window.Vue = require('vue').default; */
 

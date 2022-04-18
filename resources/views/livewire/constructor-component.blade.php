@@ -109,19 +109,108 @@
                                                 {{-- carusel --}}
                                                 @if ($my_widget['id_rel'] == 2)
                                                     <?php $carusel_images = $widget_builder->pageCarusel($my_widget['widget_id'], 2) ?>
-                                                    <div class="card mt-5 shadow">
-                                                        <div class="card-header">
-                                                            <h5>Sección carusel</h5>
+                                                    
+                                                    @foreach ($carusel_images as $carusel_image)
+                                                        <div class="card mt-5 shadow">
+                                                            <div class="card-header">
+                                                                <h5>Sección carusel</h5>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    @if ($carusel_image->imagen1 != '')
+                                                                    <div class="col-12 col-md-3">
+                                                                        <img class="img-fluid" src="{{ asset('files/' . $carusel_image->imagen1) }}" alt="" />
+                                                                    </div>
+                                                                    @endif
+                                                                    @if ($carusel_image->imagen2 != '')
+                                                                    <div class="col-12 col-md-3">
+                                                                        <img class="img-fluid" src="{{ asset('files/' . $carusel_image->imagen2) }}" alt="" />
+                                                                    </div>
+                                                                    @endif
+                                                                    @if ($carusel_image->imagen3 != '')
+                                                                    <div class="col-12 col-md-3">
+                                                                        <img class="img-fluid" src="{{ asset('files/' . $carusel_image->imagen3) }}" alt="" />
+                                                                    </div>
+                                                                    @endif
+                                                                </div>
+                                                                
+                                                                <div class="owl-carousel owl-theme owl-loaded owl-drag d-none">
+                                                                    
+                                                                        <div class="item">
+                                                                            
+                                                                            <div class="inner">
+                                                                                <div class="row row-content">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="headline-wrap">
+                                                                                            {{-- <h1><span class="reveal-text">H1 TITLE</span></h1>
+                                                                                            <h2><span class="reveal-text">H2 TITLE</span></h2> --}}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row row-cta">
+                                                                                    <div class="col-md-12 cta-wrap">
+                                                                                        {{-- <a class="cta-main"><span class="cta-text reveal-text">CTA-MAIN</span></a> --}}
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    
+                                                                    @if ($carusel_image->imagen2 != '')
+                                                                        <div class="item">
+                                                                            <img src="{{ asset('files/' . $carusel_image->imagen2) }}" alt="" />
+                                                                            <div class="inner">
+                                                                                <div class="row row-content">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="headline-wrap">
+                                                                                           {{--  <h1><span class="reveal-text">H1 TITLE</span></h1>
+                                                                                            <h2><span class="reveal-text">H2 TITLE</span></h2> --}}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row row-cta">
+                                                                                    <div class="col-md-12 cta-wrap">
+                                                                                        {{-- <a class="cta-main"><span class="cta-text reveal-text">CTA-MAIN</span></a> --}}
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
+                                                                    @if ($carusel_image->imagen3 != '')
+                                                                        <div class="item">
+                                                                            <img src="{{ asset('files/' . $carusel_image->imagen3) }}" alt="" />
+                                                                            <div class="inner">
+                                                                                <div class="row row-content">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="headline-wrap">
+                                                                                           {{--  <h1><span class="reveal-text">H1 TITLE</span></h1>
+                                                                                            <h2><span class="reveal-text">H2 TITLE</span></h2> --}}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row row-cta">
+                                                                                    <div class="col-md-12 cta-wrap">
+                                                                                        {{-- <a class="cta-main"><span class="cta-text reveal-text">CTA-MAIN</span></a> --}}
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                                <div class="form-group mt-3 float-right">
+                                                                    <div class="col-12">
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $carusel_image->id }}, 'Slider')">Borrar</button>
+                                                                        <button class="btn btn-outline-primary" wire:click='editWidget({{ $carusel_image->id }}, "Slider")'>Editar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="card-body">
-                                                        
-                                                        </div>
-                                                    </div>
+                                                    @endforeach
                                                 @endif
                                                 {{-- carusel --}}
                                                 
                                             @endforeach
                                             {{-- mywidgets --}}
+                                            {{-- -------------------------- seccion para editar  --------------------- --}}
                                             {{-- seccion Encabezado --}}
                                             @if ($widget == 1)
                                                 <div id="widget-header"></div>
@@ -130,10 +219,26 @@
                                                         <h5>Sección encabezado</h5>
                                                     </div>
                                                     <div class="card-body">
-                                                        <div class="form-group">
-                                                            <label for="InputWidget">Imagen</label>
-                                                            <input type="file" class="form-control" wire:model='header_imagen'>
-                                                        </div>
+
+                                                        @if ($header['image'] != null)
+                                                           <div class="row justify-content-center">
+                                                               <div class="col-12 col-md-3">
+                                                                    <img src="{{ asset('files/' . $header['image']) }}" alt="Profiler"
+                                                                    class="preview_admin">
+                                                                    
+                                                               </div>
+                                                           </div>
+                                                           <div class="row justify-content-center">
+                                                                <div class="col-12 mt-3 text-right">
+                                                                    <button class="btn btn-danger text-center" wire:click="deleteImage({{ $header['id'] }}, 'Encabezado' )">Borrar</button>
+                                                                </div>
+                                                           </div>
+                                                           @else
+                                                            <div class="form-group">
+                                                                <label for="InputWidget">Imagen</label>
+                                                                <input type="file" class="form-control" wire:model='header_imagen'>
+                                                            </div>
+                                                        @endif
                                                         
                                                         <div class="form-group">
                                                             <label for="InputWidget">*Título</label>
@@ -183,18 +288,68 @@
                                                     <h5>Sección encabezado</h5>
                                                 </div>
                                                 <div class="card-body">
-                                                    <div class="form-group">
-                                                        <label for="InputWidget">Imagen1</label>
-                                                        <input type="file" class="form-control" wire:model='carusel_imagen1'>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="InputWidget">Imagen2</label>
-                                                        <input type="file" class="form-control" wire:model='carusel_imagen2'>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="InputWidget">Imagen3</label>
-                                                        <input type="file" class="form-control" wire:model='carusel_imagen3'>
-                                                    </div>
+                                                    @if ($carusel['imagen1'] != null)
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-12 col-md-3">
+                                                                <img src="{{ asset('files/' . $carusel['imagen1']) }}" alt="Profiler"
+                                                                class="preview_admin">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-12 mt-3 text-right">
+                                                                <button class="btn btn-danger text-center" wire:click="deleteImage({{ $carusel['id'] }}, 'Slider', 'imagen1')">Borrar</button>
+                                                            </div>
+                                                       </div>
+                                                        @else 
+                                                            <div class="form-group">
+                                                                <label for="InputWidget">Imagen1</label>
+                                                                <input type="file" class="form-control" wire:model='carusel_imagen1'>
+                                                            </div>
+                                                    @endif
+                                                    
+                                                    @if ($carusel['imagen2'] != null)
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-12 col-md-3">
+                                                                <img src="{{ asset('files/' . $carusel['imagen2']) }}" alt="Profiler"
+                                                                class="preview_admin">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-12 mt-3 text-right">
+                                                                <button class="btn btn-danger text-center" wire:click="deleteImage({{ $carusel['id'] }}, 'Slider', 'imagen2')">Borrar</button>
+                                                            </div>
+                                                       </div>
+                                                        @else 
+                                                            <div class="form-group">
+                                                                <label for="InputWidget">Imagen2</label>
+                                                                <input type="file" class="form-control" wire:model='carusel_imagen2'>
+                                                            </div>
+                                                    @endif
+                                                    
+                                                    @if ($carusel['imagen3'] != null)
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-12 col-md-3">
+                                                                <img src="{{ asset('files/' . $carusel['imagen3']) }}" alt="Profiler"
+                                                                class="preview_admin">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-12 mt-3 text-right">
+                                                                <button class="btn btn-danger text-center" wire:click="deleteImage({{ $carusel['id'] }}, 'Slider', 'imagen3')">Borrar</button>
+                                                            </div>
+                                                       </div>
+                                                        @else 
+                                                            <div class="form-group">
+                                                                <label for="InputWidget">Imagen3</label>
+                                                                <input type="file" class="form-control" wire:model='carusel_imagen3'>
+                                                            </div>
+                                                    @endif
+                                                   
+                                                    
+                                                   
                                                     <div class="row ">
                                                         <div class="col-12 text-center">
                                                             <div wire:loading wire:target="storeCarusel">

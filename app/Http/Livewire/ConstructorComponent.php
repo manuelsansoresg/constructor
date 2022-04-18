@@ -29,6 +29,7 @@ class ConstructorComponent extends Component
     public $header;
     public $header_imagen;
     //*slider carusel
+    public $carusel;
     public $carusel_imagen1;
     public $carusel_imagen2;
     public $carusel_imagen3;
@@ -87,6 +88,18 @@ class ConstructorComponent extends Component
         WidgetBuilder::where($data_widget_builder)->delete();
         WidgetHeader::find($widget_id)->delete();
         self::resetWidget();
+    }
+
+    /**
+     * borra la imagen segun widget
+     *
+     * @param int $widget_id
+     * @return void
+     */
+    public function deleteImage($widget_id, $name_widget, $name_image = null)
+    {
+        WidgetBuilder::deleteImage($widget_id, $name_widget, $name_image);
+        self::editWidget($widget_id, $name_widget);
     }
 
     public function storeHeader()

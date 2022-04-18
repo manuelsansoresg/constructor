@@ -47,15 +47,35 @@ class WidgetBuilder extends Model
         return $widget;
     }
 
-    public static function editWidget($widget_id, $type)
+    public static function editWidget($widget_id, $name_widget)
     {
-        switch ($type) {
-            case 'name_widget':
-                # code...
+        switch ($name_widget) {
+            case 'Slider':
+                $widget = WidgetCarusel::find($widget_id)->toArray();
                 break;
             
             default:
                     $widget = WidgetHeader::find($widget_id)->toArray();
+                break;
+        }
+        return $widget;
+    }
+
+    public static function deleteImage($widget_id, $name_widget, $name_image = null)
+    {
+        switch ($name_widget) {
+            case 'Slider':
+                    $widget = WidgetCarusel::find($widget_id);
+                    @unlink('files/'.$widget->$name_image);
+                    $widget->$name_image='';
+                    $widget->update();
+                break;
+            
+            default:
+                    $widget = WidgetHeader::find($widget_id)->first();
+                    @unlink('files/'.$widget->image);
+                    $widget->image='';
+                    $widget->update();
                 break;
         }
         return $widget;

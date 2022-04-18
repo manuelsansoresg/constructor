@@ -1,3 +1,20 @@
+var $owl = $('.owl-carousel').owlCarousel({
+    stagePadding: 0,
+    items: 1,
+    loop:true,
+    margin:0,
+    singleItem:true,
+    nav:true,
+    /* 
+    navText: [
+        "<i class='fa fa-caret-left'></i>",
+        "<i class='fa fa-caret-right'></i>"
+    ], */
+    dots:true,
+    autoplay:true,
+    autoplayTimeout:5000
+});
+
 window.addTitle = function()
 {
     let title = $('#titlePage').val();
@@ -25,6 +42,8 @@ window.changeSection = function() {
 $(function(){
 
     window.Livewire.on('setScroll', divPosition => {
+        $('.tree').jstree();
+
         $('html, body').animate({
             scrollTop: $(divPosition).offset().top
         }, 2000);
@@ -32,6 +51,7 @@ $(function(){
     
     window.Livewire.on('setTree', divPosition => {
         $('.tree').jstree();
+       
     })
 
 });
