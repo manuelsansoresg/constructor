@@ -196,7 +196,7 @@
                                                                         </div>
                                                                     @endif
                                                                 </div>
-                                                                <div class="form-group mt-3 float-right">
+                                                                <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $carusel_image->id }}, 'Slider')">Borrar</button>
                                                                         <button class="btn btn-outline-primary" wire:click='editWidget({{ $carusel_image->id }}, "Slider")'>Editar</button>
@@ -207,6 +207,32 @@
                                                     @endforeach
                                                 @endif
                                                 {{-- carusel --}}
+
+                                                {{-- title --}}
+                                                @if ($my_widget['id_rel'] == 3)
+                                                <?php $titles = $widget_builder->pageTitle($my_widget['widget_id'], 3) ?>
+                                                    @foreach ($titles as $title)
+                                                        <div class="card mt-5 shadow">
+                                                            <div class="card-header">
+                                                                <h5>Sección texto</h5>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                {!! $title->content !!}
+                                                                <div class="form-group mt-5 float-right">
+                                                                    <div class="col-12">
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $title->id }}, 'Texto')">Borrar</button>
+                                                                        <button class="btn btn-outline-primary" wire:click='editWidget({{ $title->id }}, "Texto")'>Editar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                                {{-- title --}}
+
+                                                {{-- Descripcion --}}
+
+                                                {{-- Descripcion --}}
                                                 
                                             @endforeach
                                             {{-- mywidgets --}}
@@ -220,7 +246,7 @@
                                                     </div>
                                                     <div class="card-body">
 
-                                                        @if ($header['image'] != null)
+                                                        @if (isset($header['image']) &&  $header['image'] != null)
                                                            <div class="row justify-content-center">
                                                                <div class="col-12 col-md-3">
                                                                     <img src="{{ asset('files/' . $header['image']) }}" alt="Profiler"
@@ -234,9 +260,10 @@
                                                                 </div>
                                                            </div>
                                                            @else
-                                                            <div class="form-group">
-                                                                <label for="InputWidget">Imagen</label>
-                                                                <input type="file" class="form-control" wire:model='header_imagen'>
+                                                            <div class="form-group" wire:ignore>
+                                                                @if (isset($header['id']))
+                                                                    <button type="button" onclick="modalImage({{ $header['id'] }}, 1, 'image')" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Agregar Imagen</button>
+                                                                @endif
                                                             </div>
                                                         @endif
                                                         
@@ -270,7 +297,7 @@
                                                             </div>
                                                         </div>
                                 
-                                                        <div class="form-group float-right">
+                                                        <div class="form-group float-right mt-3">
                                                             <button class="btn btn-outline-danger" wire:click="resetWidget">Cancelar</button>
                                                             <button class="btn btn-outline-primary" wire:click='storeHeader()'>Guardar</button>
                                                         </div>
@@ -288,7 +315,7 @@
                                                     <h5>Sección encabezado</h5>
                                                 </div>
                                                 <div class="card-body">
-                                                    @if ($carusel['imagen1'] != null)
+                                                    @if (isset($carusel['imagen1']) && $carusel['imagen1'] != null)
                                                         <div class="row justify-content-center">
                                                             <div class="col-12 col-md-3">
                                                                 <img src="{{ asset('files/' . $carusel['imagen1']) }}" alt="Profiler"
@@ -303,12 +330,13 @@
                                                        </div>
                                                         @else 
                                                             <div class="form-group">
-                                                                <label for="InputWidget">Imagen1</label>
-                                                                <input type="file" class="form-control" wire:model='carusel_imagen1'>
+                                                                <button type="button" onclick="modalImage({{ $carusel['id'] }}, 2, 'imagen1')" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Agregar Imagen</button>
+                                                               {{--  <label for="InputWidget">Imagen1</label>
+                                                                <input type="file" class="form-control" wire:model='carusel_imagen1'> --}}
                                                             </div>
                                                     @endif
                                                     
-                                                    @if ($carusel['imagen2'] != null)
+                                                    @if ( isset($carusel['imagen2']) && $carusel['imagen2'] != null)
                                                         <div class="row justify-content-center">
                                                             <div class="col-12 col-md-3">
                                                                 <img src="{{ asset('files/' . $carusel['imagen2']) }}" alt="Profiler"
@@ -324,11 +352,11 @@
                                                         @else 
                                                             <div class="form-group">
                                                                 <label for="InputWidget">Imagen2</label>
-                                                                <input type="file" class="form-control" wire:model='carusel_imagen2'>
+                                                                <button type="button" onclick="modalImage({{ $carusel['id'] }}, 2, 'imagen2')" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Agregar Imagen</button>
                                                             </div>
                                                     @endif
                                                     
-                                                    @if ($carusel['imagen3'] != null)
+                                                    @if ( isset($carusel['imagen3']) && $carusel['imagen3'] != null)
                                                         <div class="row justify-content-center">
                                                             <div class="col-12 col-md-3">
                                                                 <img src="{{ asset('files/' . $carusel['imagen3']) }}" alt="Profiler"
@@ -344,7 +372,7 @@
                                                         @else 
                                                             <div class="form-group">
                                                                 <label for="InputWidget">Imagen3</label>
-                                                                <input type="file" class="form-control" wire:model='carusel_imagen3'>
+                                                                <button type="button" onclick="modalImage({{ $carusel['id'] }}, 2, 'imagen3')" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Agregar Imagen</button>
                                                             </div>
                                                     @endif
                                                    
@@ -360,7 +388,7 @@
                             
                                                         </div>
                                                     </div>
-                                                    <div class="form-group float-right">
+                                                    <div class="form-group float-right mt-3">
                                                         <button class="btn btn-outline-danger" wire:click="resetWidget">Cancelar</button>
                                                         <button class="btn btn-outline-primary" wire:click='storeCarusel()'>Guardar</button>
                                                     </div>
@@ -370,6 +398,26 @@
 
                                             @endif
                                             {{-- seccion carrusel --}}
+                                            {{-- seccion titulo --}}
+                                            @if ($widget == 3)
+                                                <div id="widget-title"></div>
+                                                <div class="card mt-5 shadow">
+                                                    <div class="card-header">
+                                                        <h5>Sección texto</h5>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-group" wire:ignore>
+                                                            <label for="InputWidget">Texto</label>
+                                                            <textarea name="" id="title" cols="30" rows="10" class="form-control summernote"></textarea>
+                                                        </div>
+                                                        <div class="form-group float-right mt-3">
+                                                            <button class="btn btn-outline-danger" wire:click="resetWidget">Cancelar</button>
+                                                            <button class="btn btn-outline-primary" wire:click='storeTitle()'>Guardar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            {{-- seccion titulo --}}
                                             
                                         </div>
                                         <div class="tab-pane fade" id="fondo" role="tabpanel" aria-labelledby="fondo-tab">...</div>
@@ -387,5 +435,6 @@
    </div>
 @include('page_modal')
 @include('section_modal')
+@include('modal_image')
     <a href="#" onclick="modalSection()" class="btn-flotante btn btn-primary btn-circle mt-5"><i class="fas fa-plus"></i></a>
 </div>

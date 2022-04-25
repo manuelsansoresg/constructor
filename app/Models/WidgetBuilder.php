@@ -46,12 +46,23 @@ class WidgetBuilder extends Model
                     ->where(['widget_carusel.id' => $widget_id, 'id_rel' => $type])->get();
         return $widget;
     }
+    public function pageTitle($widget_id, $type)
+    {
+        $widget = WidgetBuilder::
+                    select('content', 'widget_texts.id')
+                    ->join('widget_texts', 'widget_texts.id', '=', 'widget_builders.widget_id')
+                    ->where(['widget_texts.id' => $widget_id, 'id_rel' => $type])->get();
+        return $widget;
+    }
 
     public static function editWidget($widget_id, $name_widget)
     {
         switch ($name_widget) {
             case 'Slider':
                 $widget = WidgetCarusel::find($widget_id)->toArray();
+                break;
+            case 'Texto':
+                $widget = WidgetText::find($widget_id)->toArray();
                 break;
             
             default:

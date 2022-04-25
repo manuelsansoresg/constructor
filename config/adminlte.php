@@ -456,6 +456,27 @@ return [
                 ],
             ],
         ],
+        
+        'Summernote' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '/vendor/summernote/summernote.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '/vendor/summernote/summernote.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '/vendor/summernote/lang/summernote-es-ES.js',
+                ],
+            ],
+        ],
         'App' => [
             'active' => true,
             'files' => [

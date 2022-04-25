@@ -30,3 +30,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('/page/store', [App\Http\Livewire\ConstructorComponent::class, 'storePage'])->name('home');
+Route::post('/image/add', [App\Http\Livewire\ConstructorComponent::class, 'imageAdd'])->name('home');

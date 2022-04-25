@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Lib\LImage;
 use App\Models\Builder;
 use App\Models\Section;
 use App\Models\Widget;
@@ -9,6 +10,7 @@ use App\Models\WidgetBuilder;
 use App\Models\WidgetCarusel;
 use App\Models\WidgetGallery;
 use App\Models\WidgetHeader;
+use App\Models\WidgetText;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
@@ -22,7 +24,7 @@ class ConstructorComponent extends Component
     public $page_actual;
     public $pages;
     public $widgets; //*lista de secciones
-    public $widget; //*valor de la seccion
+    public $widget; //*valor entero del select
     public $is_edit = false;
     //*valores de los widgets a guardar
     public $widget_id = null;
@@ -33,6 +35,8 @@ class ConstructorComponent extends Component
     public $carusel_imagen1;
     public $carusel_imagen2;
     public $carusel_imagen3;
+    //*title
+    public $title;
     //*datos guardados widgets
     public $my_widgets;
 
@@ -41,7 +45,7 @@ class ConstructorComponent extends Component
     ];
 
     protected $listeners = [
-        'updatePages', 'updateSection'
+        'updatePages', 'updateSection', 'setTitle', 'updateImage'
     ];
 
     public function mount()
@@ -73,6 +77,9 @@ class ConstructorComponent extends Component
         $this->$model           = $data_widget;
         //* sirve para volver dinamicamente la asignacion de una propiedad imagen ejemplo $this->header_imagen
         $this->widget_id        = $data_widget['id'];
+        if ($name_widget == 'Texto') {
+            $this->emit('setSummerTitle', $this->title['content']);
+        }
         self::updateSection($get_widget->id);
     }
 
@@ -88,6 +95,13 @@ class ConstructorComponent extends Component
         WidgetBuilder::where($data_widget_builder)->delete();
         WidgetHeader::find($widget_id)->delete();
         self::resetWidget();
+    }
+
+    public function imageAdd(Request $request)
+    {
+        $image = new LImage($request);
+        $add = $image->add();
+        return $add;
     }
 
     /**
@@ -153,6 +167,17 @@ class ConstructorComponent extends Component
         self::resetWidget();
     }
 
+    public function storeTitle()
+    {
+        $data_title['widget_id']    = $this->widget;
+        $data_title['content']        = $this->title;
+        WidgetText::saveEdit($data_title, $this->page_actual->id, $this->widget_id);
+        
+        $this->my_widgets = WidgetBuilder::getMyWidgets($this->page_actual->id);
+        self::resetWidget();
+    }
+
+
     public function storePage(Request $request)
     {
         $title = $request->title;
@@ -183,9 +208,28 @@ class ConstructorComponent extends Component
             $this->widget = $widget_id;
             //dd($name_section);
             $this->emit('setScroll', $name_section);
+            if ($get_widget->id == 3) {
+                $this->emit('setSummernote');
+            }
         }
     }
 
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * Luego de realizar el adjuntado del modal el js llama a esta funcion para actualizar los nuevos valores del modelo
+     * @return void
+     */
+    public function updateImage()
+    {
+        $this->my_widgets     = WidgetBuilder::getMyWidgets($this->page_actual->id);
+        self::resetWidget();
+    }
+
+    
     public function resetWidget()
     {
         $this->widget           = '';

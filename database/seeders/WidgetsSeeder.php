@@ -18,8 +18,8 @@ class WidgetsSeeder extends Seeder
         $titulos = array('Encabezado', 'Slider', 'Título', 'Descripción', '2 columnas',
         'Parallax', 'Productos', 'Video', 'Galería', 'Contacto', 'Pie de página');
        
-        $execute = array('header', 'carusel', '', '', '',
-        '', '', '', '', '', '');
+        $execute = array('header', 'carusel', 'title', 'description', 'two_column',
+        'parallax', 'product', 'video', 'vallery', 'contact', 'footer');
         
         foreach ($titulos as $key => $titulo) {
             $widget = new Widget();
