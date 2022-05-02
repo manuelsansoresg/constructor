@@ -15,10 +15,10 @@ class WidgetsSeeder extends Seeder
      */
     public function run()
     {
-        $titulos = array('Encabezado', 'Slider', 'Título', 'Descripción', '2 columnas',
+        $titulos = array('Encabezado', 'Slider', 'Texto', '2 columnas',
         'Parallax', 'Productos', 'Video', 'Galería', 'Contacto', 'Pie de página');
        
-        $execute = array('header', 'carusel', 'title', 'description', 'two_column',
+        $execute = array('header', 'carusel', 'texto', 'two_column',
         'parallax', 'product', 'video', 'vallery', 'contact', 'footer');
         
         foreach ($titulos as $key => $titulo) {
@@ -29,6 +29,7 @@ class WidgetsSeeder extends Seeder
         }
         $page = new Builder();
         $page->name = 'Inicio';
+        $page->slug = '/';
         $page->save();
     }
 }

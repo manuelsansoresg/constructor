@@ -10,7 +10,7 @@ class WidgetBuilder extends Model
     use HasFactory;
     protected $table = "widget_builders";
     protected $fillable = [
-        'builder_id', 'id_rel' , 'widget_id'
+        'builder_id', 'id_rel', 'widget_id'
     ];
 
     public static function saveEdit($data)
@@ -31,27 +31,24 @@ class WidgetBuilder extends Model
     //*Relaciones
     public function pageHeader($widget_id, $type)
     {
-        $widget = WidgetBuilder::
-                    select('widget_headers.image', 'widget_headers.title', 'phone', 'phone2', 'widget_headers.id')
-                    ->join('widget_headers', 'widget_headers.id', '=', 'widget_builders.widget_id')
-                    ->where(['widget_headers.id' => $widget_id, 'id_rel' => $type])->get();
+        $widget = WidgetBuilder::select('widget_headers.image', 'widget_headers.title', 'phone', 'phone2', 'widget_headers.id')
+            ->join('widget_headers', 'widget_headers.id', '=', 'widget_builders.widget_id')
+            ->where(['widget_headers.id' => $widget_id, 'id_rel' => $type])->get();
         return $widget;
     }
 
     public function pageCarusel($widget_id, $type)
     {
-        $widget = WidgetBuilder::
-                    select('imagen1', 'imagen2', 'imagen3', 'widget_carusel.id')
-                    ->join('widget_carusel', 'widget_carusel.id', '=', 'widget_builders.widget_id')
-                    ->where(['widget_carusel.id' => $widget_id, 'id_rel' => $type])->get();
+        $widget = WidgetBuilder::select('imagen1', 'imagen2', 'imagen3', 'widget_carusel.id')
+            ->join('widget_carusel', 'widget_carusel.id', '=', 'widget_builders.widget_id')
+            ->where(['widget_carusel.id' => $widget_id, 'id_rel' => $type])->get();
         return $widget;
     }
     public function pageTitle($widget_id, $type)
     {
-        $widget = WidgetBuilder::
-                    select('content', 'widget_texts.id')
-                    ->join('widget_texts', 'widget_texts.id', '=', 'widget_builders.widget_id')
-                    ->where(['widget_texts.id' => $widget_id, 'id_rel' => $type])->get();
+        $widget = WidgetBuilder::select('content', 'widget_texts.id')
+            ->join('widget_texts', 'widget_texts.id', '=', 'widget_builders.widget_id')
+            ->where(['widget_texts.id' => $widget_id, 'id_rel' => $type])->get();
         return $widget;
     }
 
@@ -64,9 +61,9 @@ class WidgetBuilder extends Model
             case 'Texto':
                 $widget = WidgetText::find($widget_id)->toArray();
                 break;
-            
+
             default:
-                    $widget = WidgetHeader::find($widget_id)->toArray();
+                $widget = WidgetHeader::find($widget_id)->toArray();
                 break;
         }
         return $widget;
@@ -76,17 +73,21 @@ class WidgetBuilder extends Model
     {
         switch ($name_widget) {
             case 'Slider':
-                    $widget = WidgetCarusel::find($widget_id);
-                    @unlink('files/'.$widget->$name_image);
-                    $widget->$name_image='';
+                $widget = WidgetCarusel::find($widget_id);
+                @unlink('files/' . $widget->$name_image);
+                if ($widget != null) {
+                    $widget->$name_image = '';
                     $widget->update();
+                }
                 break;
-            
+
             default:
-                    $widget = WidgetHeader::find($widget_id)->first();
-                    @unlink('files/'.$widget->image);
-                    $widget->image='';
+                $widget = WidgetHeader::find($widget_id)->first();
+                @unlink('files/' . $widget->image);
+                if ($widget != null) {
+                    $widget->image = '';
                     $widget->update();
+                }
                 break;
         }
         return $widget;

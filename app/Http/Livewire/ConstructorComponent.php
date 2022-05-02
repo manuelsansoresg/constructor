@@ -26,15 +26,23 @@ class ConstructorComponent extends Component
     public $widgets; //*lista de secciones
     public $widget; //*valor entero del select
     public $is_edit = false;
+    public $link_preview = '/data';
     //*valores de los widgets a guardar
     public $widget_id = null;
     public $header;
-    public $header_imagen;
+    public $header_imagen; //*modelo nombre caja input para adjuntar
+    public $header_my_image; //*variable para asignar la imagen
     //*slider carusel
     public $carusel;
+    //*modelo para adjuntar imagenes carusel
     public $carusel_imagen1;
     public $carusel_imagen2;
     public $carusel_imagen3;
+    //*variables para asignar imagenes en carusel
+    public $carusel_my_image1;
+    public $carusel_my_image2;
+    public $carusel_my_image3;
+
     //*title
     public $title;
     //*datos guardados widgets
@@ -45,7 +53,7 @@ class ConstructorComponent extends Component
     ];
 
     protected $listeners = [
-        'updatePages', 'updateSection', 'setTitle', 'updateImage'
+        'updatePages', 'updateSection', 'setTitle', 'updateImage', 'updateMyWidgets', 'resetComponents'
     ];
 
     public function mount()
@@ -53,7 +61,9 @@ class ConstructorComponent extends Component
         $this->page_actual    = Builder::where('name', 'Inicio')->first();
         $this->pages          = Builder::all();
         $this->widgets        = Widget::all();
-
+        $this->link_preview = $this->page_actual->slug;
+        /* if ($this->page_actual->slug != "inicio") {
+        } */
         $this->my_widgets     = WidgetBuilder::getMyWidgets($this->page_actual->id);
     }
 
@@ -77,6 +87,14 @@ class ConstructorComponent extends Component
         $this->$model           = $data_widget;
         //* sirve para volver dinamicamente la asignacion de una propiedad imagen ejemplo $this->header_imagen
         $this->widget_id        = $data_widget['id'];
+        if ($name_widget == 'Encabezado') {
+            $this->header_my_image = $data_widget['image'];
+        }
+        if ($name_widget == 'Slider') {
+            $this->carusel_my_image1 = $data_widget['imagen1'];
+            $this->carusel_my_image2 = $data_widget['imagen2'];
+            $this->carusel_my_image3 = $data_widget['imagen3'];
+        }
         if ($name_widget == 'Texto') {
             $this->emit('setSummerTitle', $this->title['content']);
         }
@@ -91,12 +109,31 @@ class ConstructorComponent extends Component
             'id_rel' => $get_widget->id,
             'widget_id' => $widget_id
         );
-        
         WidgetBuilder::where($data_widget_builder)->delete();
-        WidgetHeader::find($widget_id)->delete();
+        if ($get_widget->execute_widget == 'header') {
+            $my_widget = WidgetHeader::find($widget_id);
+            @unlink('files/' . $my_widget->image);
+            $my_widget->delete();
+        }
+        
+        if ($get_widget->execute_widget == 'carusel') {
+            $my_widget = WidgetCarusel::find($widget_id);
+            self::deleteImage($get_widget->id, 'Encabezado', 'imagen1');
+            self::deleteImage($get_widget->id, 'Encabezado', 'imagen2');
+            self::deleteImage($get_widget->id, 'Encabezado', 'imagen3');
+            $my_widget->delete();
+        }
+       
         self::resetWidget();
     }
 
+    
+    /**
+     * Agrega imagenes desde el modal disparado en agregar imagenes desde los widgets que contengan imagen
+     *
+     * @param Request $request
+     * @return void
+     */
     public function imageAdd(Request $request)
     {
         $image = new LImage($request);
@@ -105,67 +142,44 @@ class ConstructorComponent extends Component
     }
 
     /**
-     * borra la imagen segun widget
+     * Se dispara en title.js al abrir el modal para editar y asi poder asignar los valores al modal
      *
-     * @param int $widget_id
+     * @param int $section_id id= tabla widgets
+     * @param int $widget_id id del widget
      * @return void
      */
+    public function getDataWidget($section_id, $widget_id)
+    {
+        switch ($section_id) {
+            case 'value':
+                # code...
+                break;
+            
+            default:
+                #encabezado
+                $widget = WidgetHeader::find($widget_id);
+                break;
+        }
+        return response()->json($widget);
+    }
+
+   /**
+    * borra la imagen segun widget
+    *
+    * @param int $widget_id
+    * @param string $name_widget = seccion(Encabezado, Slider)..etc
+    * @param string $name_image nombre de la imagen en la tabla
+    * @return void
+    */
     public function deleteImage($widget_id, $name_widget, $name_image = null)
     {
         WidgetBuilder::deleteImage($widget_id, $name_widget, $name_image);
         self::editWidget($widget_id, $name_widget);
     }
 
-    public function storeHeader()
-    {
-        $this->validate(WidgetHeader::rules());
-        $this->header['widget_id'] = $this->widget;
-        if ($this->header_imagen != null) {
-            $imageName = $this->header_imagen->getClientOriginalName();
-            $this->header_imagen->storeAs('files', $imageName, 'public_uploads');
-            $this->header['image']   = $imageName;
+    
 
-            $get_header = WidgetHeader::find($this->widget_id);
-            if ($get_header != null) {
-                $imagen_anterior = $get_header->image;
-                @unlink('files/'.$imagen_anterior);
-            }
-        }
-        WidgetHeader::saveEdit($this->header, $this->page_actual->id, $this->widget_id);
-        $this->my_widgets = WidgetBuilder::getMyWidgets($this->page_actual->id);
-        self::resetWidget();
-    }
-
-    public function storeCarusel()
-    {
-        $data_images                = array();
-        $data_images['widget_id']   = $this->widget;
-
-        if ($this->carusel_imagen1 != null) {
-            $imageName = 'carusel-'.$this->carusel_imagen1->getClientOriginalName();
-            $this->carusel_imagen1->storeAs('files', $imageName, 'public_uploads');
-            $data_images['imagen1'] = $imageName;
-            WidgetCarusel::deleteImageWithImage(array('widget_id' => $this->widget_id), 'imagen1');
-        }
-        if ($this->carusel_imagen2 != null) {
-            $imageName = 'carusel-'.$this->carusel_imagen2->getClientOriginalName();
-            $this->carusel_imagen2->storeAs('files', $imageName, 'public_uploads');
-            $data_images['imagen2'] = $imageName;
-            WidgetCarusel::deleteImageWithImage(array('widget_id' => $this->widget_id), 'imagen2');
-        }
-        if ($this->carusel_imagen3 != null) {
-            $imageName = 'carusel-'.$this->carusel_imagen3->getClientOriginalName();
-            $this->carusel_imagen3->storeAs('files', $imageName, 'public_uploads');
-            $data_images['imagen3'] = $imageName;
-            WidgetCarusel::deleteImageWithImage(array('widget_id' => $this->widget_id), 'imagen3');
-        }
-
-        $carusel = WidgetCarusel::saveEdit($data_images, $this->page_actual->id, $this->widget_id);
-        
-
-        $this->my_widgets = WidgetBuilder::getMyWidgets($this->page_actual->id);
-        self::resetWidget();
-    }
+    
 
     public function storeTitle()
     {
@@ -206,9 +220,15 @@ class ConstructorComponent extends Component
         if ($get_widget !== null) {
             $name_section = '#widget-'.$get_widget->execute_widget;
             $this->widget = $widget_id;
-            //dd($name_section);
             $this->emit('setScroll', $name_section);
-            if ($get_widget->id == 3) {
+            if ($get_widget->id == 2) { //*widget slider
+                $data_images['widget_id']   = $this->widget;
+                $carusel                    = WidgetCarusel::saveEdit($data_images, $this->page_actual->id, $this->widget_id);
+                $this->carusel = $carusel;
+                self::resetWidget();
+                self::updateSection($get_widget->id);
+            }
+            if ($get_widget->id == 3) { //*widget texto
                 $this->emit('setSummernote');
             }
         }
@@ -229,6 +249,16 @@ class ConstructorComponent extends Component
         self::resetWidget();
     }
 
+    /**
+     * listener que se ejecuta en los addWidgets.js al guardar cualquier widget para refrescar la lista de widgets
+     *
+     * @return void
+     */
+    public function updateMyWidgets()
+    {
+        $this->my_widgets = WidgetBuilder::getMyWidgets($this->page_actual->id);
+    }
+
     
     public function resetWidget()
     {
@@ -236,6 +266,12 @@ class ConstructorComponent extends Component
         $this->header           = '';
         $this->header_imagen    = '';
         $this->widget_id        = null;
+        $this->emit('setTree');
+        
+    }
+
+    public function resetComponents()
+    {
         $this->emit('setTree');
     }
 }

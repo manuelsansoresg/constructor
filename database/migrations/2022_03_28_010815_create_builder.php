@@ -139,8 +139,6 @@ class CreateBuilder extends Migration
             $table->unsignedBigInteger('builder_id')->nullable();
             $table->integer('id_rel')->nullable();
             $table->unsignedBigInteger('widget_id')->nullable();
-            $table->foreign('builder_id')->references('id')->on('builders')->onDelete('cascade');
-            $table->foreign('widget_id')->references('id')->on('widgets')->onDelete('cascade');
             $table->timestamps();
         });
     }

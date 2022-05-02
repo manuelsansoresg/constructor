@@ -22,7 +22,8 @@ class WidgetHeader extends Model
 
     public static function saveEdit($data, $page, $header_id = null)
     {
-        if ($header_id != null) {
+        
+        if ($header_id != 'null') {
             $widget_header    = WidgetHeader::find($header_id);
             $widget_header->fill($data);
             $widget_header->update();

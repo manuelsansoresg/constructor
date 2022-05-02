@@ -17,7 +17,7 @@ class WidgetCarusel extends Model
 
     public static function saveEdit($data, $page, $carusel_id = null)
     {
-        if ($carusel_id == null) {
+        if ($carusel_id == 'null') {
             $widget = new WidgetCarusel($data);
             $widget->save();
 
@@ -32,6 +32,7 @@ class WidgetCarusel extends Model
             $widget->fill($data);
             $widget->update();
         }
+        return $widget;
     }
 
     public static function deleteImageWithImage($data_delete, $name_image)
