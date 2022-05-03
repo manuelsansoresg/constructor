@@ -36,7 +36,7 @@
                     <input type="hidden" name="widget_id" id="modal-carusel-section_id">
                     <input type="hidden" name="carusel_id" id="modal-carusel-widget_id">
                     <input type="hidden" name="page_actual" id="modal-carusel-page_actual">
-                    <button type="button" class="btn btn-outline-secondary" onclick="closeModalSection('modal-widget-header')">Cerrar</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="closeModalSection('modal-widget-carusel')">Cerrar</button>
                     <button type="submit" class="btn btn-outline-primary">Agregar</button>
                 </div>
         </form>

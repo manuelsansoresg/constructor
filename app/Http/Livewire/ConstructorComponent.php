@@ -151,8 +151,8 @@ class ConstructorComponent extends Component
     public function getDataWidget($section_id, $widget_id)
     {
         switch ($section_id) {
-            case 'value':
-                # code...
+            case '3':
+                $widget = WidgetText::find($widget_id);
                 break;
             
             default:
@@ -174,7 +174,7 @@ class ConstructorComponent extends Component
     public function deleteImage($widget_id, $name_widget, $name_image = null)
     {
         WidgetBuilder::deleteImage($widget_id, $name_widget, $name_image);
-        self::editWidget($widget_id, $name_widget);
+        
     }
 
     
@@ -183,9 +183,7 @@ class ConstructorComponent extends Component
 
     public function storeTitle()
     {
-        $data_title['widget_id']    = $this->widget;
-        $data_title['content']        = $this->title;
-        WidgetText::saveEdit($data_title, $this->page_actual->id, $this->widget_id);
+        
         
         $this->my_widgets = WidgetBuilder::getMyWidgets($this->page_actual->id);
         self::resetWidget();

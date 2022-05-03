@@ -12,7 +12,7 @@ class WidgetText extends Model
 
     public static function saveEdit($data, $page, $text_id = null)
     {
-        if ($text_id == null) {
+        if ($text_id == 'null') {
             $text = new WidgetText($data);
             $text->save();
 

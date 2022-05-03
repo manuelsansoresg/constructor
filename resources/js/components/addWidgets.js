@@ -35,6 +35,25 @@ $("#frm-carusel").submit(function (e) {
 
 });
 
+$("#frm-texto").submit(function (e) {
+    e.preventDefault();
+    const form = document.getElementById("frm-texto");
+    const data = new FormData(form);
+    axios.post("/widgets/texto/store", data)
+        .then(function (response) {
+            let result = response.data;
+            Livewire.emit('updateMyWidgets');
+            Livewire.emit('resetComponents');
+            $('#modal-widget-texto').modal('hide');
+            document.getElementById('frm-texto').reset();
+            showInfo();
+        })
+        .catch(e => { });
+
+});
+
+
+
 function showInfo() {
     Swal.fire({
         icon: 'success',

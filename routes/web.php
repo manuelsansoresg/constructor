@@ -36,4 +36,5 @@ Route::get('/admin/getDataWidget/{section_id}/{widget_id}', [App\Http\Livewire\C
 Route::group(['prefix' => 'widgets'], function () {
     Route::post('/header/store', [App\Http\Controllers\AddWidgetsController::class, 'storeHeader']);
     Route::post('/carusel/store', [App\Http\Controllers\AddWidgetsController::class, 'storeCarusel']);
+    Route::post('/texto/store', [App\Http\Controllers\AddWidgetsController::class, 'storeTexto']);
 });

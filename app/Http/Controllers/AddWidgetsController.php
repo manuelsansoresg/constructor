@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\WidgetBuilder;
 use App\Models\WidgetCarusel;
 use App\Models\WidgetHeader;
+use App\Models\WidgetText;
 use Illuminate\Http\Request;
 
 class AddWidgetsController extends Controller
@@ -68,5 +69,11 @@ class AddWidgetsController extends Controller
         
 
         WidgetCarusel::saveEdit($data_images, $request->page_actual, $request->carusel_id);
+    }
+
+    public function storeTexto(Request $request)
+    {
+        $data = $request->data;
+        WidgetText::saveEdit($data, $request->page_actual, $request->texto_id);
     }
 }

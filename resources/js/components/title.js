@@ -45,12 +45,23 @@ window.setDataModal = function (page_actual, section_id, widget_id) {
     
     getDataModal(section_id, widget_id);
     closeModalSection('sectionModal');
+   
     switch (section_id) {
+       
         case '2':
             $('#modal-carusel-section_id').val(section_id);
             $('#modal-carusel-widget_id').val(widget_id);
             $('#modal-carusel-page_actual').val(page_actual);
             $('#modal-widget-carusel').modal('show');
+
+            break;
+        case '3':
+            $('#texto-content').summernote({
+            });
+            $('#modal-texto-section_id').val(section_id);
+            $('#modal-texto-widget_id').val(widget_id);
+            $('#modal-texto-page_actual').val(page_actual);
+            $('#modal-widget-texto').modal('show');
 
             break;
 
@@ -67,9 +78,13 @@ function getDataModal(section_id, widget_id) {
     axios.get("/admin/getDataWidget/"+section_id+'/'+widget_id)
         .then(function (response) {
             let result = response.data;
+            console.log(result);
             switch (section_id) {
                 case '2':
                   
+                    break;
+                case '3':
+                    $('#texto-content').summernote('pasteHTML', result.content);
                     break;
             
                 default:
@@ -89,6 +104,12 @@ window.closeModalSection = function (div) {
 
 
 $(function () {
+    if (document.getElementById('texto-content')) {
+        $('#texto-content').summernote({
+
+        });
+    }
+    
 
     window.Livewire.on('setScroll', divPosition => {
         $('.tree').jstree();
@@ -104,9 +125,7 @@ $(function () {
     })
 
     window.Livewire.on('setSummernote', divPosition => {
-        $('.summernote').summernote({
-
-        });
+        
         $(".summernote").on("summernote.change", function (e) {   // callback as jquery custom event 
             Livewire.emit('setTitle', this.value);
             console.log(this.value);

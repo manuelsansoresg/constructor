@@ -120,22 +120,33 @@
                                                                 <h5>Sección carusel</h5>
                                                             </div>
                                                             <div class="card-body">
-                                                                <div class="row">
-                                                                    @if ($carusel_image->imagen1 != '')
-                                                                    <div class="col-12 col-md-3">
-                                                                        <img class="img-fluid" src="{{ asset('files/' . $carusel_image->imagen1) }}" alt="" />
+                                                                <div class="container">
+                                                                    <div class="row">
+                                                                        @if ($carusel_image->imagen1 != '')
+                                                                        <div class="col-12 col-md-4">
+                                                                            <img class="img-fluid" src="{{ asset('files/' . $carusel_image->imagen1) }}" alt="" />
+                                                                            <div class="d-block mt-3">
+                                                                                <button class="btn btn-outline-danger btn-block" wire:click="deleteImage({{$carusel_image->id}}, 'Slider', 'imagen1')">Borrar</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        @endif
+                                                                        @if ($carusel_image->imagen2 != '')
+                                                                        <div class="col-12 col-md-4">
+                                                                            <img class="img-fluid" src="{{ asset('files/' . $carusel_image->imagen2) }}" alt="" />
+                                                                            <div class="d-block mt-3">
+                                                                                <button class="btn btn-outline-danger btn-block" wire:click="deleteImage({{$carusel_image->id}}, 'Slider', 'imagen2')">Borrar</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        @endif
+                                                                        @if ($carusel_image->imagen3 != '')
+                                                                        <div class="col-12 col-md-4">
+                                                                            <img class="img-fluid" src="{{ asset('files/' . $carusel_image->imagen3) }}" alt="" />
+                                                                            <div class="d-block mt-3">
+                                                                                <button class="btn btn-outline-danger btn-block" wire:click="deleteImage({{$carusel_image->id}}, 'Slider', 'imagen3')">Borrar</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        @endif
                                                                     </div>
-                                                                    @endif
-                                                                    @if ($carusel_image->imagen2 != '')
-                                                                    <div class="col-12 col-md-3">
-                                                                        <img class="img-fluid" src="{{ asset('files/' . $carusel_image->imagen2) }}" alt="" />
-                                                                    </div>
-                                                                    @endif
-                                                                    @if ($carusel_image->imagen3 != '')
-                                                                    <div class="col-12 col-md-3">
-                                                                        <img class="img-fluid" src="{{ asset('files/' . $carusel_image->imagen3) }}" alt="" />
-                                                                    </div>
-                                                                    @endif
                                                                 </div>
                                                                 
                                                                 <div class="owl-carousel owl-theme owl-loaded owl-drag d-none">
@@ -203,7 +214,7 @@
                                                                 <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $carusel_image->id }}, 'Slider')">Borrar</button>
-                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, 1, {{ $carusel_image->id }})'>Editar</button>
+                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "2", {{ $carusel_image->id }})'>Editar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -225,7 +236,7 @@
                                                                 <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $title->id }}, 'Texto')">Borrar</button>
-                                                                        <button class="btn btn-outline-primary" wire:click='editWidget({{ $title->id }}, "Texto")'>Editar</button>
+                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "3", {{ $title->id }})'>Editar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -379,6 +390,7 @@
    </div>
    @include('modal_widgets.modal_encabezado')
    @include('modal_widgets.modal_carusel')
+   @include('modal_widgets.modal_texto')
     @include('page_modal')
     @include('section_modal')
     @include('modal_image')
