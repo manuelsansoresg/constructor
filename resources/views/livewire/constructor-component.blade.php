@@ -19,13 +19,13 @@
                             </li>
                             </ul>
                         </div>
-                        
+
                         <div class="tree">
                             <ul>
                             <li  data-jstree='{"opened" : true }'> Templates
                                 <ul>
                                     <li>
-                                       
+
                                     </li>
                                 </ul>
                             </li>
@@ -71,7 +71,7 @@
                                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                             {{-- mywidgets --}}
                                             @foreach ($my_widgets as $my_widget)
-                                           
+
                                             @if ($my_widget['id_rel'] == 1)
                                                 <?php $headers = $widget_builder->pageHeader($my_widget['widget_id'], 1) ?>
                                                     @foreach ($headers as $header)
@@ -113,7 +113,7 @@
                                                 {{-- carusel --}}
                                                 @if ($my_widget['id_rel'] == 2)
                                                     <?php $carusel_images = $widget_builder->pageCarusel($my_widget['widget_id'], 2) ?>
-                                                    
+
                                                     @foreach ($carusel_images as $carusel_image)
                                                         <div class="card mt-5 shadow">
                                                             <div class="card-header">
@@ -148,11 +148,11 @@
                                                                         @endif
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="owl-carousel owl-theme owl-loaded owl-drag d-none">
-                                                                    
+
                                                                         <div class="item">
-                                                                            
+
                                                                             <div class="inner">
                                                                                 <div class="row row-content">
                                                                                     <div class="col-md-12">
@@ -169,7 +169,7 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    
+
                                                                     @if ($carusel_image->imagen2 != '')
                                                                         <div class="item">
                                                                             <img src="{{ asset('files/' . $carusel_image->imagen2) }}" alt="" />
@@ -245,135 +245,113 @@
                                                 @endif
                                                 {{-- title --}}
 
-                                                {{-- Descripcion --}}
-
-                                                {{-- Descripcion --}}
-                                                
-                                            @endforeach
-                                            {{-- mywidgets --}}
-                                            {{-- -------------------------- seccion para editar  --------------------- --}}
-                                            {{-- seccion Encabezado --}}
-                                            @if ($widget == 1)
-                                                <div id="widget-header"></div>
-                                                
-                                            @endif
-                                            {{-- /seccion Encabezado --}}
-
-                                            {{-- seccion carrusel --}}
-                                            @if ($widget == 2)
-                                            <div id="widget-carusel"></div>
-                                            <div class="card mt-5 shadow">
-                                                <div class="card-header">
-                                                    <h5>Sección encabezado</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <?php 
-                                                        $carusel_id = isset($carusel['id']) ? $carusel['id'] : 'null';   
-                                                    ?>
-                                                    @if ($carusel_my_image1 != null)
-                                                        <div class="row justify-content-center">
-                                                            <div class="col-12 col-md-3">
-                                                                <img src="{{ asset('files/' . $carusel_my_image1) }}" alt="Profiler"
-                                                                class="preview_admin">
-                                                                
+                                                {{-- Two-columns --}}
+                                                @if ($my_widget['id_rel'] == 4)
+                                                <?php $two_columns = $widget_builder->pageTwoColumns($my_widget['widget_id'], 4) ?>
+                                                    @foreach ($two_columns as $query)
+                                                        <div class="card mt-5 shadow">
+                                                            <div class="card-header">
+                                                                <h5>Sección 2 columnas </h5>
                                                             </div>
-                                                        </div>
-                                                        <div class="row justify-content-center">
-                                                            <div class="col-12 mt-3 text-right">
-                                                                <button class="btn btn-danger text-center" wire:click="deleteImage({{ $carusel['id'] }}, 'Slider', 'imagen1')">Borrar</button>
-                                                            </div>
-                                                       </div>
-                                                        @else 
-                                                            <div class="form-group">
-                                                                <label for="InputWidget">Imagen1</label>
-                                                                <button type="button" onclick="modalImage({{ $carusel_id }}, 2, 'imagen1')" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Agregar Imagen</button>
-                                                            </div>
-                                                    @endif
-                                                    
-                                                    @if ($carusel_my_image2 != null)
-                                                        <div class="row justify-content-center">
-                                                            <div class="col-12 col-md-3">
-                                                               
-                                                                <img src="{{ asset('files/' . $carusel_my_image2) }}" alt="Profiler"
-                                                                class="preview_admin">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                        <div class="row justify-content-center">
-                                                            <div class="col-12 mt-3 text-right">
-                                                                <button class="btn btn-danger text-center" wire:click="deleteImage({{ $carusel['id'] }}, 'Slider', 'imagen2')">Borrar</button>
-                                                            </div>
-                                                       </div>
-                                                        @else 
-                                                            <div class="form-group">
-                                                                <label for="InputWidget">Imagen2</label>
-                                                                <button type="button" onclick="modalImage({{ $carusel_id }}, 2, 'imagen2')" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Agregar Imagen</button>
-                                                            </div>
-                                                    @endif
-                                                    
-                                                    @if ($carusel_my_image3 != null)
-                                                        <div class="row justify-content-center">
-                                                            <div class="col-12 col-md-3">
-                                                                <img src="{{ asset('files/' . $carusel_my_image3) }}" alt="Profiler"
-                                                                class="preview_admin">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                        <div class="row justify-content-center">
-                                                            <div class="col-12 mt-3 text-right">
-                                                                <button class="btn btn-danger text-center" wire:click="deleteImage({{ $carusel['id'] }}, 'Slider', 'imagen3')">Borrar</button>
-                                                            </div>
-                                                       </div>
-                                                        @else 
-                                                            <div class="form-group">
-                                                                <label for="InputWidget">Imagen3</label>
-                                                                <button type="button" onclick="modalImage({{ $carusel_id }}, 2, 'imagen3')" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Agregar Imagen</button>
-                                                            </div>
-                                                    @endif
-                                                   
-                                                    
-                                                   
-                                                    <div class="row ">
-                                                        <div class="col-12 text-center">
-                                                            <div wire:loading wire:target="storeCarusel">
-                                                                <div class="fa-3x">
-                                                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                          <p>
+                                                                           {!! $query->title !!}
+                                                                        </p>
+<p>
+                                                                           {!! $query->subtitle !!}
+                                                                        </p>
+<p>
+                                                                           {!! $query->description !!}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <img src="{{ asset('files/'.$query->image) }}" class="img-fluid">
+                                                                    </div>
+                                                                </div>
+                                                              <div class="form-group mt-5 float-right">
+                                                                    <div class="col-12">
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, '2 columnas')">Borrar</button>
+                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "4", {{ $query->id }})'>Editar</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                            
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group float-right mt-3">
-                                                        <button class="btn btn-outline-danger" wire:click="resetWidget">Cancelar</button>
-                                                        <button class="btn btn-outline-primary" wire:click='storeCarusel()'>Guardar</button>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
+                                                    @endforeach
+                                                @endif
+                                                {{-- Two-columns --}}
 
-                                            @endif
-                                            {{-- seccion carrusel --}}
-                                            {{-- seccion titulo --}}
-                                            @if ($widget == 3)
-                                                <div id="widget-title"></div>
-                                                <div class="card mt-5 shadow">
-                                                    <div class="card-header">
-                                                        <h5>Sección texto</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="form-group" wire:ignore>
-                                                            <label for="InputWidget">Texto</label>
-                                                            <textarea name="" id="title" cols="30" rows="10" class="form-control summernote"></textarea>
+                                                {{-- patallax --}}
+                                                @if ($my_widget['id_rel'] == 5)
+                                                <?php $parallaxs = $widget_builder->pageParallax($my_widget['widget_id'], 5) ?>
+                                                    @foreach ($parallaxs as $query)
+                                                        <div class="card mt-5 shadow">
+                                                            <div class="card-header">
+                                                                <h5>Sección parallax </h5>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                @if ($query->image != '')
+                                                                    <div class="row">
+                                                                        <div class="col-12 col-md-3 text-center">
+                                                                            <img src="{{ asset('files/'.$query->image) }}" class="preview_admin">
+                                                                            <div class="d-block mt-3">
+                                                                                <button class="btn btn-outline-danger btn-block" wire:click="deleteImage({{$query->id}}, 'Parallax', 'image')">Borrar</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
+                                                              <div class="form-group mt-5 float-right">
+                                                                    <div class="col-12">
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Parallax')">Borrar</button>
+                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "5", {{ $query->id }})'>Editar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="form-group float-right mt-3">
-                                                            <button class="btn btn-outline-danger" wire:click="resetWidget">Cancelar</button>
-                                                            <button class="btn btn-outline-primary" wire:click='storeTitle()'>Guardar</button>
+                                                    @endforeach
+                                                @endif
+                                                {{-- /patallax --}}
+
+                                                {{--  video --}}
+                                                @if ($my_widget['id_rel'] == 7)
+                                                <?php $video = $widget_builder->pageVideo($my_widget['widget_id'], 7) ?>
+                                                    @foreach ($video as $query)
+                                                        <div class="card mt-5 shadow">
+                                                            <div class="card-header">
+                                                                <h5>Sección video </h5>
+                                                            </div>
+                                                            <div class="card-body">
+                                                               <div class="row">
+                                                                   <div class="col-12">
+                                                                    <p>
+                                                                        {!! $query->title !!}
+                                                                     </p>
+                                                                    <p>
+                                                                        {!! $query->subtitle !!}
+                                                                     </p>
+                                                                    <p>
+                                                                        {!! $query->description !!}
+                                                                     </p>
+                                                                    <p>
+                                                                        {!! $query->video !!}
+                                                                     </p>
+                                                                   </div>
+                                                               </div>
+                                                              <div class="form-group mt-5 float-right">
+                                                                    <div class="col-12">
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Video')">Borrar</button>
+                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "7", {{ $query->id }})'>Editar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            {{-- seccion titulo --}}
-                                            
+                                                    @endforeach
+                                                @endif
+                                                {{--  /video --}}
+
+                                            @endforeach
+                                            {{-- mywidgets --}}
                                         </div>
                                         <div class="tab-pane fade" id="fondo" role="tabpanel" aria-labelledby="fondo-tab">...</div>
                                         <div class="tab-pane fade" id="seo" role="tabpanel" aria-labelledby="seo-tab">...</div>
@@ -388,9 +366,12 @@
             </div>
         </div>
    </div>
-   @include('modal_widgets.modal_encabezado')
-   @include('modal_widgets.modal_carusel')
-   @include('modal_widgets.modal_texto')
+    @include('modal_widgets.modal_encabezado')
+    @include('modal_widgets.modal_two_columns')
+    @include('modal_widgets.modal_carusel')
+    @include('modal_widgets.modal_texto')
+    @include('modal_widgets.modal_parallax')
+    @include('modal_widgets.modal_video')
     @include('page_modal')
     @include('section_modal')
     @include('modal_image')

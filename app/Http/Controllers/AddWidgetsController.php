@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\WidgetBuilder;
 use App\Models\WidgetCarusel;
 use App\Models\WidgetHeader;
+use App\Models\WidgetParallax;
 use App\Models\WidgetText;
+use App\Models\WidgetTwoColumn;
+use App\Models\WidgetVideo;
 use Illuminate\Http\Request;
 
 class AddWidgetsController extends Controller
@@ -75,5 +78,41 @@ class AddWidgetsController extends Controller
     {
         $data = $request->data;
         WidgetText::saveEdit($data, $request->page_actual, $request->texto_id);
+    }
+    
+    public function storeTwoColumns(Request $request)
+    {
+        $data = $request->data;
+        if ($request->hasFile('image') != false) {
+            $get_image1 = $request->file('image');
+            $name_image1 = 'two-columns-'.rand(1, 999).'-'.$get_image1->getClientOriginalName();
+
+            if ($get_image1->move('files', $name_image1)) {
+                $data['image'] = $name_image1;
+                WidgetTwoColumn::deleteImageWithImage(array('id' => $request->two_columns_id), 'image');
+            }
+        }
+        WidgetTwoColumn::saveEdit($data, $request->page_actual, $request->two_columns_id);
+    }
+
+    public function storeParallax(Request $request)
+    {
+        $data = $request->data;
+        if ($request->hasFile('image') != false) {
+            $get_image1 = $request->file('image');
+            $name_image1 = 'two-columns-'.rand(1, 999).'-'.$get_image1->getClientOriginalName();
+
+            if ($get_image1->move('files', $name_image1)) {
+                $data['image'] = $name_image1;
+                WidgetParallax::deleteImageWithImage(array('id' => $request->parallax_id), 'image');
+            }
+        }
+        WidgetParallax::saveEdit($data, $request->page_actual, $request->parallax_id);
+    }
+
+    public function storeVideo(Request $request)
+    {
+        $data = $request->data;
+        WidgetVideo::saveEdit($data, $request->page_actual, $request->video_id);
     }
 }

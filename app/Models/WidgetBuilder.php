@@ -51,6 +51,32 @@ class WidgetBuilder extends Model
             ->where(['widget_texts.id' => $widget_id, 'id_rel' => $type])->get();
         return $widget;
     }
+    
+    public function pageTwoColumns($widget_id, $type)
+    {
+        $widget = WidgetBuilder::select('title', 'subtitle', 'description', 'image', 'widget_two_columns.id')
+            ->join('widget_two_columns', 'widget_two_columns.id', '=', 'widget_builders.widget_id')
+            ->where(['widget_two_columns.id' => $widget_id, 'id_rel' => $type])->get();
+        return $widget;
+    }
+    
+    public function pageParallax($widget_id, $type)
+    {
+        $widget = WidgetBuilder::select('widget_parallaxs.id', 'image')
+            ->join('widget_parallaxs', 'widget_parallaxs.id', '=', 'widget_builders.widget_id')
+            ->where(['widget_parallaxs.id' => $widget_id, 'id_rel' => $type])->get();
+
+        return $widget;
+    }
+    
+    public function pageVideo($widget_id, $type)
+    {
+        $widget = WidgetBuilder::select('widget_videos.id', 'title', 'subtitle', 'description', 'video')
+            ->join('widget_videos', 'widget_videos.id', '=', 'widget_builders.widget_id')
+            ->where(['widget_videos.id' => $widget_id, 'id_rel' => $type])->get();
+
+        return $widget;
+    }
 
     public static function editWidget($widget_id, $name_widget)
     {
@@ -74,6 +100,15 @@ class WidgetBuilder extends Model
         switch ($name_widget) {
             case 'Slider':
                 $widget = WidgetCarusel::find($widget_id);
+                @unlink('files/' . $widget->$name_image);
+                if ($widget != null) {
+                    $widget->$name_image = '';
+                    $widget->update();
+                }
+                break;
+            
+            case 'Parallax':
+                $widget = WidgetParallax::find($widget_id);
                 @unlink('files/' . $widget->$name_image);
                 if ($widget != null) {
                     $widget->$name_image = '';

@@ -1,24 +1,4 @@
-$(document).ready(function () {
 
-    var $owl = $('.owl-carousel').owlCarousel({
-        stagePadding: 0,
-        items: 1,
-        loop: true,
-        margin: 0,
-        singleItem: true,
-        nav: true,
-        /* 
-        navText: [
-            "<i class='fa fa-caret-left'></i>",
-            "<i class='fa fa-caret-right'></i>"
-        ], */
-        dots: true,
-        autoplay: true,
-        autoplayTimeout: 5000
-    });
-
-
-});
 window.addTitle = function () {
     let title = $('#titlePage').val();
     axios
@@ -53,16 +33,33 @@ window.setDataModal = function (page_actual, section_id, widget_id) {
             $('#modal-carusel-widget_id').val(widget_id);
             $('#modal-carusel-page_actual').val(page_actual);
             $('#modal-widget-carusel').modal('show');
-
             break;
         case '3':
-            $('#texto-content').summernote({
-            });
             $('#modal-texto-section_id').val(section_id);
             $('#modal-texto-widget_id').val(widget_id);
             $('#modal-texto-page_actual').val(page_actual);
             $('#modal-widget-texto').modal('show');
-
+            break;
+            case '4':
+                $('#modal-two-columns-section_id').val(section_id);
+                $('#modal-two-columns-widget_id').val(widget_id);
+                $('#modal-two-columns-page_actual').val(page_actual);
+                $('#modal-widget-two-columns').modal('show');
+                $('#modal-widget-two-columns').addClass('addScroll');
+            break;
+            case '5':
+                $('#modal-parallax-section_id').val(section_id);
+                $('#modal-parallax-widget_id').val(widget_id);
+                $('#modal-parallax-page_actual').val(page_actual);
+                $('#modal-widget-parallax').modal('show');
+                $('#modal-widget-parallax').addClass('addScroll');
+            break;
+            case '7':
+                $('#modal-video-section_id').val(section_id);
+                $('#modal-video-widget_id').val(widget_id);
+                $('#modal-video-page_actual').val(page_actual);
+                $('#modal-widget-video').modal('show');
+                $('#modal-widget-video').addClass('addScroll');
             break;
 
         default:
@@ -74,19 +71,28 @@ window.setDataModal = function (page_actual, section_id, widget_id) {
     }
 }
 
-function getDataModal(section_id, widget_id) {
+window.getDataModal = function (section_id, widget_id) {
     axios.get("/admin/getDataWidget/"+section_id+'/'+widget_id)
         .then(function (response) {
             let result = response.data;
             console.log(result);
             switch (section_id) {
                 case '2':
-                  
                     break;
                 case '3':
-                    $('#texto-content').summernote('pasteHTML', result.content);
+                    CKEDITOR.instances['texto-content'].setData(result.content);
                     break;
-            
+                case '4':
+                    CKEDITOR.instances['two-columns-title'].setData(result.title);
+                    CKEDITOR.instances['two-columns-subtitle'].setData(result.subtitle);
+                    CKEDITOR.instances['two-columns-description'].setData(result.description);
+                    break;
+                case '7':
+                    CKEDITOR.instances['video-title'].setData(result.title);
+                    CKEDITOR.instances['video-subtitle'].setData(result.subtitle);
+                    CKEDITOR.instances['video-description'].setData(result.description);
+                    $('#video-url').val(result.video);
+                    break;
                 default:
                     $('#encabezado-title').val(result.title);
                     $('#encabezado-phone').val(result.phone);
@@ -104,9 +110,42 @@ window.closeModalSection = function (div) {
 
 
 $(function () {
-    if (document.getElementById('texto-content')) {
-        $('#texto-content').summernote({
 
+    if (document.getElementById('texto-content')) {
+        let ckeditor = CKEDITOR.replace('texto-content', {
+            language: 'es-mx',
+        });
+    }
+    if (document.getElementById('two-columns-title')) {
+        let ckeditor = CKEDITOR.replace('two-columns-title', {
+            language: 'es-mx',
+        });
+    }
+    if (document.getElementById('two-columns-subtitle')) {
+        let ckeditor = CKEDITOR.replace('two-columns-subtitle', {
+            language: 'es-mx',
+        });
+    }
+    if (document.getElementById('two-columns-description')) {
+        let ckeditor = CKEDITOR.replace('two-columns-description', {
+            language: 'es-mx',
+        });
+    }
+
+    /* video */
+    if (document.getElementById('video-title')) {
+        let ckeditor = CKEDITOR.replace('video-title', {
+            language: 'es-mx',
+        });
+    }
+    if (document.getElementById('video-subtitle')) {
+        let ckeditor = CKEDITOR.replace('video-subtitle', {
+            language: 'es-mx',
+        });
+    }
+    if (document.getElementById('video-description')) {
+        let ckeditor = CKEDITOR.replace('video-description', {
+            language: 'es-mx',
         });
     }
     
@@ -124,14 +163,7 @@ $(function () {
 
     })
 
-    window.Livewire.on('setSummernote', divPosition => {
-        
-        $(".summernote").on("summernote.change", function (e) {   // callback as jquery custom event 
-            Livewire.emit('setTitle', this.value);
-            console.log(this.value);
-
-        });
-    })
+    
 
     window.Livewire.on('setSummerTitle', title => {
         console.log(title);

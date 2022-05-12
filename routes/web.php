@@ -33,8 +33,12 @@ Route::get('close_sesion', function() {
 });
 
 Route::get('/admin/getDataWidget/{section_id}/{widget_id}', [App\Http\Livewire\ConstructorComponent::class, 'getDataWidget'])->name('home');
+
 Route::group(['prefix' => 'widgets'], function () {
     Route::post('/header/store', [App\Http\Controllers\AddWidgetsController::class, 'storeHeader']);
     Route::post('/carusel/store', [App\Http\Controllers\AddWidgetsController::class, 'storeCarusel']);
     Route::post('/texto/store', [App\Http\Controllers\AddWidgetsController::class, 'storeTexto']);
+    Route::post('/two-columns/store', [App\Http\Controllers\AddWidgetsController::class, 'storeTwoColumns']);
+    Route::post('/parallax/store', [App\Http\Controllers\AddWidgetsController::class, 'storeParallax']);
+    Route::post('/video/store', [App\Http\Controllers\AddWidgetsController::class, 'storeVideo']);
 });

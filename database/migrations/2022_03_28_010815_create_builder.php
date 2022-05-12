@@ -65,16 +65,6 @@ class CreateBuilder extends Migration
             $table->timestamps();
         });
 
-       /*  Schema::create('widget_galleries', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('widget_id')->nullable();
-            $table->string('image');
-            $table->text('text')->nullable();
-            $table->smallinteger('is_template')->default(0)->nullable();
-            $table->foreign('widget_id')->references('id')->on('widgets')->onDelete('cascade');
-            $table->timestamps();
-        }); */
-       
         Schema::create('widget_texts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('widget_id')->nullable();

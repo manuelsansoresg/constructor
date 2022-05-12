@@ -11,6 +11,8 @@ use App\Models\WidgetCarusel;
 use App\Models\WidgetGallery;
 use App\Models\WidgetHeader;
 use App\Models\WidgetText;
+use App\Models\WidgetTwoColumn;
+use App\Models\WidgetVideo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
@@ -123,6 +125,13 @@ class ConstructorComponent extends Component
             self::deleteImage($get_widget->id, 'Encabezado', 'imagen3');
             $my_widget->delete();
         }
+        
+        
+
+        if ($get_widget->execute_widget == 'parallax') {
+            $my_widget = WidgetCarusel::find($widget_id);
+            self::deleteImage($get_widget->id, 'Parallax', 'image');
+        }
        
         self::resetWidget();
     }
@@ -154,7 +163,12 @@ class ConstructorComponent extends Component
             case '3':
                 $widget = WidgetText::find($widget_id);
                 break;
-            
+            case '4':
+                $widget = WidgetTwoColumn::find($widget_id);
+                break;
+            case '7':
+                $widget = WidgetVideo::find($widget_id);
+                break;
             default:
                 #encabezado
                 $widget = WidgetHeader::find($widget_id);
@@ -174,7 +188,6 @@ class ConstructorComponent extends Component
     public function deleteImage($widget_id, $name_widget, $name_image = null)
     {
         WidgetBuilder::deleteImage($widget_id, $name_widget, $name_image);
-        
     }
 
     

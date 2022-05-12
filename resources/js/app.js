@@ -12,6 +12,9 @@ require('./components/title')
 require('./components/addImage')
 require('./components/addWidgets')
 
+if (document.getElementById('parallax')) {
+    $('.parallax-window').parallax();
+}
 
 
 /* window.Vue = require('vue').default; */

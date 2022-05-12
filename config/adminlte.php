@@ -457,23 +457,19 @@ return [
             ],
         ],
         
-        'Summernote' => [
+        'Ckeditor' => [
             'active' => true,
             'files' => [
+               
                 [
-                    'type' => 'css',
+                    'type' => 'js',
                     'asset' => true,
-                    'location' => '/vendor/summernote/summernote.css',
+                    'location' => '/vendor/ckeditor/ckeditor.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => '/vendor/summernote/summernote.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => '/vendor/summernote/lang/summernote-es-ES.js',
+                    'location' => '/vendor/ckeditor/lang/es-mx.js',
                 ],
             ],
         ],
