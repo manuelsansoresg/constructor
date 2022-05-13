@@ -14,17 +14,17 @@
                 <div class="container">
                     <div class="row">
                         @if ($header->image != '')
-                            <div class="col-12 col-md-3">
+                            <div class="col-12 col-md-3 text-center text-md-left">
                                 <img src="{{ asset('files/' . $header->image) }}" alt="Profiler"
                                     class="preview_admin">
                             </div>
                         @endif
                         <div class="col-12 col-md-6 text-center">
-                            {{ $header->title }}
+                            {!! $header->title !!}
                         </div>
-                        <div class="col-12 col-md-2">
-                            <p>{{ $header->phone }}</p>
-                            <p>{{ $header->phone2 }}</p>
+                        <div class="col-12 col-md-2 text-center text-md-left">
+                            <p>{!! $header->phone !!}</p>
+                            <p>{!! $header->phone2 !!}</p>
                         </div>
                     </div>
                 </div>
@@ -157,6 +157,33 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            @endforeach
+        @endif
+        @if ($my_widget['id_rel'] == 8)
+            <?php $gallery = $widget_builder->pageGallery($my_widget['widget_id'], 8) ?>
+            {{-- <input type="hidden" id="gallery" value="true"> --}}
+            @foreach ($gallery as $query)
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        @if ($query->imagen1 != '')
+                            <img class="img-fluid" src="{{ asset('files/' . $query->imagen1) }}" alt="" />
+                        @endif
+                    </div>
+                    <div class="col-12 col-md-4">
+                        @if ($query->imagen2 != '')
+                            <img class="img-fluid" src="{{ asset('files/' . $query->imagen2) }}" alt="" />
+                        @endif
+                    </div>
+                    <div class="col-12 col-md-4">
+                        @if ($query->imagen3 != '')
+                            <img class="img-fluid" src="{{ asset('files/' . $query->imagen3) }}" alt="" />
+                        @endif
+                    </div>
+                    
+                </div>
+                
             </div>
             @endforeach
         @endif

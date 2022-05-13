@@ -93,11 +93,11 @@
                                                                         </div>
                                                                     @endif
                                                                     <div class="col-12 col-md-6 text-center">
-                                                                        {{ $header->title}}
+                                                                        {!! $header->title !!}
                                                                     </div>
                                                                     <div class="col-12 col-md-2">
-                                                                        <p>{{ $header->phone}}</p>
-                                                                        <p>{{ $header->phone2}}</p>
+                                                                        <p>{!! $header->phone !!}</p>
+                                                                        <p>{!! $header->phone2 !!}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group mt-3 float-right">
@@ -349,10 +349,10 @@
                                                     @endforeach
                                                 @endif
                                                 {{--  /video --}}
-                                                {{--  video --}}
+                                                {{--  galeria --}}
                                                 @if ($my_widget['id_rel'] == 8)
-                                                <?php $video = $widget_builder->pageGallery($my_widget['widget_id'], 8) ?>
-                                                    @foreach ($video as $query)
+                                                <?php $galeria = $widget_builder->pageGallery($my_widget['widget_id'], 8) ?>
+                                                    @foreach ($galeria as $query)
                                                         <div class="card mt-5 shadow">
                                                             <div class="card-header">
                                                                 <h5>Sección galería </h5>
@@ -418,7 +418,8 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                                {{--  /video --}}
+                                                {{--  /galeria --}}
+                                                
 
                                             @endforeach
                                             {{-- mywidgets --}}

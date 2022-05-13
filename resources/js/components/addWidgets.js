@@ -3,6 +3,15 @@ import Swal from 'sweetalert2'
 
 $("#frm-encabezado").submit(function (e) {
     e.preventDefault();
+    var desc = CKEDITOR.instances['encabezado-title'].getData();
+    $('#encabezado-title').val(desc);
+    
+    var desc = CKEDITOR.instances['encabezado-phone'].getData();
+    $('#encabezado-phone').val(desc);
+    
+    var desc = CKEDITOR.instances['encabezado-phone2'].getData();
+    $('#encabezado-phone2').val(desc);
+
     $('#loading-encabezado').show();
     const form = document.getElementById("frm-encabezado");
     const data = new FormData(form);

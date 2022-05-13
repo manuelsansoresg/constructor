@@ -101,9 +101,9 @@ window.getDataModal = function (section_id, widget_id) {
                     $('#video-url').val(result.video);
                     break;
                 default:
-                    $('#encabezado-title').val(result.title);
-                    $('#encabezado-phone').val(result.phone);
-                    $('#encabezado-phone2').val(result.phone2);
+                    CKEDITOR.instances['encabezado-title'].setData(result.title);
+                    CKEDITOR.instances['encabezado-phone'].setData(result.phone);
+                    CKEDITOR.instances['encabezado-phone2'].setData(result.phone2);
                     break;
             }
             
@@ -117,7 +117,23 @@ window.closeModalSection = function (div) {
 
 
 $(function () {
-
+    /* Encabezado */
+    if (document.getElementById('encabezado-title')) {
+        let ckeditor = CKEDITOR.replace('encabezado-title', {
+            language: 'es-mx',
+        });
+    }
+    if (document.getElementById('encabezado-phone')) {
+        let ckeditor = CKEDITOR.replace('encabezado-phone', {
+            language: 'es-mx',
+        });
+    }
+    if (document.getElementById('encabezado-phone2')) {
+        let ckeditor = CKEDITOR.replace('encabezado-phone2', {
+            language: 'es-mx',
+        });
+    }
+    
     if (document.getElementById('texto-content')) {
         let ckeditor = CKEDITOR.replace('texto-content', {
             language: 'es-mx',
