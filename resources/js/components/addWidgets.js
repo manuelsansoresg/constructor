@@ -3,11 +3,12 @@ import Swal from 'sweetalert2'
 
 $("#frm-encabezado").submit(function (e) {
     e.preventDefault();
-    
+    $('#loading-encabezado').show();
     const form = document.getElementById("frm-encabezado");
     const data = new FormData(form);
     axios.post("/widgets/header/store", data)
         .then(function (response) {
+            $('#loading-encabezado').show();
             let result = response.data;
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
@@ -21,10 +22,12 @@ $("#frm-encabezado").submit(function (e) {
 
 $("#frm-carusel").submit(function (e) {
     e.preventDefault();
+    $('#loading-carusel').show();
     const form = document.getElementById("frm-carusel");
     const data = new FormData(form);
     axios.post("/widgets/carusel/store", data)
         .then(function (response) {
+            $('#loading-carusel').hide();
             let result = response.data;
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
@@ -38,12 +41,14 @@ $("#frm-carusel").submit(function (e) {
 
 $("#frm-texto").submit(function (e) {
     e.preventDefault();
+    $('#loading-texto').show();
     var desc = CKEDITOR.instances['texto-content'].getData();
     $('#texto-content').val(desc);
     const form = document.getElementById("frm-texto");
     const data = new FormData(form);
     axios.post("/widgets/texto/store", data)
         .then(function (response) {
+            $('#loading-texto').hide();
             let result = response.data;
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
@@ -57,7 +62,7 @@ $("#frm-texto").submit(function (e) {
 
 $("#frm-two-columns").submit(function (e) {
     e.preventDefault();
-    
+    $('#loading-two-columns').show();
     var desc = CKEDITOR.instances['two-columns-title'].getData();
     $('#two-columns-title').val(desc);
     
@@ -71,6 +76,7 @@ $("#frm-two-columns").submit(function (e) {
     const data = new FormData(form);
     axios.post("/widgets/two-columns/store", data)
         .then(function (response) {
+            $('#loading-two-columns').hide();
             let result = response.data;
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
@@ -84,10 +90,12 @@ $("#frm-two-columns").submit(function (e) {
 
 $("#frm-parallax").submit(function (e) {
     e.preventDefault();
+    $('#loading-parallax').show();
     const form = document.getElementById("frm-parallax");
     const data = new FormData(form);
     axios.post("/widgets/parallax/store", data)
         .then(function (response) {
+            $('#loading-parallax').hide();
             let result = response.data;
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
@@ -101,6 +109,7 @@ $("#frm-parallax").submit(function (e) {
 
 $("#frm-video").submit(function (e) {
     e.preventDefault();
+    $('#loading-video').show();
     var desc = CKEDITOR.instances['video-title'].getData();
     $('#video-title').val(desc);
     
@@ -114,11 +123,31 @@ $("#frm-video").submit(function (e) {
     const data = new FormData(form);
     axios.post("/widgets/video/store", data)
         .then(function (response) {
+            $('#loading-video').hide();
             let result = response.data;
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-video').modal('hide');
             document.getElementById('frm-video').reset();
+            showInfo();
+        })
+        .catch(e => { });
+
+});
+
+$("#frm-gallery").submit(function (e) {
+    e.preventDefault();
+    $('#loading-gallery').show();
+    const form = document.getElementById("frm-gallery");
+    const data = new FormData(form);
+    axios.post("/widgets/gallery/store", data)
+        .then(function (response) {
+            $('#loading-gallery').hide();
+            let result = response.data;
+            Livewire.emit('updateMyWidgets');
+            Livewire.emit('resetComponents');
+            $('#modal-widget-gallery').modal('hide');
+            document.getElementById('frm-gallery').reset();
             showInfo();
         })
         .catch(e => { });

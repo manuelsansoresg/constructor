@@ -77,6 +77,14 @@ class WidgetBuilder extends Model
 
         return $widget;
     }
+    
+    public function pageGallery($widget_id, $type)
+    {
+        $widget = WidgetBuilder::select('widget_galleries.id', 'imagen1', 'imagen2', 'imagen3', 'imagen4', 'imagen5', 'imagen6')
+            ->join('widget_galleries', 'widget_galleries.id', '=', 'widget_builders.widget_id')
+            ->where(['widget_galleries.id' => $widget_id, 'id_rel' => $type])->get();
+        return $widget;
+    }
 
     public static function editWidget($widget_id, $name_widget)
     {
@@ -109,6 +117,15 @@ class WidgetBuilder extends Model
             
             case 'Parallax':
                 $widget = WidgetParallax::find($widget_id);
+                @unlink('files/' . $widget->$name_image);
+                if ($widget != null) {
+                    $widget->$name_image = '';
+                    $widget->update();
+                }
+                break;
+            
+            case 'Galería':
+                $widget = WidgetGallery::find($widget_id);
                 @unlink('files/' . $widget->$name_image);
                 if ($widget != null) {
                     $widget->$name_image = '';

@@ -10,7 +10,7 @@
                         <label for="InputWidget">Texto</label>
                         <textarea name="data[content]" id="texto-content" cols="30" rows="10" class="form-control summernote"></textarea>
                     </div>
-                    <div class="row" style="display: none" id="loading-carusel">
+                    <div class="row" style="display: none" id="loading-texto">
                         <div class="col-12 text-center">
                             <div>
                                 <div class="fa-3x">

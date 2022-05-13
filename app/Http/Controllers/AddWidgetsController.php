@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\WidgetBuilder;
 use App\Models\WidgetCarusel;
+use App\Models\WidgetGallery;
 use App\Models\WidgetHeader;
 use App\Models\WidgetParallax;
 use App\Models\WidgetText;
@@ -100,7 +101,7 @@ class AddWidgetsController extends Controller
         $data = $request->data;
         if ($request->hasFile('image') != false) {
             $get_image1 = $request->file('image');
-            $name_image1 = 'two-columns-'.rand(1, 999).'-'.$get_image1->getClientOriginalName();
+            $name_image1 = 'parallax-'.rand(1, 999).'-'.$get_image1->getClientOriginalName();
 
             if ($get_image1->move('files', $name_image1)) {
                 $data['image'] = $name_image1;
@@ -114,5 +115,70 @@ class AddWidgetsController extends Controller
     {
         $data = $request->data;
         WidgetVideo::saveEdit($data, $request->page_actual, $request->video_id);
+    }
+    
+    public function storeGallery(Request $request)
+    {
+        $data_images                = array();
+        $data_images['widget_id']   = $request->widget_id;
+
+        if ($request->hasFile('imagen1') != false) {
+            $get_image1 = $request->file('imagen1');
+            $name_image1 = 'gallery-'.rand(1, 999).'-'.$get_image1->getClientOriginalName();
+
+            if ($get_image1->move('files', $name_image1)) {
+                $data_images['imagen1'] = $name_image1;
+                WidgetGallery::deleteImageWithImage(array('id' => $request->gallery_id), 'imagen1');
+            }
+        }
+        
+        if ($request->hasFile('imagen2') != false) {
+            $get_image1 = $request->file('imagen2');
+            $name_image1 = 'gallery-'.rand(1, 999).'-'.$get_image1->getClientOriginalName();
+
+            if ($get_image1->move('files', $name_image1)) {
+                $data_images['imagen2'] = $name_image1;
+                WidgetGallery::deleteImageWithImage(array('id' => $request->gallery_id), 'imagen2');
+            }
+        }
+        
+        if ($request->hasFile('imagen3') != false) {
+            $get_image1 = $request->file('imagen3');
+            $name_image1 = 'gallery-'.rand(1, 999).'-'.$get_image1->getClientOriginalName();
+
+            if ($get_image1->move('files', $name_image1)) {
+                $data_images['imagen3'] = $name_image1;
+                WidgetGallery::deleteImageWithImage(array('id' => $request->gallery_id), 'imagen3');
+            }
+        }
+        if ($request->hasFile('imagen4') != false) {
+            $get_image1 = $request->file('imagen4');
+            $name_image1 = 'gallery-'.rand(1, 999).'-'.$get_image1->getClientOriginalName();
+
+            if ($get_image1->move('files', $name_image1)) {
+                $data_images['imagen4'] = $name_image1;
+                WidgetGallery::deleteImageWithImage(array('id' => $request->gallery_id), 'imagen4');
+            }
+        }
+        if ($request->hasFile('imagen5') != false) {
+            $get_image1 = $request->file('imagen5');
+            $name_image1 = 'gallery-'.rand(1, 999).'-'.$get_image1->getClientOriginalName();
+
+            if ($get_image1->move('files', $name_image1)) {
+                $data_images['imagen5'] = $name_image1;
+                WidgetGallery::deleteImageWithImage(array('id' => $request->gallery_id), 'imagen5');
+            }
+        }
+        if ($request->hasFile('imagen6') != false) {
+            $get_image1 = $request->file('imagen6');
+            $name_image1 = 'gallery-'.rand(1, 999).'-'.$get_image1->getClientOriginalName();
+
+            if ($get_image1->move('files', $name_image1)) {
+                $data_images['imagen6'] = $name_image1;
+                WidgetGallery::deleteImageWithImage(array('id' => $request->gallery_id), 'imagen6');
+            }
+        }
+
+        WidgetGallery::saveEdit($data_images, $request->page_actual, $request->gallery_id);
     }
 }

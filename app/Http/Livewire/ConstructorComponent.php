@@ -126,6 +126,17 @@ class ConstructorComponent extends Component
             $my_widget->delete();
         }
         
+        if ($get_widget->execute_widget == 'gallery') {
+            $my_widget = WidgetGallery::find($widget_id);
+            self::deleteImage($get_widget->id, 'Galería', 'imagen1');
+            self::deleteImage($get_widget->id, 'Galería', 'imagen2');
+            self::deleteImage($get_widget->id, 'Galería', 'imagen3');
+            self::deleteImage($get_widget->id, 'Galería', 'imagen4');
+            self::deleteImage($get_widget->id, 'Galería', 'imagen5');
+            self::deleteImage($get_widget->id, 'Galería', 'imagen6');
+            $my_widget->delete();
+        }
+        
         
 
         if ($get_widget->execute_widget == 'parallax') {

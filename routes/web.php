@@ -41,4 +41,5 @@ Route::group(['prefix' => 'widgets'], function () {
     Route::post('/two-columns/store', [App\Http\Controllers\AddWidgetsController::class, 'storeTwoColumns']);
     Route::post('/parallax/store', [App\Http\Controllers\AddWidgetsController::class, 'storeParallax']);
     Route::post('/video/store', [App\Http\Controllers\AddWidgetsController::class, 'storeVideo']);
+    Route::post('/gallery/store', [App\Http\Controllers\AddWidgetsController::class, 'storeGallery']);
 });

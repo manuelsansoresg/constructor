@@ -349,6 +349,76 @@
                                                     @endforeach
                                                 @endif
                                                 {{--  /video --}}
+                                                {{--  video --}}
+                                                @if ($my_widget['id_rel'] == 8)
+                                                <?php $video = $widget_builder->pageGallery($my_widget['widget_id'], 8) ?>
+                                                    @foreach ($video as $query)
+                                                        <div class="card mt-5 shadow">
+                                                            <div class="card-header">
+                                                                <h5>Sección galería </h5>
+                                                            </div>
+                                                            <div class="card-body">
+                                                               <div class="row">
+                                                                @if ($query->imagen1 != '')
+                                                                <div class="col-12 col-md-4">
+                                                                    <img class="img-fluid" src="{{ asset('files/' . $query->imagen1) }}" alt="" />
+                                                                    <div class="d-block mt-3">
+                                                                        <button class="btn btn-outline-danger btn-block" wire:click="deleteImage({{$query->id}}, 'Galería', 'imagen1')">Borrar</button>
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+                                                                @if ($query->imagen2 != '')
+                                                                <div class="col-12 col-md-4">
+                                                                    <img class="img-fluid" src="{{ asset('files/' . $query->imagen2) }}" alt="" />
+                                                                    <div class="d-block mt-3">
+                                                                        <button class="btn btn-outline-danger btn-block" wire:click="deleteImage({{$query->id}}, 'Galería', 'imagen2')">Borrar</button>
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+                                                                @if ($query->imagen3 != '')
+                                                                <div class="col-12 col-md-4">
+                                                                    <img class="img-fluid" src="{{ asset('files/' . $query->imagen3) }}" alt="" />
+                                                                    <div class="d-block mt-3">
+                                                                        <button class="btn btn-outline-danger btn-block" wire:click="deleteImage({{$query->id}}, 'Galería', 'imagen3')">Borrar</button>
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+                                                                @if ($query->imagen4 != '')
+                                                                <div class="col-12 col-md-4">
+                                                                    <img class="img-fluid" src="{{ asset('files/' . $query->imagen4) }}" alt="" />
+                                                                    <div class="d-block mt-3">
+                                                                        <button class="btn btn-outline-danger btn-block" wire:click="deleteImage({{$query->id}}, 'Galería', 'imagen4')">Borrar</button>
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+                                                                @if ($query->imagen5 != '')
+                                                                <div class="col-12 col-md-4">
+                                                                    <img class="img-fluid" src="{{ asset('files/' . $query->imagen5) }}" alt="" />
+                                                                    <div class="d-block mt-3">
+                                                                        <button class="btn btn-outline-danger btn-block" wire:click="deleteImage({{$query->id}}, 'Galería', 'imagen5')">Borrar</button>
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+                                                                @if ($query->imagen6 != '')
+                                                                <div class="col-12 col-md-4">
+                                                                    <img class="img-fluid" src="{{ asset('files/' . $query->imagen6) }}" alt="" />
+                                                                    <div class="d-block mt-3">
+                                                                        <button class="btn btn-outline-danger btn-block" wire:click="deleteImage({{$query->id}}, 'Galería', 'imagen6')">Borrar</button>
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+                                                               </div>
+                                                              <div class="form-group mt-5 float-right">
+                                                                    <div class="col-12">
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Galería')">Borrar</button>
+                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "8", {{ $query->id }})'>Editar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                                {{--  /video --}}
 
                                             @endforeach
                                             {{-- mywidgets --}}
@@ -372,6 +442,7 @@
     @include('modal_widgets.modal_texto')
     @include('modal_widgets.modal_parallax')
     @include('modal_widgets.modal_video')
+    @include('modal_widgets.modal_gallery')
     @include('page_modal')
     @include('section_modal')
     @include('modal_image')

@@ -40,26 +40,33 @@ window.setDataModal = function (page_actual, section_id, widget_id) {
             $('#modal-texto-page_actual').val(page_actual);
             $('#modal-widget-texto').modal('show');
             break;
-            case '4':
+        case '4':
                 $('#modal-two-columns-section_id').val(section_id);
                 $('#modal-two-columns-widget_id').val(widget_id);
                 $('#modal-two-columns-page_actual').val(page_actual);
                 $('#modal-widget-two-columns').modal('show');
                 $('#modal-widget-two-columns').addClass('addScroll');
             break;
-            case '5':
+        case '5':
                 $('#modal-parallax-section_id').val(section_id);
                 $('#modal-parallax-widget_id').val(widget_id);
                 $('#modal-parallax-page_actual').val(page_actual);
                 $('#modal-widget-parallax').modal('show');
                 $('#modal-widget-parallax').addClass('addScroll');
             break;
-            case '7':
+        case '7':
                 $('#modal-video-section_id').val(section_id);
                 $('#modal-video-widget_id').val(widget_id);
                 $('#modal-video-page_actual').val(page_actual);
                 $('#modal-widget-video').modal('show');
                 $('#modal-widget-video').addClass('addScroll');
+            break;
+        case '8':
+                $('#modal-gallery-section_id').val(section_id);
+                $('#modal-gallery-widget_id').val(widget_id);
+                $('#modal-gallery-page_actual').val(page_actual);
+                $('#modal-widget-gallery').modal('show');
+                $('#modal-widget-gallery').addClass('addScroll');
             break;
 
         default:
