@@ -23,9 +23,10 @@ window.changeSection = function (page_actual) {
 
 window.setDataModal = function (page_actual, section_id, widget_id) {
     
+  
+
     getDataModal(section_id, widget_id);
     closeModalSection('sectionModal');
-   
     switch (section_id) {
        
         case '2':
@@ -61,12 +62,15 @@ window.setDataModal = function (page_actual, section_id, widget_id) {
                 $('#modal-widget-video').modal('show');
                 $('#modal-widget-video').addClass('addScroll');
             break;
-        case '8':
-                $('#modal-gallery-section_id').val(section_id);
-                $('#modal-gallery-widget_id').val(widget_id);
-                $('#modal-gallery-page_actual').val(page_actual);
-                $('#modal-widget-gallery').modal('show');
-                $('#modal-widget-gallery').addClass('addScroll');
+        case '9':
+                $('#modal-contacto-section_id').val(section_id);
+                if (widget_id != 'null') {
+                    $('#modal-contacto-widget_id').val(widget_id);
+                }
+                
+                $('#modal-contacto-page_actual').val(page_actual);
+                $('#modal-widget-contacto').modal('show');
+                $('#modal-widget-contacto').addClass('addScroll');
             break;
 
         default:
@@ -78,11 +82,11 @@ window.setDataModal = function (page_actual, section_id, widget_id) {
     }
 }
 
+
 window.getDataModal = function (section_id, widget_id) {
     axios.get("/admin/getDataWidget/"+section_id+'/'+widget_id)
         .then(function (response) {
             let result = response.data;
-            console.log(result);
             switch (section_id) {
                 case '2':
                     break;
@@ -100,6 +104,11 @@ window.getDataModal = function (section_id, widget_id) {
                     CKEDITOR.instances['video-description'].setData(result.description);
                     $('#video-url').val(result.video);
                     break;
+                case '9':
+                    $('#contacto-name').val(result.name);
+                    $('#elementsForm').html(result.content_form);
+                    $('#modal-contacto-widget_id').val(result.widget_id);
+                    break;
                 default:
                     CKEDITOR.instances['encabezado-title'].setData(result.title);
                     CKEDITOR.instances['encabezado-phone'].setData(result.phone);
@@ -109,6 +118,15 @@ window.getDataModal = function (section_id, widget_id) {
             
         })
         .catch(e => { });
+}
+
+window.openModalAddElementContact = function (section_id, widget_id, page_actual) {
+    $('#modal-element_contact-section_id').val(section_id);
+    $('#modal-element_contact-widget_id').val(widget_id);
+    $('#modal-element_contact-page_actual').val(page_actual);
+
+    $('#modal-widget-element_contact').modal('show');
+    $('#modal-widget-element_contact').addClass('addScroll');
 }
 
 window.closeModalSection = function (div) {

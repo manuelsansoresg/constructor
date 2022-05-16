@@ -85,6 +85,19 @@ class WidgetBuilder extends Model
             ->where(['widget_galleries.id' => $widget_id, 'id_rel' => $type])->get();
         return $widget;
     }
+    
+    public function pageContact($widget_id, $type)
+    {
+        $widget = WidgetBuilder::select('widget_contacts.id', 'name')
+            ->join('widget_contacts', 'widget_contacts.id', '=', 'widget_builders.widget_id')
+            ->where(['widget_contacts.id' => $widget_id, 'id_rel' => $type])->get();
+        return $widget;
+    }
+
+    public function elementsContact($contact_id)
+    {
+        return ContactElement::where('widget_contact_id', $contact_id)->get();
+    }
 
     public static function editWidget($widget_id, $name_widget)
     {

@@ -4,10 +4,12 @@ namespace App\Http\Livewire;
 
 use App\Lib\LImage;
 use App\Models\Builder;
+use App\Models\ContactElement;
 use App\Models\Section;
 use App\Models\Widget;
 use App\Models\WidgetBuilder;
 use App\Models\WidgetCarusel;
+use App\Models\WidgetContact;
 use App\Models\WidgetGallery;
 use App\Models\WidgetHeader;
 use App\Models\WidgetText;
@@ -103,6 +105,14 @@ class ConstructorComponent extends Component
         self::updateSection($get_widget->id);
     }
 
+    public function deleteElementContact($contact_id)
+    {
+        $element = ContactElement::find($contact_id);
+        $element->delete();
+        
+        self::resetWidget();
+    }
+
     public function deleteWidget($widget_id, $name_widget)
     {
         $get_widget = Widget::where('name', $name_widget)->first();
@@ -179,6 +189,9 @@ class ConstructorComponent extends Component
                 break;
             case '7':
                 $widget = WidgetVideo::find($widget_id);
+                break;
+            case '9':
+                $widget = ContactElement::getElements($widget_id);
                 break;
             default:
                 #encabezado

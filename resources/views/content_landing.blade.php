@@ -187,6 +187,43 @@
             </div>
             @endforeach
         @endif
+        @if ($my_widget['id_rel'] == 9)
+        <?php $contacto = $widget_builder->pageContact($my_widget['widget_id'], 9) ?>
+            {{-- <input type="hidden" id="gallery" value="true"> --}}
+            @foreach ($contacto as $query)
+            <?php $get_elements = $widget_builder->elementsContact($query->id) ?>
+            <form method="post" action="" class="py-5">
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h2>Contacto</h2>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        @foreach ($get_elements as $element)
+                        <?php $required = ($element->required == 1)? 'required' : '';?>
+                            <div class="col-12 col-md-10">
+                                <div class="form-group">
+                                    <label for="InputWidget">{{ $element->name }}</label>
+                                    <input type="text" class="form-control" name="name" {{ $required }} placeholder="{{ $element->placeholder }}">
+                                </div>
+                            </div>
+                            @endforeach
+                            
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-10">
+                                <div class="form-group">
+                                    <label for="InputWidget"></label>
+                                    <button type="submit" class="btn btn-outline-primary float-right">Enviar</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+            </form>
+            @endforeach
+        @endif
     @endforeach
     
     

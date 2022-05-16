@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactElement;
 use App\Models\WidgetBuilder;
 use App\Models\WidgetCarusel;
+use App\Models\WidgetContact;
 use App\Models\WidgetGallery;
 use App\Models\WidgetHeader;
 use App\Models\WidgetParallax;
@@ -180,5 +182,22 @@ class AddWidgetsController extends Controller
         }
 
         WidgetGallery::saveEdit($data_images, $request->page_actual, $request->gallery_id);
+    }
+
+    public function storeContact(Request $request)
+    {
+        $data_images['widget_id']   = $request->widget_id;
+        $contacto_id = $request->contacto_id;
+
+        WidgetContact::editWidget($request, $request->page_actual, $contacto_id);
+        ContactElement::editElements($request, $contacto_id);
+
+    }
+
+    public function addElementContact(Request $request)
+    {
+        $data = $request->data;
+        $element = new ContactElement($data);
+        $element->save();
     }
 }

@@ -115,11 +115,8 @@ class CreateBuilder extends Migration
         Schema::create('widget_contacts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('widget_id')->nullable();
+            $table->string('name')->nullable();
             
-            $table->string('name');
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('comment')->nullable();
             $table->smallinteger('is_template')->default(0)->nullable();
             $table->foreign('widget_id')->references('id')->on('widgets')->onDelete('cascade');
             $table->timestamps();

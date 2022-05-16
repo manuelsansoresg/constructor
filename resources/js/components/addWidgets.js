@@ -163,6 +163,44 @@ $("#frm-gallery").submit(function (e) {
 
 });
 
+$("#frm-contacto").submit(function (e) {
+    e.preventDefault();
+    $('#loading-contacto').show();
+    const form = document.getElementById("frm-contacto");
+    const data = new FormData(form);
+    axios.post("/widgets/contacto/store", data)
+        .then(function (response) {
+            $('#loading-contacto').hide();
+            let result = response.data;
+            Livewire.emit('updateMyWidgets');
+            Livewire.emit('resetComponents');
+            $('#modal-widget-contacto').modal('hide');
+            document.getElementById('frm-contacto').reset();
+            showInfo();
+        })
+        .catch(e => { });
+
+});
+
+$("#frm-element_contact").submit(function (e) {
+    e.preventDefault();
+    $('#loading-element_contact').show();
+    const form = document.getElementById("frm-element_contact");
+    const data = new FormData(form);
+    axios.post("/widgets/add-element-contacto/store", data)
+        .then(function (response) {
+            $('#loading-element_contact').hide();
+            let result = response.data;
+            Livewire.emit('updateMyWidgets');
+            Livewire.emit('resetComponents');
+            $('#modal-widget-element_contact').modal('hide');
+            document.getElementById('frm-element_contact').reset();
+            showInfo();
+        })
+        .catch(e => { });
+
+});
+
 
 
 function showInfo() {

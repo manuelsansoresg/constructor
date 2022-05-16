@@ -102,8 +102,8 @@
                                                                 </div>
                                                                 <div class="form-group mt-3 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $header->id }}, 'Encabezado')">Borrar</button>
                                                                         <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, 1, {{ $header->id }})'>Editar</button>
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $header->id }}, 'Encabezado')">Borrar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -213,8 +213,8 @@
                                                                 </div>
                                                                 <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $carusel_image->id }}, 'Slider')">Borrar</button>
                                                                         <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "2", {{ $carusel_image->id }})'>Editar</button>
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $carusel_image->id }}, 'Slider')">Borrar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -235,8 +235,8 @@
                                                                 {!! $title->content !!}
                                                                 <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $title->id }}, 'Texto')">Borrar</button>
                                                                         <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "3", {{ $title->id }})'>Editar</button>
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $title->id }}, 'Texto')">Borrar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -272,8 +272,8 @@
                                                                 </div>
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, '2 columnas')">Borrar</button>
                                                                         <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "4", {{ $query->id }})'>Editar</button>
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, '2 columnas')">Borrar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -303,8 +303,8 @@
                                                                 @endif
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Parallax')">Borrar</button>
                                                                         <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "5", {{ $query->id }})'>Editar</button>
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Parallax')">Borrar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -340,8 +340,8 @@
                                                                </div>
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Video')">Borrar</button>
                                                                         <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "7", {{ $query->id }})'>Editar</button>
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Video')">Borrar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -410,8 +410,8 @@
                                                                </div>
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Galería')">Borrar</button>
                                                                         <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "8", {{ $query->id }})'>Editar</button>
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Galería')">Borrar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -419,7 +419,59 @@
                                                     @endforeach
                                                 @endif
                                                 {{--  /galeria --}}
-                                                
+                                                {{--  contacto --}}
+                                                @if ($my_widget['id_rel'] == 9)
+                                                <?php $contacto = $widget_builder->pageContact($my_widget['widget_id'], 9) ?>
+                                                    @foreach ($contacto as $query)
+                                                    <div class="card mt-5 shadow">
+                                                        <div class="card-header">
+                                                            <h5>Sección contacto </h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                           <div class="row">
+                                                               <?php $get_elements = $widget_builder->elementsContact($query->id) ?>
+                                                               
+                                                                   <table class="table">
+                                                                       <thead>
+                                                                           <tr>
+                                                                               <th>Nombre</th>
+                                                                               <th>Leyenda</th>
+                                                                               <th>Requerido</th>
+                                                                               <th></th>
+                                                                           </th>
+                                                                       </thead>
+                                                                       <tbody>
+                                                                        @foreach ($get_elements as $element)
+                                                                        <tr>
+                                                                            <td> {{ $element->name }} </td>
+                                                                            <td> {{ $element->placeholder }} </td>
+                                                                            <td> 
+                                                                                @if ($element->required === 1)
+                                                                                <span class="badge badge-success">Sí</span>
+                                                                                @else
+                                                                                <span class="badge badge-danger">No</span>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td>
+                                                                                <button class="btn btn-outline-danger" wire:click="deleteElementContact({{ $element->id }})">Borrar elemento</button>
+                                                                            </td>
+                                                                        </tr>
+                                                                        @endforeach
+                                                                       </tbody>
+                                                                   </table>
+                                                                </div>
+                                                                <div class="form-group mt-5 float-right">
+                                                                    <div class="col-12">
+                                                                        <button class="btn btn-outline-secondary" onclick="openModalAddElementContact(9,{{ $query->id }}, {{ $page_actual->id }})">Agregar elemento</button>
+                                                                        <button class="btn btn-outline-primary" wire:click='setDataModal( {{ $page_actual->id }}, "8", {{ $query->id }})'>Editar</button>
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Galería')">Borrar</button>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    @endforeach
+                                                @endif
+                                                {{--  contacto --}}
 
                                             @endforeach
                                             {{-- mywidgets --}}
@@ -444,6 +496,8 @@
     @include('modal_widgets.modal_parallax')
     @include('modal_widgets.modal_video')
     @include('modal_widgets.modal_gallery')
+    @include('modal_widgets.modal_contacto')
+    @include('modal_widgets.modal_add_element_contact')
     @include('page_modal')
     @include('section_modal')
     @include('modal_image')

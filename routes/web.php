@@ -42,4 +42,6 @@ Route::group(['prefix' => 'widgets'], function () {
     Route::post('/parallax/store', [App\Http\Controllers\AddWidgetsController::class, 'storeParallax']);
     Route::post('/video/store', [App\Http\Controllers\AddWidgetsController::class, 'storeVideo']);
     Route::post('/gallery/store', [App\Http\Controllers\AddWidgetsController::class, 'storeGallery']);
+    Route::post('/contacto/store', [App\Http\Controllers\AddWidgetsController::class, 'storeContact']);
+    Route::post('/add-element-contacto/store', [App\Http\Controllers\AddWidgetsController::class, 'addElementContact']);
 });
