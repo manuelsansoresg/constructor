@@ -463,8 +463,8 @@
                                                                 <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
                                                                         <button class="btn btn-outline-secondary" onclick="openModalAddElementContact(9,{{ $query->id }}, {{ $page_actual->id }})">Agregar elemento</button>
-                                                                        <button class="btn btn-outline-primary" wire:click='setDataModal( {{ $page_actual->id }}, "8", {{ $query->id }})'>Editar</button>
-                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Galería')">Borrar</button>
+                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "9", {{ $query->id }})'>Editar</button>
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Contacto')">Borrar</button>
                                                                     </div>
                                                                 </div>
                                                         </div>

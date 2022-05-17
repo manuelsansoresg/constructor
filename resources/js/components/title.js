@@ -105,7 +105,7 @@ window.getDataModal = function (section_id, widget_id) {
                     $('#video-url').val(result.video);
                     break;
                 case '9':
-                    $('#contacto-name').val(result.name);
+                    $('#contacto-name').val(result.contact.name);
                     $('#elementsForm').html(result.content_form);
                     $('#modal-contacto-widget_id').val(result.widget_id);
                     break;

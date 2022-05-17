@@ -73,11 +73,12 @@ class ContactElement extends Model
         $requerido  = $request->requerido;
 
         for ($i=0; $i < count($name); $i++) {
+            $val_requerido = (isset($requerido[$i])) ? $requerido[$i] : 0;
             $data_elements = array(
                 'widget_contact_id' => $contacto_id,
                 'name' => $name[$i],
                 'placeholder' => $leyenda[$i],
-                'required' => $requerido[$i],
+                'required' => $val_requerido,
             );
             $contact_elements = new ContactElement($data_elements);
             $contact_elements->save();
