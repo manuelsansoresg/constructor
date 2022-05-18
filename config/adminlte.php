@@ -243,15 +243,22 @@ return [
         ], */
         [
             'text' => 'blog',
-            'url'  => 'admin/blog',
+            'url'  => 'admin/home',
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'pages',
+            'text'        => 'Paginas',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+           /*  'label'       => 4,
+            'label_color' => 'success', */
+        ],
+        [
+            'text'        => 'Configuración',
+            'url'         => 'admin/settings',
+            'icon'        => 'far fa-fw fa-file',
+            /* 'label'       => 4,
+            'label_color' => 'success', */
         ],
         ['header' => 'Configuracion'],
         [
