@@ -52,6 +52,9 @@ class ConstructorComponent extends Component
     //*datos guardados widgets
     public $my_widgets;
 
+    public $builder;
+    public $section_tab;
+
     protected $validationAttributes = [
         'header.title' => 'Título',
     ];
@@ -63,9 +66,11 @@ class ConstructorComponent extends Component
     public function mount()
     {
         $this->page_actual    = Builder::where('name', 'Inicio')->first();
+        $this->builder        = $this->page_actual->toArray();
         $this->pages          = Builder::all();
         $this->widgets        = Widget::all();
-        $this->link_preview = $this->page_actual->slug;
+        $this->link_preview   = $this->page_actual->slug;
+        $this->section_tab    = 1;
         /* if ($this->page_actual->slug != "inicio") {
         } */
         $this->my_widgets     = WidgetBuilder::getMyWidgets($this->page_actual->id);
@@ -74,6 +79,12 @@ class ConstructorComponent extends Component
     public function render()
     {
         return view('livewire.constructor-component');
+    }
+
+    public function setTab($section)
+    {
+        $this->section_tab = $section;
+        self::resetComponents();
     }
 
     public function setPage($page)
@@ -215,7 +226,11 @@ class ConstructorComponent extends Component
     }
 
     
-
+    public function storeConfig()
+    {
+        Builder::saveEdit($this->builder, $this->page_actual->name);
+        $this->builder    = Builder::where('name', 'Inicio')->first()->toArray();
+    }
     
 
     public function storeTitle()

@@ -22,6 +22,7 @@ class CreateSettings extends Migration
             $table->string('direccion')->nullable();
             $table->text('leyenda_footer')->nullable();
             $table->string('fb')->nullable();
+            $table->string('instagram')->nullable();
             $table->string('twitter')->nullable();
             $table->string('youtube')->nullable();
             $table->string('tiktok')->nullable();

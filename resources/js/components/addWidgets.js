@@ -201,6 +201,23 @@ $("#frm-element_contact").submit(function (e) {
 
 });
 
+$("#frm-settings").submit(function (e) {
+    e.preventDefault();
+    $('#loading-setting').show();
+    var desc = CKEDITOR.instances['config-derechos'].getData();
+    $('#config-derechos').val(desc);
+    
+    const form = document.getElementById("frm-settings");
+    const data = new FormData(form);
+    axios.post("/widgets/setting/store", data)
+        .then(function (response) {
+            $('#loading-setting').hide();
+            let result = response.data;
+            showInfo();
+        })
+        .catch(e => { });
+});
+
 
 
 function showInfo() {

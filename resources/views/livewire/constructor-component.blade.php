@@ -20,7 +20,7 @@
                             </ul>
                         </div>
 
-                        <div class="tree">
+                        <div class="tree d-none">
                             <ul>
                             <li  data-jstree='{"opened" : true }'> Templates
                                 <ul>
@@ -55,20 +55,20 @@
                                     {{-- tabs --}}
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item" role="presentation">
-                                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Contenido</a>
+                                          <a class="nav-link {{ $section_tab == '' || $section_tab == 1 ? 'active' : '' }}"  wire:click="setTab('1')"  id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Contenido</a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                          <a class="nav-link" id="fondo-tab" data-toggle="tab" href="#fondo" role="tab" aria-controls="fondo" aria-selected="false">Fondo</a>
+                                          <a class="nav-link {{ $section_tab == '' || $section_tab == 2 ? 'active' : '' }}"  wire:click="setTab('2')"  id="fondo-tab" data-toggle="tab" href="#fondo" role="tab" aria-controls="fondo" aria-selected="false">Fondo</a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                          <a class="nav-link" id="seo-tab" data-toggle="tab" href="#seo" role="tab" aria-controls="seo" aria-selected="false">SEO</a>
+                                          <a class="nav-link {{ $section_tab == '' || $section_tab == 3 ? 'active' : '' }}"  wire:click="setTab('3')"  id="seo-tab" data-toggle="tab" href="#seo" role="tab" aria-controls="seo" aria-selected="false">SEO</a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                          <a class="nav-link" id="configuracion-tab" data-toggle="tab" href="#configuracion" role="tab" aria-controls="configuracion" aria-selected="false">Configuración</a>
+                                            <a class="nav-link {{ $section_tab == '' || $section_tab == 4 ? 'active' : '' }}"  wire:click="setTab('4')"  id="conf-tab" data-toggle="tab" href="#conf" role="tab" aria-controls="conf" aria-selected="false">Configuración</a>
                                         </li>
-                                      </ul>
+                                    </ul>
                                     <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 1 ? 'show active' : '' }}" id="home" role="tabpanel" aria-labelledby="home-tab">
                                             {{-- mywidgets --}}
                                             @foreach ($my_widgets as $my_widget)
 
@@ -259,7 +259,7 @@
                                                                           <p>
                                                                            {!! $query->title !!}
                                                                         </p>
-<p>
+                                                                        <p>
                                                                            {!! $query->subtitle !!}
                                                                         </p>
 <p>
@@ -476,9 +476,41 @@
                                             @endforeach
                                             {{-- mywidgets --}}
                                         </div>
-                                        <div class="tab-pane fade" id="fondo" role="tabpanel" aria-labelledby="fondo-tab">...</div>
-                                        <div class="tab-pane fade" id="seo" role="tabpanel" aria-labelledby="seo-tab">...</div>
-                                        <div class="tab-pane fade" id="seo" role="tabpanel" aria-labelledby="configuracion-tab">...</div>
+                                        <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 2 ? 'show active' : '' }}" id="fondo" role="tabpanel" aria-labelledby="fondo-tab">fondo</div>
+                                        <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 3 ? 'show active' : '' }}" id="seo" role="tabpanel" aria-labelledby="seo-tab">seo</div>
+                                        <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 4 ? 'show active' : '' }}" id="conf" role="tabpanel" aria-labelledby="conf-tab">
+                                            <div class="card mt-5">
+                                                <div class="card-header"> <h5>Footer</h5></div>
+                                                <div class="card-body">
+                                                    <form action=""  wire:submit.prevent="storeConfig(2)">
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Mostrar footer</label>
+                                                            <input type="checkbox" wire:model="builder.show_footer" valie="1">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Mostrar fb</label>
+                                                            <input type="checkbox" wire:model="builder.show_facebook" valie="1">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Mostrar twitter</label>
+                                                            <input type="checkbox" wire:model="builder.show_twitter" valie="1">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Mostrar instagram</label>
+                                                            <input type="checkbox" wire:model="builder.show_instagram" valie="1">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Mostrar youtube</label>
+                                                            <input type="checkbox" wire:model="builder.show_youtube" valie="1">
+                                                        </div>
+                                                       
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     {{-- tabs --}}
                                 </div>

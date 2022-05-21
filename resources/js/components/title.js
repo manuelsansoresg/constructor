@@ -22,8 +22,6 @@ window.changeSection = function (page_actual) {
 }
 
 window.setDataModal = function (page_actual, section_id, widget_id) {
-    
-  
 
     getDataModal(section_id, widget_id);
     closeModalSection('sectionModal');
@@ -87,6 +85,7 @@ window.getDataModal = function (section_id, widget_id) {
     axios.get("/admin/getDataWidget/"+section_id+'/'+widget_id)
         .then(function (response) {
             let result = response.data;
+            console.log(section_id);
             switch (section_id) {
                 case '2':
                     break;
@@ -105,7 +104,10 @@ window.getDataModal = function (section_id, widget_id) {
                     $('#video-url').val(result.video);
                     break;
                 case '9':
-                    $('#contacto-name').val(result.contact.name);
+                    if (result.contact !== null) {
+                        $('#contacto-name').val(result.contact.name);
+                    }
+
                     $('#elementsForm').html(result.content_form);
                     $('#modal-contacto-widget_id').val(result.widget_id);
                     break;
@@ -172,6 +174,25 @@ $(function () {
             language: 'es-mx',
         });
     }
+    
+    if (document.getElementById('config-derechos')) {
+       
+        let ckeditor = CKEDITOR.replace('config-derechos', {
+            language: 'es-mx',
+        });
+        resolveTextSetting();
+        
+    }
+
+    function resolveTextSetting() {
+        return new Promise(resolve => {
+          setTimeout(() => {
+              let result = $('#content-config-derechos').val();
+              CKEDITOR.instances['config-derechos'].setData(result);
+              resolve();
+          }, 2000);
+        });
+      }
 
     /* video */
     if (document.getElementById('video-title')) {

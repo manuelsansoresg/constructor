@@ -19,7 +19,11 @@ Route::get('/web/{page}', [App\Http\Controllers\LandingController::class, 'index
 
 
 
+
 Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('/admin/settings', App\Http\Controllers\SettingController::class);
+
 
 Route::post('/page/store', [App\Http\Livewire\ConstructorComponent::class, 'storePage']);
 Route::post('/image/add', [App\Http\Livewire\ConstructorComponent::class, 'imageAdd']);
@@ -44,4 +48,6 @@ Route::group(['prefix' => 'widgets'], function () {
     Route::post('/gallery/store', [App\Http\Controllers\AddWidgetsController::class, 'storeGallery']);
     Route::post('/contacto/store', [App\Http\Controllers\AddWidgetsController::class, 'storeContact']);
     Route::post('/add-element-contacto/store', [App\Http\Controllers\AddWidgetsController::class, 'addElementContact']);
+    
+    Route::post('/setting/store', [App\Http\Controllers\AddWidgetsController::class, 'storeSetting']);
 });

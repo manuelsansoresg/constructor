@@ -248,7 +248,7 @@ return [
         ],
         [
             'text'        => 'Paginas',
-            'url'         => 'admin/pages',
+            'url'         => 'admin/home',
             'icon'        => 'far fa-fw fa-file',
            /*  'label'       => 4,
             'label_color' => 'success', */
@@ -263,12 +263,12 @@ return [
         ['header' => 'Configuracion'],
         [
             'text' => 'Perfil',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Cambiar password',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/password',
             'icon' => 'fas fa-fw fa-lock',
         ],
         /* [

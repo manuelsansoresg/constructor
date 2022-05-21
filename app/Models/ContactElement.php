@@ -32,12 +32,12 @@ class ContactElement extends Model
                 'name' => ''
             );
             $get_element = WidgetContact::where($data_contact)->first();
+            
             if ($get_element == null) {
                 $contact = new WidgetContact($data_contact);
                 $contact->save();
 
                 $widget_contact_id = $contact->id;
-
                 foreach ($get_elements as $key => $element) {
                 
                     $data_elements    = array(
@@ -59,10 +59,15 @@ class ContactElement extends Model
             $elements = ContactElement::where('widget_contact_id', $widget_contact_id)->get();
         }
         
-
+        
         $view_elements =  View::make('element_contact', compact('elements'))->render();
         return array('contact' => $contact , 'content_form' => $view_elements, 'widget_id' => $widget_contact_id);
         return $view_elements;
+    }
+
+    public function fillElements($object)
+    {
+        # code...
     }
 
     public static function editElements($request, $contacto_id)
