@@ -484,24 +484,32 @@
                                                 <div class="card-body">
                                                     <form action=""  wire:submit.prevent="storeConfig(2)">
                                                         <div class="form-group">
+                                                            <label for="InputWidget">Color Letra</label>
+                                                            <input type="color" wire:model="builder.color_footer">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Color fondo</label>
+                                                            <input type="color" wire:model="builder.background_footer">
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label for="InputWidget">Mostrar footer</label>
-                                                            <input type="checkbox" wire:model="builder.show_footer" valie="1">
+                                                            <input type="checkbox" wire:model="builder.show_footer" value="1">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputWidget">Mostrar fb</label>
-                                                            <input type="checkbox" wire:model="builder.show_facebook" valie="1">
+                                                            <input type="checkbox" wire:model="builder.show_facebook" value="1">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputWidget">Mostrar twitter</label>
-                                                            <input type="checkbox" wire:model="builder.show_twitter" valie="1">
+                                                            <input type="checkbox" wire:model="builder.show_twitter" value="1">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputWidget">Mostrar instagram</label>
-                                                            <input type="checkbox" wire:model="builder.show_instagram" valie="1">
+                                                            <input type="checkbox" wire:model="builder.show_instagram" value="1">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputWidget">Mostrar youtube</label>
-                                                            <input type="checkbox" wire:model="builder.show_youtube" valie="1">
+                                                            <input type="checkbox" wire:model="builder.show_youtube" value="1">
                                                         </div>
                                                        
                                                         <div class="modal-footer">

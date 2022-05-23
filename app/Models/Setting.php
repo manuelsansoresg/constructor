@@ -27,4 +27,9 @@ class Setting extends Model
         return $setting;
     }
 
+    public function get()
+    {
+        return Setting::find(1);
+    }
+
 }

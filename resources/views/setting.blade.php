@@ -42,6 +42,10 @@
                                         <input type="text" class="form-control" name="data[fb]" value="{{ $my_setting->fb }}">
                                     </div>
                                     <div class="form-group">
+                                        <label for="InputWidget">Twitter</label>
+                                        <input type="text" class="form-control" name="data[twitter]" value="{{ $my_setting->twitter }}">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="InputWidget">Instagram</label>
                                         <input type="text" class="form-control" name="data[instagram]" value="{{ $my_setting->instagram }}">
                                     </div>

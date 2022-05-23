@@ -15,6 +15,6 @@ class LandingController extends Controller
         $page_actual    = Builder::where('name', $page)->first();
         $my_widgets     = WidgetBuilder::getMyWidgets($page_actual->id);
         
-        return view('content_landing', compact('page_actual', 'my_widgets'));
+        return view('content_landing', compact('page_actual', 'my_widgets', 'page'));
     }
 }

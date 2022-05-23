@@ -6,6 +6,8 @@
 <div>
     {{-- widgets --}}
     @inject('widget_builder', 'App\Models\WidgetBuilder')
+    @inject('builder', 'App\Models\Builder')
+    @inject('setting', 'App\Models\Setting')
 
     @foreach ($my_widgets as $my_widget)
         @if ($my_widget['id_rel'] == 1)
@@ -226,6 +228,62 @@
         @endif
     @endforeach
     
+    {{-- footer --}}
+    <?php 
+        $config  = $builder->getByPageName($page);
+        $setting = $setting->get();
+    ?>
+    @if ($config->show_footer == true)
+    <div style="background-color:{{ $config->background_footer }}; color: {{ $config->color_footer }}">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-12 col-md-4 text-center">
+                    <p class="py-0 my-0 h6">{{ $setting->telefono}}</p>
+                    <p class="py-0 my-0 h6">{{ $setting->telefono2}}</p>
+                    <p class="py-0 my-0 h6">{{ $setting->correo}}</p>
+                    <p class="py-0 my-0 h6">{{ $setting->correo2}}</p>
+                </div>
+                <div class="col-12 col-md-4 align-self-center text-center">
+                    {!! $setting->leyenda_footer !!}
+                </div>
+                <div class="col-12 col-md-4 text-center">
+                    <ul class="list-inline">
+                        @if ($config->show_facebook == true)
+                            <li class="list-inline-item">
+                                <a href="{{ $setting->fb }}" target="_blank">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            </li>
+                        @endif
+                        @if ($config->show_twitter == true)
+                            <li class="list-inline-item">
+                                <a href="{{ $setting->twitter }}" target="_blank">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                        @endif
+                        @if ($config->show_instagram == true)
+                            <li class="list-inline-item">
+                                <a href="{{ $setting->instagram }}" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li>
+                        @endif
+                        @if ($config->show_youtube == true)
+                            <li class="list-inline-item">
+                                <a href="{{ $setting->youtube }}" target="_blank">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+  
+    {{-- footer --}}
     
     {{-- widgets --}}
 </div>

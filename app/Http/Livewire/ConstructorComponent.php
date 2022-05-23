@@ -230,6 +230,7 @@ class ConstructorComponent extends Component
     {
         Builder::saveEdit($this->builder, $this->page_actual->name);
         $this->builder    = Builder::where('name', 'Inicio')->first()->toArray();
+        self::resetWidget();
     }
     
 
