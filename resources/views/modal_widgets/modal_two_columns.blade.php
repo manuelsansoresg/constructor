@@ -6,6 +6,12 @@
                     {{-- contenido --}}
 
                     <h5>Sección 2 columnas</h5>
+
+                    <div class="form-group">
+                        <label for="InputWidget">Orden</label>
+                        <input type="text" class="form-control" name="data[order]" id="two-columns-order">
+                    </div>
+
                     <div class="form-group">
                         <label for="InputWidget">Imagen</label>
                         <input type="file" class="form-control" name="image">

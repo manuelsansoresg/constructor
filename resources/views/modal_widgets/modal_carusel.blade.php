@@ -7,6 +7,11 @@
 
                     <h5>Sección carusel</h5>
                     <div class="form-group">
+                        <label for="InputWidget">Orden</label>
+                        <input type="text" class="form-control" name="order" id="carusel-order">
+                    </div>
+
+                    <div class="form-group">
                         <label for="InputWidget">Imagen1</label>
                         <input type="file" class="form-control" name="imagen1">
                     </div>

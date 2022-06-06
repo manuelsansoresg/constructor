@@ -13,12 +13,17 @@ class ContactElement extends Model
     protected $fillable = [
         'widget_contact_id', 'name', 'placeholder', 'required'];
 
-    public static function getElements($widget_id)
+    public static function getElements($widget_id, $page_actual)
     {
         
         $elements             = null;
         $contact              = null;
         $widget_contact_id    = $widget_id;
+
+        $order = WidgetBuilder::where([
+            'builder_id' => $page_actual, 'id_rel' => 9, 'widget_id' => $widget_contact_id
+        ])
+            ->first();
 
         if ($widget_contact_id != 'null') {
             $contact = WidgetContact::find($widget_contact_id);
@@ -61,8 +66,8 @@ class ContactElement extends Model
         
         
         $view_elements =  View::make('element_contact', compact('elements'))->render();
-        return array('contact' => $contact , 'content_form' => $view_elements, 'widget_id' => $widget_contact_id);
-        return $view_elements;
+        $get_order = ($order!= null) ? $order->order : 0;
+        return array('contact' => $contact , 'content_form' => $view_elements, 'widget_id' => $widget_contact_id, 'order' => $get_order);
     }
 
     public function fillElements($object)

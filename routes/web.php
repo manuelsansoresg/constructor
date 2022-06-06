@@ -36,7 +36,7 @@ Route::get('close_sesion', function() {
     return redirect('/'); // or to another route
 });
 
-Route::get('/admin/getDataWidget/{section_id}/{widget_id}', [App\Http\Livewire\ConstructorComponent::class, 'getDataWidget'])->name('home');
+Route::get('/admin/getDataWidget/{section_id}/{widget_id}/{page_actual}', [App\Http\Livewire\ConstructorComponent::class, 'getDataWidget'])->name('home');
 
 Route::group(['prefix' => 'widgets'], function () {
     Route::post('/header/store', [App\Http\Controllers\AddWidgetsController::class, 'storeHeader']);

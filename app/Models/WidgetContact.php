@@ -31,8 +31,10 @@ class WidgetContact extends Model
         $find_builder = WidgetBuilder::where($data_page)->first();
 
         if ($find_builder === null) {
-            WidgetBuilder::saveEdit($data_page);
+            $data_page['order'] = $data['order'];
+            WidgetBuilder::setOrderBuilder($data_page, null);
+        } else {
+            WidgetBuilder::setOrderBuilder($data_page, $data['order'], true);
         }
-        
     }
 }

@@ -10,7 +10,7 @@ class WidgetBuilder extends Model
     use HasFactory;
     protected $table = "widget_builders";
     protected $fillable = [
-        'builder_id', 'id_rel', 'widget_id'
+        'builder_id', 'id_rel', 'widget_id', 'order'
     ];
 
     public static function saveEdit($data)
@@ -22,9 +22,21 @@ class WidgetBuilder extends Model
         }
     }
 
+    public static function setOrderBuilder($data, $order = null, $is_edit = false)
+    {
+        if ($is_edit == false) {
+            $builder = new WidgetBuilder($data);
+            $builder->save();
+        } else {
+            $builder = WidgetBuilder::where($data);
+            $builder->update(['order' => $order]);
+        }
+        return $builder;
+    }
+
     public static function getMyWidgets($page)
     {
-        $widgets = WidgetBuilder::where('builder_id', $page)->orderBy('created_at', 'ASC')->get()->toArray();
+        $widgets = WidgetBuilder::where('builder_id', $page)->orderBy('order', 'ASC')->orderBy('created_at', 'ASC')->get()->toArray();
         return $widgets;
     }
 

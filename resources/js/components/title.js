@@ -23,7 +23,7 @@ window.changeSection = function (page_actual) {
 
 window.setDataModal = function (page_actual, section_id, widget_id) {
 
-    getDataModal(section_id, widget_id);
+    getDataModal(section_id, widget_id, page_actual);
     closeModalSection('sectionModal');
     switch (section_id) {
        
@@ -60,6 +60,13 @@ window.setDataModal = function (page_actual, section_id, widget_id) {
                 $('#modal-widget-video').modal('show');
                 $('#modal-widget-video').addClass('addScroll');
             break;
+        case '8':
+                $('#modal-gallery-section_id').val(section_id);
+                $('#modal-gallery-widget_id').val(widget_id);
+                $('#modal-gallery-page_actual').val(page_actual);
+                $('#modal-widget-gallery').modal('show');
+                $('#modal-widget-gallery').addClass('addScroll');
+            break;
         case '9':
                 $('#modal-contacto-section_id').val(section_id);
                 if (widget_id != 'null') {
@@ -81,29 +88,39 @@ window.setDataModal = function (page_actual, section_id, widget_id) {
 }
 
 
-window.getDataModal = function (section_id, widget_id) {
-    axios.get("/admin/getDataWidget/"+section_id+'/'+widget_id)
+window.getDataModal = function (section_id, widget_id, page_actual) {
+    axios.get("/admin/getDataWidget/"+section_id+'/'+widget_id+ '/' + page_actual)
         .then(function (response) {
             let result = response.data;
-            console.log(section_id);
             switch (section_id) {
                 case '2':
+                    $('#carusel-order').val(result.order);
                     break;
                 case '3':
+                    $('#texto-order').val(result.order);
                     CKEDITOR.instances['texto-content'].setData(result.content);
                     break;
                 case '4':
+                    $('#two-columns-order').val(result.order);
                     CKEDITOR.instances['two-columns-title'].setData(result.title);
                     CKEDITOR.instances['two-columns-subtitle'].setData(result.subtitle);
                     CKEDITOR.instances['two-columns-description'].setData(result.description);
                     break;
+                case '5':
+                        $('#parallax-order').val(result.order);
+                    break;
                 case '7':
+                    $('#video-order').val(result.order);
                     CKEDITOR.instances['video-title'].setData(result.title);
                     CKEDITOR.instances['video-subtitle'].setData(result.subtitle);
                     CKEDITOR.instances['video-description'].setData(result.description);
                     $('#video-url').val(result.video);
                     break;
+                case '8':
+                    $('#gallery-order').val(result.order);
+                    break;
                 case '9':
+                    $('#contacto-order').val(result.order);
                     if (result.contact !== null) {
                         $('#contacto-name').val(result.contact.name);
                     }
@@ -112,6 +129,7 @@ window.getDataModal = function (section_id, widget_id) {
                     $('#modal-contacto-widget_id').val(result.widget_id);
                     break;
                 default:
+                    $('#encabezado-order').val(result.order);
                     CKEDITOR.instances['encabezado-title'].setData(result.title);
                     CKEDITOR.instances['encabezado-phone'].setData(result.phone);
                     CKEDITOR.instances['encabezado-phone2'].setData(result.phone2);

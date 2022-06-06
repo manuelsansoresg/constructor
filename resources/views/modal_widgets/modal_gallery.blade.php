@@ -5,6 +5,11 @@
                 <div class="modal-body">
                     {{-- contenido --}}
 
+                    <div class="form-group">
+                        <label for="InputWidget">Orden</label>
+                        <input type="text" class="form-control" name="order" id="gallery-order">
+                    </div>
+
                     <h5>Sección galería</h5>
                     <div class="form-group">
                         <label for="InputWidget">Imagen1</label>

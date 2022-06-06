@@ -15,22 +15,34 @@ class WidgetParallax extends Model
         'widget_id', 'image', 'text'
     ];
 
+    public static function getById($id)
+    {
+        return WidgetParallax:: select('widget_parallaxs.id as id', 'image', 'text', 'widget_builders.order')
+                    ->where(['widget_parallaxs.id'=> $id, 'id_rel' => 5])
+                    ->join('widget_builders', 'widget_builders.widget_id', '=', 'widget_parallaxs.id')->first();
+    }
+
     public static function saveEdit($data, $page, $text_id = null)
     {
+        $data_page = array(
+            'builder_id' => $page,
+            'id_rel' => 5
+        );
+
         if ($text_id == 'null') {
             $text = new WidgetParallax($data);
             $text->save();
-
-            $data_page = array(
-                'builder_id' => $page,
-                'widget_id' => $text->id,
-                'id_rel' => 5
-            );
-            WidgetBuilder::saveEdit($data_page);
+           
+            $data_page['order'] = $data['order'];
+            $data_page['widget_id'] =$text->id;
+            WidgetBuilder::setOrderBuilder($data_page, null);
         } else {
             $text = WidgetParallax::find($text_id);
             $text->fill($data);
             $text->update();
+
+            $data_page['widget_id'] = $text->id;
+            WidgetBuilder::setOrderBuilder($data_page, $data['order'], true);
         }
     }
 

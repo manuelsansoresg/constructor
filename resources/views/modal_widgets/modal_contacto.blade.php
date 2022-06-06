@@ -7,6 +7,10 @@
 
                     <h5>Sección Contacto</h5>
                   
+                    <div class="form-group">
+                        <label for="InputWidget">Orden</label>
+                        <input type="text" class="form-control" name="data[order]" id="contacto-order">
+                    </div>
 
                     <div class="form-group">
                         <label for="InputWidget">*Nombre contacto</label>
@@ -14,7 +18,7 @@
                     </div>
                     <h5 class="text-center">Elementos del formulario</h5>
                     <div id="elementsForm">
-                        aa
+                        
                     </div>
 
                     <div class="row" style="display: none" id="loading-contacto">

@@ -42,6 +42,8 @@ class AddWidgetsController extends Controller
     {
         $data_images                = array();
         $data_images['widget_id']   = $request->widget_id;
+        $data_images['order']   = $request->order;
+
 
         if ($request->hasFile('imagen1') != false) {
             $get_image1 = $request->file('imagen1');
@@ -124,6 +126,7 @@ class AddWidgetsController extends Controller
     {
         $data_images                = array();
         $data_images['widget_id']   = $request->widget_id;
+        $data_images['order']   = $request->order;
 
         if ($request->hasFile('imagen1') != false) {
             $get_image1 = $request->file('imagen1');

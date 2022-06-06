@@ -6,6 +6,11 @@
                     {{-- contenido --}}
 
                     <h5>Sección Video</h5>
+                    
+                    <div class="form-group">
+                        <label for="InputWidget">Orden</label>
+                        <input type="text" class="form-control" name="data[order]" id="video-order">
+                    </div>
 
                     <div class="form-group">
                         <label for="InputWidget">*Título</label>

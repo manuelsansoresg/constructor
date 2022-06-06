@@ -12,6 +12,7 @@ use App\Models\WidgetCarusel;
 use App\Models\WidgetContact;
 use App\Models\WidgetGallery;
 use App\Models\WidgetHeader;
+use App\Models\WidgetParallax;
 use App\Models\WidgetText;
 use App\Models\WidgetTwoColumn;
 use App\Models\WidgetVideo;
@@ -189,24 +190,33 @@ class ConstructorComponent extends Component
      * @param int $widget_id id del widget
      * @return void
      */
-    public function getDataWidget($section_id, $widget_id)
+    public function getDataWidget($section_id, $widget_id, $page_actual)
     {
         switch ($section_id) {
+            case '1':
+                #encabezado
+                $widget = WidgetHeader::getById($widget_id);
+                break;
+            case '2':
+                $widget = WidgetCarusel::getById($widget_id);
+                break;
             case '3':
-                $widget = WidgetText::find($widget_id);
+                $widget = WidgetText::getById($widget_id);
                 break;
             case '4':
-                $widget = WidgetTwoColumn::find($widget_id);
+                $widget = WidgetTwoColumn::getById($widget_id);
+                break;
+            case '5':
+                $widget = WidgetParallax::getById($widget_id);
                 break;
             case '7':
-                $widget = WidgetVideo::find($widget_id);
+                $widget = WidgetVideo::getById($widget_id);
+                break;
+            case '8':
+                $widget = WidgetGallery::getById($widget_id);
                 break;
             case '9':
-                $widget = ContactElement::getElements($widget_id);
-                break;
-            default:
-                #encabezado
-                $widget = WidgetHeader::find($widget_id);
+                $widget = ContactElement::getElements($widget_id, $page_actual);
                 break;
         }
         return response()->json($widget);

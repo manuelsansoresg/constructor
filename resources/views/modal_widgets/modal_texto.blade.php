@@ -6,6 +6,12 @@
                     {{-- contenido --}}
 
                     <h5>Sección Texto</h5>
+                    
+                    <div class="form-group">
+                        <label for="InputWidget">Orden</label>
+                        <input type="text" class="form-control" name="data[order]" id="texto-order">
+                    </div>
+
                     <div class="form-group" wire:ignore>
                         <label for="InputWidget">Texto</label>
                         <textarea name="data[content]" id="texto-content" cols="30" rows="10" class="form-control summernote"></textarea>
