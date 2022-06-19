@@ -20,7 +20,7 @@ Route::get('/web/{page}', [App\Http\Controllers\LandingController::class, 'index
 
 
 
-Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::resource('/admin/settings', App\Http\Controllers\SettingController::class);
 
@@ -36,7 +36,7 @@ Route::get('close_sesion', function() {
     return redirect('/'); // or to another route
 });
 
-Route::get('/admin/getDataWidget/{section_id}/{widget_id}/{page_actual}', [App\Http\Livewire\ConstructorComponent::class, 'getDataWidget'])->name('home');
+
 
 Route::group(['prefix' => 'widgets'], function () {
     Route::post('/header/store', [App\Http\Controllers\AddWidgetsController::class, 'storeHeader']);
@@ -50,4 +50,24 @@ Route::group(['prefix' => 'widgets'], function () {
     Route::post('/add-element-contacto/store', [App\Http\Controllers\AddWidgetsController::class, 'addElementContact']);
     
     Route::post('/setting/store', [App\Http\Controllers\AddWidgetsController::class, 'storeSetting']);
+    
+    Route::post('/widget/{widget_id}/{page_id}/store', [App\Http\Controllers\AddWidgetsController::class, 'addElementContact']);
+});
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('getDataWidget/{section_id}/{widget_id}/{page_actual}', [App\Http\Livewire\ConstructorComponent::class, 'getDataWidget'])->name('home');
+    Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('widget/{section_id}/{page_actual}/create', [App\Http\Livewire\ConstructorComponent::class, 'createWidget']);
+    
+    
+    Route::get('encabezado/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetHeaderController::class, 'edit']);
+    Route::get('carusel/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetCaruselController::class, 'edit']);
+    Route::get('texto/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetTextController::class, 'edit']);
+    Route::get('two-columns/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetTwoColumnController::class, 'edit']);
+    Route::get('parallax/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetParallaxController::class, 'edit']);
+    Route::get('video/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetVideoController::class, 'edit']);
+    Route::get('galeria/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetGalleryController::class, 'edit']);
+    Route::get('contacto/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetContactController::class, 'edit']);
+
 });

@@ -38,7 +38,7 @@
                     <input type="hidden" name="section_id" id="modal-element_contact-section_id">
                     <input type="hidden" name="data[widget_contact_id]" id="modal-element_contact-widget_id">
                     <input type="hidden" name="page_actual" id="modal-element_contact-page_actual">
-                    <button type="button" class="btn btn-outline-secondary" onclick="closeModalSection('modal-widget-contacto')">Cerrar</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="closeModalSection('modal-widget-element_contact')">Cerrar</button>
                     <button type="submit" class="btn btn-outline-primary">Agregar</button>
                 </div>
         </form>

@@ -33,7 +33,6 @@ class WidgetHeader extends Model
             'builder_id' => $page,
             'id_rel' => 1,
         );
-
         if ($header_id != 'null') {
             $widget_header    = WidgetHeader::find($header_id);
             $widget_header->fill($data);

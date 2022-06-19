@@ -36,7 +36,7 @@ class WidgetBuilder extends Model
 
     public static function getMyWidgets($page)
     {
-        $widgets = WidgetBuilder::where('builder_id', $page)->orderBy('order', 'ASC')->orderBy('created_at', 'ASC')->get()->toArray();
+        $widgets = WidgetBuilder::where('builder_id', $page)->orderBy('order', 'ASC')->orderBy('order', 'ASC')->get()->toArray();
         return $widgets;
     }
 

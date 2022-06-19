@@ -61,19 +61,25 @@ class ConstructorComponent extends Component
     ];
 
     protected $listeners = [
-        'updatePages', 'updateSection', 'setTitle', 'updateImage', 'updateMyWidgets', 'resetComponents'
+        'updatePages', 'updateSection', 'setTitle', 'updateImage', 'updateMyWidgets', 'resetComponents', 'setPage'
     ];
 
     public function mount()
     {
-        $this->page_actual    = Builder::where('name', 'Inicio')->first();
+        $this->setParamsPage('Inicio');
+        $this->section_tab    = 1;
+        /* if ($this->page_actual->slug != "inicio") {
+        } */
+        
+    }
+
+    public function setParamsPage($page)
+    {
+        $this->page_actual    = Builder::where('name', $page)->first();
         $this->builder        = $this->page_actual->toArray();
         $this->pages          = Builder::all();
         $this->widgets        = Widget::all();
         $this->link_preview   = $this->page_actual->slug;
-        $this->section_tab    = 1;
-        /* if ($this->page_actual->slug != "inicio") {
-        } */
         $this->my_widgets     = WidgetBuilder::getMyWidgets($this->page_actual->id);
     }
 
@@ -90,7 +96,8 @@ class ConstructorComponent extends Component
 
     public function setPage($page)
     {
-        $this->page_actual = $page;
+        $this->setParamsPage($page);
+        
     }
 
     public function editWidget($widget_id, $name_widget)
@@ -334,5 +341,14 @@ class ConstructorComponent extends Component
     public function resetComponents()
     {
         $this->emit('setTree');
+    }
+
+    public function createWidget($section_id, $page_actual)
+    {
+        $path_page    = 'page_widgets/';
+        $view         = 'encabezado';
+        
+
+        return view($path_page.$view);
     }
 }

@@ -17,15 +17,15 @@ $("#frm-encabezado").submit(function (e) {
     const data = new FormData(form);
     axios.post("/widgets/header/store", data)
         .then(function (response) {
-            $('#loading-encabezado').show();
+            $('#loading-encabezado').hide();
             let result = response.data;
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
-            $('#modal-widget-header').modal('hide');
-            document.getElementById('frm-encabezado').reset();
             showInfo();
         })
-        .catch(e => { });
+        .catch(e => { 
+            $('#loading-encabezado').hide();
+        });
 
 });
 
@@ -40,11 +40,11 @@ $("#frm-carusel").submit(function (e) {
             let result = response.data;
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
-            $('#modal-widget-carusel').modal('hide');
-            document.getElementById('frm-carusel').reset();
             showInfo();
         })
-        .catch(e => { });
+        .catch(e => { 
+            $('#loading-carusel').hide();
+        });
 
 });
 
@@ -62,10 +62,11 @@ $("#frm-texto").submit(function (e) {
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-texto').modal('hide');
-            document.getElementById('frm-texto').reset();
             showInfo();
         })
-        .catch(e => { });
+        .catch(e => { 
+            $('#loading-texto').hide();
+        });
 
 });
 
@@ -90,10 +91,11 @@ $("#frm-two-columns").submit(function (e) {
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-two-columns').modal('hide');
-            document.getElementById('frm-two-columns').reset();
             showInfo();
         })
-        .catch(e => { });
+        .catch(e => {
+            $('#loading-two-columns').hide();
+         });
 
 });
 
@@ -109,10 +111,11 @@ $("#frm-parallax").submit(function (e) {
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-parallax').modal('hide');
-            document.getElementById('frm-parallax').reset();
             showInfo();
         })
-        .catch(e => { });
+        .catch(e => { 
+            $('#modal-widget-parallax').modal('hide');
+        });
 
 });
 
@@ -137,10 +140,11 @@ $("#frm-video").submit(function (e) {
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-video').modal('hide');
-            document.getElementById('frm-video').reset();
             showInfo();
         })
-        .catch(e => { });
+        .catch(e => {
+            $('#loading-video').hide();
+         });
 
 });
 
@@ -156,10 +160,11 @@ $("#frm-gallery").submit(function (e) {
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-gallery').modal('hide');
-            document.getElementById('frm-gallery').reset();
             showInfo();
         })
-        .catch(e => { });
+        .catch(e => {
+            $('#loading-gallery').hide();
+         });
 
 });
 
@@ -175,10 +180,11 @@ $("#frm-contacto").submit(function (e) {
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-contacto').modal('hide');
-            document.getElementById('frm-contacto').reset();
             showInfo();
         })
-        .catch(e => { });
+        .catch(e => {
+            $('#loading-contacto').hide();
+         });
 
 });
 

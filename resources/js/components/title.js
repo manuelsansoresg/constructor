@@ -18,8 +18,27 @@ window.modalSection = function () {
 
 window.changeSection = function (page_actual) {
     let section_id = $('#section').val();
-    setDataModal(page_actual, section_id, 'null')
+    let name_section = 'encabezado';
+    switch (section_id) {
+        case '2':
+            name_section = 'slider'
+            break;
+        case '3':
+            name_section = 'carusel'
+            break;
+        case '4':
+            name_section = 'texto'
+            break;
+        case '5':
+            name_section = 'two-columns'
+            break;
+    }
+    let url = '/admin/'+name_section+'/'+page_actual+'/null/edit'
+
+    window.location = url;
 }
+
+
 
 window.setDataModal = function (page_actual, section_id, widget_id) {
 
@@ -128,7 +147,11 @@ window.getDataModal = function (section_id, widget_id, page_actual) {
                     $('#elementsForm').html(result.content_form);
                     $('#modal-contacto-widget_id').val(result.widget_id);
                     break;
-                default:
+                case '1':
+                    CKEDITOR.replace('encabezado-title', {
+                        language: 'es-mx',
+                    });
+                    
                     $('#encabezado-order').val(result.order);
                     CKEDITOR.instances['encabezado-title'].setData(result.title);
                     CKEDITOR.instances['encabezado-phone'].setData(result.phone);
@@ -138,6 +161,69 @@ window.getDataModal = function (section_id, widget_id, page_actual) {
             
         })
         .catch(e => { });
+}
+
+if (document.getElementById('modal-encabezado-section_id')) {
+    let section_id    = $('#modal-encabezado-section_id').val();
+    let widget_id     = $('#modal-encabezado-widget_id').val();
+    let page_actual   = $('#modal-encabezado-page_actual').val();
+
+    getDataModal(section_id, widget_id, page_actual);
+}
+
+if (document.getElementById('modal-carusel-section_id')) {
+    let section_id    = $('#modal-carusel-section_id').val();
+    let widget_id     = $('#modal-carusel-widget_id').val();
+    let page_actual   = $('#modal-carusel-page_actual').val();
+
+    getDataModal(section_id, widget_id, page_actual);
+}
+
+if (document.getElementById('modal-texto-section_id')) {
+    let section_id    = $('#modal-texto-section_id').val();
+    let widget_id     = $('#modal-texto-widget_id').val();
+    let page_actual   = $('#modal-texto-page_actual').val();
+
+    getDataModal(section_id, widget_id, page_actual);
+}
+
+if (document.getElementById('modal-two-columns-section_id')) {
+    let section_id    = $('#modal-two-columns-section_id').val();
+    let widget_id     = $('#modal-two-columns-widget_id').val();
+    let page_actual   = $('#modal-two-columns-page_actual').val();
+
+    getDataModal(section_id, widget_id, page_actual);
+}
+
+if (document.getElementById('modal-parallax-section_id')) {
+    let section_id    = $('#modal-parallax-section_id').val();
+    let widget_id     = $('#modal-parallax-widget_id').val();
+    let page_actual   = $('#modal-parallax-page_actual').val();
+
+    getDataModal(section_id, widget_id, page_actual);
+}
+
+if (document.getElementById('modal-video-section_id')) {
+    let section_id    = $('#modal-video-section_id').val();
+    let widget_id     = $('#modal-video-widget_id').val();
+    let page_actual   = $('#modal-video-page_actual').val();
+
+    getDataModal(section_id, widget_id, page_actual);
+}
+
+if (document.getElementById('modal-gallery-section_id')) {
+    let section_id    = $('#modal-gallery-section_id').val();
+    let widget_id     = $('#modal-gallery-widget_id').val();
+    let page_actual   = $('#modal-gallery-page_actual').val();
+
+    getDataModal(section_id, widget_id, page_actual);
+}
+if (document.getElementById('modal-contacto-section_id')) {
+    let section_id    = $('#modal-contacto-section_id').val();
+    let widget_id     = $('#modal-contacto-widget_id').val();
+    let page_actual   = $('#modal-contacto-page_actual').val();
+
+    getDataModal(section_id, widget_id, page_actual);
 }
 
 window.openModalAddElementContact = function (section_id, widget_id, page_actual) {
@@ -156,6 +242,7 @@ window.closeModalSection = function (div) {
 
 $(function () {
     /* Encabezado */
+    
     if (document.getElementById('encabezado-title')) {
         let ckeditor = CKEDITOR.replace('encabezado-title', {
             language: 'es-mx',
@@ -228,7 +315,11 @@ $(function () {
             language: 'es-mx',
         });
     }
-    
+
+    /* setear pagina con click a las paginas en el admin */
+    window.setPage = function(page) {
+        Livewire.emit('setPage', page);
+    }
 
     window.Livewire.on('setScroll', divPosition => {
         $('.tree').jstree();

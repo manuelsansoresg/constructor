@@ -13,7 +13,7 @@
                                     @foreach ($pages as $page)
                                         <?php $cont = $cont +1; ?>
                                         <?php $selected = ($page->name == $page_actual) ? 'true' : 'false'; ?>
-                                        <li data-jstree='{ "selected" : {{ $selected }}}'> {{ $page->name }} </li>
+                                        <li data-jstree='{ "selected" : {{ $selected }}}' > <a href="#" onclick="setPage('{{ $page->name }}')"> {{ $page->name }} </a>   </li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -102,7 +102,7 @@
                                                                 </div>
                                                                 <div class="form-group mt-3 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, 1, {{ $header->id }})'>Editar</button>
+                                                                        <a class="btn btn-outline-primary" href="/admin/encabezado/{{$page_actual->id}}/{{ $header->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $header->id }}, 'Encabezado')">Borrar</button>
                                                                     </div>
                                                                 </div>
@@ -213,7 +213,7 @@
                                                                 </div>
                                                                 <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "2", {{ $carusel_image->id }})'>Editar</button>
+                                                                        <a class="btn btn-outline-primary" href="/admin/carusel/{{$page_actual->id}}/{{ $header->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $carusel_image->id }}, 'Slider')">Borrar</button>
                                                                     </div>
                                                                 </div>
@@ -235,7 +235,7 @@
                                                                 {!! $title->content !!}
                                                                 <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "3", {{ $title->id }})'>Editar</button>
+                                                                        <a class="btn btn-outline-primary" href="/admin/texto/{{$page_actual->id}}/{{ $title->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $title->id }}, 'Texto')">Borrar</button>
                                                                     </div>
                                                                 </div>
@@ -272,7 +272,7 @@
                                                                 </div>
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "4", {{ $query->id }})'>Editar</button>
+                                                                        <a class="btn btn-outline-primary" href="/admin/two-columns/{{$page_actual->id}}/{{ $query->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, '2 columnas')">Borrar</button>
                                                                     </div>
                                                                 </div>
@@ -303,7 +303,7 @@
                                                                 @endif
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "5", {{ $query->id }})'>Editar</button>
+                                                                        <a class="btn btn-outline-primary" href="/admin/parallax/{{$page_actual->id}}/{{ $query->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Parallax')">Borrar</button>
                                                                     </div>
                                                                 </div>
@@ -340,7 +340,7 @@
                                                                </div>
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "7", {{ $query->id }})'>Editar</button>
+                                                                        <a class="btn btn-outline-primary" href="/admin/video/{{$page_actual->id}}/{{ $query->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Video')">Borrar</button>
                                                                     </div>
                                                                 </div>
@@ -410,7 +410,7 @@
                                                                </div>
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
-                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "8", {{ $query->id }})'>Editar</button>
+                                                                        <a class="btn btn-outline-primary" href="/admin/galeria/{{$page_actual->id}}/{{ $query->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Galería')">Borrar</button>
                                                                     </div>
                                                                 </div>
@@ -463,7 +463,7 @@
                                                                 <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
                                                                         <button class="btn btn-outline-secondary" onclick="openModalAddElementContact(9,{{ $query->id }}, {{ $page_actual->id }})">Agregar elemento</button>
-                                                                        <button class="btn btn-outline-primary" onclick='setDataModal( {{ $page_actual->id }}, "9", {{ $query->id }})'>Editar</button>
+                                                                        <a class="btn btn-outline-primary" href="/admin/contacto/{{$page_actual->id}}/{{ $query->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Contacto')">Borrar</button>
                                                                     </div>
                                                                 </div>
@@ -529,17 +529,10 @@
             </div>
         </div>
    </div>
-    @include('modal_widgets.modal_encabezado')
-    @include('modal_widgets.modal_two_columns')
-    @include('modal_widgets.modal_carusel')
-    @include('modal_widgets.modal_texto')
-    @include('modal_widgets.modal_parallax')
-    @include('modal_widgets.modal_video')
-    @include('modal_widgets.modal_gallery')
-    @include('modal_widgets.modal_contacto')
-    @include('modal_widgets.modal_add_element_contact')
+   
     @include('page_modal')
     @include('section_modal')
     @include('modal_image')
+    @include('modal_add_element_contact')
     <a href="#" onclick="modalSection()" class="btn-flotante btn btn-primary btn-circle mt-5"><i class="fas fa-plus"></i></a>
 </div>
