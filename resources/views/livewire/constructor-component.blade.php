@@ -313,6 +313,32 @@
                                                 @endif
                                                 {{-- /patallax --}}
 
+                                                {{-- producto --}}
+                                                @if ($my_widget['id_rel'] == 6)
+                                                <?php $products = $widget_builder->pageProduct($my_widget['widget_id'], 6) ?>
+                                                    @foreach ($products as $query)
+                                                        <div class="card mt-5 shadow">
+                                                            <div class="card-header">
+                                                                <h5>Sección Producto </h5>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-3 text-center">
+                                                                        {{ $query->name }}
+                                                                    </div>
+                                                                </div>
+                                                              <div class="form-group mt-5 float-right">
+                                                                    <div class="col-12">
+                                                                        <a class="btn btn-outline-primary" href="/admin/producto/{{$page_actual->id}}/{{ $query->id }}/edit">Editar</a>
+                                                                        <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Productos')">Borrar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                                {{-- /producto --}}
+
                                                 {{--  video --}}
                                                 @if ($my_widget['id_rel'] == 7)
                                                 <?php $video = $widget_builder->pageVideo($my_widget['widget_id'], 7) ?>

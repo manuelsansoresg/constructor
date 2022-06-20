@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Lib\LImage;
 use App\Models\Builder;
 use App\Models\ContactElement;
+use App\Models\ContentProduct;
 use App\Models\Section;
 use App\Models\Widget;
 use App\Models\WidgetBuilder;
@@ -165,12 +166,15 @@ class ConstructorComponent extends Component
             self::deleteImage($get_widget->id, 'Galería', 'imagen6');
             $my_widget->delete();
         }
-        
-        
 
         if ($get_widget->execute_widget == 'parallax') {
             $my_widget = WidgetCarusel::find($widget_id);
             self::deleteImage($get_widget->id, 'Parallax', 'image');
+        }
+        
+        if ($get_widget->execute_widget == 'product') {
+            $my_widget = ContentProduct::find($widget_id);
+            $my_widget->delete();
         }
        
         self::resetWidget();
@@ -215,6 +219,9 @@ class ConstructorComponent extends Component
                 break;
             case '5':
                 $widget = WidgetParallax::getById($widget_id);
+                break;
+            case '6':
+                $widget = ContentProduct::getById($widget_id);
                 break;
             case '7':
                 $widget = WidgetVideo::getById($widget_id);

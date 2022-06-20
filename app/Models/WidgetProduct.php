@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class WidgetProduct extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id', 'content_product_id', 'title', 'price', 'discount', 'description', 'image'
+    ];
 }

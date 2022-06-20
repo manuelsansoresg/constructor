@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactElement;
+use App\Models\ContentProduct;
 use App\Models\Setting;
 use App\Models\WidgetBuilder;
 use App\Models\WidgetCarusel;
@@ -203,6 +204,13 @@ class AddWidgetsController extends Controller
         $data = $request->data;
         $element = new ContactElement($data);
         $element->save();
+    }
+
+    public function storeProduct(Request $request)
+    {
+        $data = $request->data;
+        ContentProduct::saveEdit($data, $request->page_actual, $request->product_id);
+
     }
 
     public function storeSetting(Request $request)

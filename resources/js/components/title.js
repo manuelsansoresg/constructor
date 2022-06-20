@@ -32,6 +32,18 @@ window.changeSection = function (page_actual) {
         case '5':
             name_section = 'two-columns'
             break;
+        case '6':
+            name_section = 'producto'
+            break;
+        case '7':
+            name_section = 'video'
+            break;
+        case '8':
+            name_section = 'galeria'
+            break;
+        case '9':
+            name_section = 'contacto'
+            break;
     }
     let url = '/admin/'+name_section+'/'+page_actual+'/null/edit'
 
@@ -128,6 +140,10 @@ window.getDataModal = function (section_id, widget_id, page_actual) {
                 case '5':
                         $('#parallax-order').val(result.order);
                     break;
+                case '6':
+                        $('#product-order').val(result.order);
+                        $('#product-name').val(result.name);
+                    break;
                 case '7':
                     $('#video-order').val(result.order);
                     CKEDITOR.instances['video-title'].setData(result.title);
@@ -222,6 +238,14 @@ if (document.getElementById('modal-contacto-section_id')) {
     let section_id    = $('#modal-contacto-section_id').val();
     let widget_id     = $('#modal-contacto-widget_id').val();
     let page_actual   = $('#modal-contacto-page_actual').val();
+
+    getDataModal(section_id, widget_id, page_actual);
+}
+
+if (document.getElementById('modal-product-section_id')) {
+    let section_id    = $('#modal-product-section_id').val();
+    let widget_id     = $('#modal-product-widget_id').val();
+    let page_actual   = $('#modal-product-page_actual').val();
 
     getDataModal(section_id, widget_id, page_actual);
 }

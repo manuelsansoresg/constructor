@@ -80,12 +80,21 @@ class WidgetBuilder extends Model
 
         return $widget;
     }
-    
+
     public function pageVideo($widget_id, $type)
     {
         $widget = WidgetBuilder::select('widget_videos.id', 'title', 'subtitle', 'description', 'video')
             ->join('widget_videos', 'widget_videos.id', '=', 'widget_builders.widget_id')
             ->where(['widget_videos.id' => $widget_id, 'id_rel' => $type])->get();
+
+        return $widget;
+    }
+    
+    public function pageProduct($widget_id, $type)
+    {
+        $widget = WidgetBuilder::select('content_products.id', 'name')
+            ->join('content_products', 'content_products.id', '=', 'widget_builders.widget_id')
+            ->where(['content_products.id' => $widget_id, 'id_rel' => $type])->get();
 
         return $widget;
     }

@@ -167,20 +167,35 @@
             {{-- <input type="hidden" id="gallery" value="true"> --}}
             @foreach ($gallery as $query)
             <div class="container mt-5">
-                <div class="row">
-                    <div class="col-12 col-md-4">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-2">
                         @if ($query->imagen1 != '')
                             <img class="img-fluid" src="{{ asset('files/' . $query->imagen1) }}" alt="" />
                         @endif
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-2">
                         @if ($query->imagen2 != '')
                             <img class="img-fluid" src="{{ asset('files/' . $query->imagen2) }}" alt="" />
                         @endif
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-2">
                         @if ($query->imagen3 != '')
                             <img class="img-fluid" src="{{ asset('files/' . $query->imagen3) }}" alt="" />
+                        @endif
+                    </div>
+                    <div class="col-12 col-md-2">
+                        @if ($query->imagen4 != '')
+                            <img class="img-fluid" src="{{ asset('files/' . $query->imagen4) }}" alt="" />
+                        @endif
+                    </div>
+                    <div class="col-12 col-md-2">
+                        @if ($query->imagen5 != '')
+                            <img class="img-fluid" src="{{ asset('files/' . $query->imagen5) }}" alt="" />
+                        @endif
+                    </div>
+                    <div class="col-12 col-md-2">
+                        @if ($query->imagen6 != '')
+                            <img class="img-fluid" src="{{ asset('files/' . $query->imagen6) }}" alt="" />
                         @endif
                     </div>
                     

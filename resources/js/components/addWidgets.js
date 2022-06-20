@@ -188,6 +188,26 @@ $("#frm-contacto").submit(function (e) {
 
 });
 
+$("#frm-product").submit(function (e) {
+    e.preventDefault();
+    $('#loading-product').show();
+    const form = document.getElementById("frm-product");
+    const data = new FormData(form);
+    axios.post("/widgets/producto/store", data)
+        .then(function (response) {
+            $('#loading-product').hide();
+            let result = response.data;
+            Livewire.emit('updateMyWidgets');
+            Livewire.emit('resetComponents');
+            $('#modal-widget-product').modal('hide');
+            showInfo();
+        })
+        .catch(e => {
+            $('#loading-product').hide();
+         });
+
+});
+
 $("#frm-element_contact").submit(function (e) {
     e.preventDefault();
     $('#loading-element_contact').show();

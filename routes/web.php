@@ -52,6 +52,8 @@ Route::group(['prefix' => 'widgets'], function () {
     Route::post('/setting/store', [App\Http\Controllers\AddWidgetsController::class, 'storeSetting']);
     
     Route::post('/widget/{widget_id}/{page_id}/store', [App\Http\Controllers\AddWidgetsController::class, 'addElementContact']);
+    
+    Route::post('/producto/store', [App\Http\Controllers\AddWidgetsController::class, 'storeProduct']);
 });
 
 
@@ -69,5 +71,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('video/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetVideoController::class, 'edit']);
     Route::get('galeria/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetGalleryController::class, 'edit']);
     Route::get('contacto/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetContactController::class, 'edit']);
+    
+    Route::get('producto/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetProductController::class, 'edit']);
 
 });

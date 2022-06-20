@@ -9,7 +9,7 @@ class WidgetVideo extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title', 'subtitle', 'description', 'video'
+        'title', 'subtitle', 'description', 'video', 'widget_id'
     ];
 
     public static function getById($id)
@@ -25,7 +25,6 @@ class WidgetVideo extends Model
             'builder_id' => $page,
             'id_rel' => 7
         );
-
         if ($text_id == 'null') {
             $text = new WidgetVideo($data);
             $text->save();
