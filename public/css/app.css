@@ -62169,6 +62169,18 @@ a.text-muted:hover {
   height: 100%;
   padding-bottom: 10px;
 } */
+.content-product {
+  text-align: center;
+  height: 200px;
+}
+
+.img-product {
+  max-height: 200px;
+  max-width: 100%;
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+
 .video-responsive {
   height: 0;
   overflow: hidden;

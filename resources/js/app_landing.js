@@ -16,7 +16,7 @@ $(document).ready(function () {
             "<i class='fa fa-caret-left'></i>",
             "<i class='fa fa-caret-right'></i>"
         ],
-        dots: true,
+        dots: false,
         autoplay: true,
         autoplayTimeout: 5000,
         autoHeight: true,

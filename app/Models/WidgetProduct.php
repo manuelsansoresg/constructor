@@ -25,7 +25,7 @@ class WidgetProduct extends Model
                 WidgetProduct::deleteImageWithImage(array('id' => $request->gallery_id), 'image');
             }
         }
-        if ($request->product_id == null) {
+        if ($request->product_id == 'null') {
             $product = new WidgetProduct($data);
             $product->save();
         } else {

@@ -135,6 +135,33 @@
             <div class="parallax-window mt-5" data-parallax="scroll" data-image-src="{{ asset('files/'.$parallax->image) }}"></div>
             @endforeach
         @endif
+        @if ($my_widget['id_rel'] == 6)
+        <?php $products = $widget_builder->pageProduct($my_widget['widget_id'], 6) ?>
+        
+            <div class="container mt-5">
+                <div class="row">
+                    {{-- <input type="hidden" id="gallery" value="true"> --}}
+                    @foreach ($products as $query)
+                    <?php $get_elements = $widget_builder->elementsProduct($query->id) ?>
+                        @foreach ($get_elements as $element)
+                        <div class="col-12 col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="content-product">
+                                        <img class="img-product" src="{{ asset('files/'.$element->image) }}" alt="" srcset="">
+                                    </div>
+                                    <p class="card-text text-center mt-3 h5"> {{ $element->title }} </p>
+                                    <p class="text-center h6">${{ $element->price }}</p>
+                                    <div class="text-center h6">{!! $element->description !!}</div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    @endforeach
+                </div>
+            </div>
+          
+        @endif
         @if ($my_widget['id_rel'] == 7)
             <?php $video = $widget_builder->pageVideo($my_widget['widget_id'], 7) ?>
             {{-- <input type="hidden" id="video" value="true"> --}}
@@ -241,6 +268,7 @@
             </form>
             @endforeach
         @endif
+       
     @endforeach
     
     {{-- footer --}}

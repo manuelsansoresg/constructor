@@ -49,7 +49,7 @@
                     <input type="hidden" name="data[content_product_id]" id="modal-element_product-widget_id">
                     <input type="hidden" name="product_id" id="modal-element_product-id" value="null">
                     <input type="hidden" name="page_actual" id="modal-element_product-page_actual">
-                    <button type="button" class="btn btn-outline-secondary" onclick="closeModalSection('modal-widget-element_contact')">Cerrar</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="closeModalSection('modal-widget-element_product')">Cerrar</button>
                     <button type="submit" class="btn btn-outline-primary">Agregar</button>
                 </div>
         </form>

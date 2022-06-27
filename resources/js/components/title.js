@@ -263,7 +263,7 @@ window.openModalAddElementProduct = function (section_id, widget_id, page_actual
     $('#modal-element_product-section_id').val(section_id);
     $('#modal-element_product-widget_id').val(widget_id);
     $('#modal-element_product-page_actual').val(page_actual);
-
+    $('#modal-element_product-id').val('null')
     $('#modal-widget-element_product').modal('show');
     $('#modal-widget-element_product').addClass('addScroll');
 }
