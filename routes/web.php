@@ -49,11 +49,14 @@ Route::group(['prefix' => 'widgets'], function () {
     Route::post('/contacto/store', [App\Http\Controllers\AddWidgetsController::class, 'storeContact']);
     Route::post('/add-element-contacto/store', [App\Http\Controllers\AddWidgetsController::class, 'addElementContact']);
     
+    
+    
     Route::post('/setting/store', [App\Http\Controllers\AddWidgetsController::class, 'storeSetting']);
     
     Route::post('/widget/{widget_id}/{page_id}/store', [App\Http\Controllers\AddWidgetsController::class, 'addElementContact']);
     
     Route::post('/producto/store', [App\Http\Controllers\AddWidgetsController::class, 'storeProduct']);
+    Route::post('/add-element-producto/store', [App\Http\Controllers\AddWidgetsController::class, 'addElementProducto']);
 });
 
 
@@ -73,5 +76,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('contacto/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetContactController::class, 'edit']);
     
     Route::get('producto/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetProductController::class, 'edit']);
+    Route::get('producto/{product_id}/get', [App\Http\Controllers\WidgetProductController::class, 'getProduct']);
 
 });

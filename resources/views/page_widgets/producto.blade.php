@@ -44,6 +44,7 @@
                                 <input type="text" class="form-control" name="data[name]" id="product-name">
                                 <small>Este nombre solo servira para identificar al contenedor donde se agregaran los productos</small>
                             </div>
+
                             <div class="row" style="display: none" id="loading-product">
                                 <div class="col-12 text-center">
                                     <div>

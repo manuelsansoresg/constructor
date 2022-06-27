@@ -259,6 +259,36 @@ window.openModalAddElementContact = function (section_id, widget_id, page_actual
     $('#modal-widget-element_contact').addClass('addScroll');
 }
 
+window.openModalAddElementProduct = function (section_id, widget_id, page_actual) {
+    $('#modal-element_product-section_id').val(section_id);
+    $('#modal-element_product-widget_id').val(widget_id);
+    $('#modal-element_product-page_actual').val(page_actual);
+
+    $('#modal-widget-element_product').modal('show');
+    $('#modal-widget-element_product').addClass('addScroll');
+}
+
+window.editProduct = function(section_id, content_id, product_id, page_actual)  {
+
+    $('#modal-element_product-section_id').val(section_id);
+    $('#modal-element_product-widget_id').val(content_id);
+    $('#modal-element_product-id').val(product_id)
+    $('#modal-element_product-page_actual').val(page_actual);
+
+    axios.get("/admin/producto/"+product_id+"/get")
+        .then(function (response) {
+            let result = response.data;
+            $('#product-title').val(result.title);
+            $('#product-price').val(result.price);
+            $('#product-discount').val(result.discount);
+            CKEDITOR.instances['product-element-description'].setData(result.description);
+            $('#modal-widget-element_product').modal('show');
+        })
+        .catch(e => { });
+
+    
+}
+
 window.closeModalSection = function (div) {
     $('#' + div + '').modal('hide');
 }
@@ -336,6 +366,12 @@ $(function () {
     }
     if (document.getElementById('video-description')) {
         let ckeditor = CKEDITOR.replace('video-description', {
+            language: 'es-mx',
+        });
+    }
+    
+    if (document.getElementById('product-element-description')) {
+        let ckeditor = CKEDITOR.replace('product-element-description', {
             language: 'es-mx',
         });
     }

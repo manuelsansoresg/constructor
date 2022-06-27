@@ -11,6 +11,7 @@ use App\Models\WidgetContact;
 use App\Models\WidgetGallery;
 use App\Models\WidgetHeader;
 use App\Models\WidgetParallax;
+use App\Models\WidgetProduct;
 use App\Models\WidgetText;
 use App\Models\WidgetTwoColumn;
 use App\Models\WidgetVideo;
@@ -196,9 +197,8 @@ class AddWidgetsController extends Controller
 
         WidgetContact::editWidget($request, $request->page_actual, $contacto_id);
         ContactElement::editElements($request, $contacto_id);
-
     }
-
+    
     public function addElementContact(Request $request)
     {
         $data = $request->data;
@@ -208,9 +208,13 @@ class AddWidgetsController extends Controller
 
     public function storeProduct(Request $request)
     {
-        $data = $request->data;
-        ContentProduct::saveEdit($data, $request->page_actual, $request->product_id);
+        
+        ContentProduct::saveEdit($request, $request->page_actual, $request->product_id);
+    }
 
+    public function addElementProducto(Request $request)
+    {
+        WidgetProduct::saveElement($request);
     }
 
     public function storeSetting(Request $request)

@@ -213,7 +213,7 @@
                                                                 </div>
                                                                 <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
-                                                                        <a class="btn btn-outline-primary" href="/admin/carusel/{{$page_actual->id}}/{{ $header->id }}/edit">Editar</a>
+                                                                        <a class="btn btn-outline-primary" href="/admin/carusel/{{$page_actual->id}}/{{ $carusel_image->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $carusel_image->id }}, 'Slider')">Borrar</button>
                                                                     </div>
                                                                 </div>
@@ -323,12 +323,50 @@
                                                             </div>
                                                             <div class="card-body">
                                                                 <div class="row">
-                                                                    <div class="col-12 col-md-3 text-center">
-                                                                        {{ $query->name }}
+                                                                    <div class="col-12  text-center">
+                                                                        <?php $get_elements = $widget_builder->elementsProduct($query->id) ?>
+                                                               
+                                                                            <table class="table">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Imágen</th>
+                                                                                        <th>Título</th>
+                                                                                        <th>Precio</th>
+                                                                                        <th>Descuento</th>
+                                                                                        <th>Descripcion</th>
+                                                                                        <th></th>
+                                                                                    </th>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    @foreach ($get_elements as $element)
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            @if ($element->image != '')
+                                                                                                <img class="preview_admin" src="{{ asset('files/' . $element->image) }}" alt="" srcset="">
+                                                                                            @endif
+                                                                                        </td>
+                                                                                        <td> <small>{{ $element->title }}</small> </td>
+                                                                                        <td> <small>{{ $element->price }}</small> </td>
+                                                                                        <td> <small>{{ $element->discount }}</small> </td>
+                                                                                        <td> <small> {!! $element->description !!} </small> </td>
+                                                                                        
+                                                                                        <td>
+                                                                                            <div class="col-12">
+                                                                                                <a class="btn btn-outline-primary btn-block" onclick="editProduct(6, {{ $query->id }}, {{ $element->id }}, {{ $page_actual->id }})">Editar</a>
+                                                                                            </div>
+                                                                                            <div class="col-12 mt-3">
+                                                                                                <button class="btn btn-outline-danger" wire:click="deleteElementProduct({{ $element->id }})">Borrar</button>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    @endforeach
+                                                                                </tbody>
+                                                                            </table>
                                                                     </div>
                                                                 </div>
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
+                                                                        <button class="btn btn-outline-secondary" onclick="openModalAddElementProduct(6,{{ $query->id }}, {{ $page_actual->id }})">Agregar elemento</button>
                                                                         <a class="btn btn-outline-primary" href="/admin/producto/{{$page_actual->id}}/{{ $query->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Productos')">Borrar</button>
                                                                     </div>
@@ -479,7 +517,7 @@
                                                                                 @endif
                                                                             </td>
                                                                             <td>
-                                                                                <button class="btn btn-outline-danger" wire:click="deleteElementContact({{ $element->id }})">Borrar elemento</button>
+                                                                                <button class="btn btn-outline-danger" wire:click="deleteElementContact({{ $element->id }})">Borrar </button>
                                                                             </td>
                                                                         </tr>
                                                                         @endforeach
@@ -560,5 +598,6 @@
     @include('section_modal')
     @include('modal_image')
     @include('modal_add_element_contact')
+    @include('modal_add_element_product')
     <a href="#" onclick="modalSection()" class="btn-flotante btn btn-primary btn-circle mt-5"><i class="fas fa-plus"></i></a>
 </div>

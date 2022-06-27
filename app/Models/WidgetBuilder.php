@@ -119,6 +119,11 @@ class WidgetBuilder extends Model
     {
         return ContactElement::where('widget_contact_id', $contact_id)->get();
     }
+    
+    public function elementsProduct($content_product_id)
+    {
+        return WidgetProduct::where('content_product_id', $content_product_id)->get();
+    }
 
     public static function editWidget($widget_id, $name_widget)
     {

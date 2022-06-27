@@ -190,6 +190,9 @@ $("#frm-contacto").submit(function (e) {
 
 $("#frm-product").submit(function (e) {
     e.preventDefault();
+
+    
+
     $('#loading-product').show();
     const form = document.getElementById("frm-product");
     const data = new FormData(form);
@@ -221,6 +224,28 @@ $("#frm-element_contact").submit(function (e) {
             Livewire.emit('resetComponents');
             $('#modal-widget-element_contact').modal('hide');
             document.getElementById('frm-element_contact').reset();
+            showInfo();
+        })
+        .catch(e => { });
+
+});
+
+$("#frm-element_product").submit(function (e) {
+    e.preventDefault();
+    var desc = CKEDITOR.instances['product-element-description'].getData();
+    $('#product-description').val(desc);
+
+    $('#loading-element_product').show();
+    const form = document.getElementById("frm-element_product");
+    const data = new FormData(form);
+    axios.post("/widgets/add-element-producto/store", data)
+        .then(function (response) {
+            $('#loading-element_product').hide();
+            let result = response.data;
+            Livewire.emit('updateMyWidgets');
+            Livewire.emit('resetComponents');
+            $('#modal-widget-element_product').modal('hide');
+            document.getElementById('frm-element_product').reset();
             showInfo();
         })
         .catch(e => { });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContentProduct;
+use App\Models\WidgetProduct;
 use Illuminate\Http\Request;
 
 class WidgetProductController extends Controller
@@ -57,9 +58,16 @@ class WidgetProductController extends Controller
      */
     public function edit($page, $widget_id)
     {
-        $query = ContentProduct::find($widget_id);
+        $query    = ContentProduct::find($widget_id);
+
         $section_id = 6;
         return view('page_widgets.producto', compact('query', 'page', 'section_id'));
+    }
+
+    public function getProduct($product_id)
+    {
+        $product = WidgetProduct::find($product_id);
+        return response()->json($product);
     }
 
     /**

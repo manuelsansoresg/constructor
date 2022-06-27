@@ -14,6 +14,7 @@ use App\Models\WidgetContact;
 use App\Models\WidgetGallery;
 use App\Models\WidgetHeader;
 use App\Models\WidgetParallax;
+use App\Models\WidgetProduct;
 use App\Models\WidgetText;
 use App\Models\WidgetTwoColumn;
 use App\Models\WidgetVideo;
@@ -128,6 +129,15 @@ class ConstructorComponent extends Component
     public function deleteElementContact($contact_id)
     {
         $element = ContactElement::find($contact_id);
+        $element->delete();
+        
+        self::resetWidget();
+    }
+
+    public function deleteElementProduct($product_id)
+    {
+        $element = WidgetProduct::find($product_id);
+        @unlink('files/'.$element->image);
         $element->delete();
         
         self::resetWidget();

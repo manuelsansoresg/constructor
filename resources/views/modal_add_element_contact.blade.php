@@ -4,13 +4,10 @@
             <div class="modal-content">
                 <div class="modal-body"  >
                     {{-- contenido --}}
-
                     <h5>Agregar elemento</h5>
-                  
-
                     <div class="form-group">
                         <label for="InputWidget"> Nombre  </label>
-                        <input type="text" name="data[name]" class="form-control" value="">
+                        <input type="text" name="data[title]" class="form-control" value="">
                     </div>
                     <div class="form-group">
                         <label for="InputWidget"> Leyenda </label>
