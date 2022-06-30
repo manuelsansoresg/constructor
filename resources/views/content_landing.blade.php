@@ -144,17 +144,27 @@
                     @foreach ($products as $query)
                     <?php $get_elements = $widget_builder->elementsProduct($query->id) ?>
                         @foreach ($get_elements as $element)
-                        <div class="col-12 col-md-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="content-product">
-                                        <img class="img-product" src="{{ asset('files/'.$element->image) }}" alt="" srcset="">
+                        <div class="col-12 col-md-3 py-4">
+                            <a onclick="openModalProduct('{{ asset('files') }}', '{{$element->image}}', '{{ $element->title }}', '{{ $element->price }}', '{{ $element->discount }}', '{{ $element->description }}')" class="pointer">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="content-product">
+                                            <img class="img-product" src="{{ asset('files/'.$element->image) }}" alt="" srcset="">
+                                        </div>
+                                        <p class="card-text text-center mt-3 h5"> {{ $element->title }} </p>
+                                        @if ($element->discount > 0)
+                                        <p class="text-center h3"> <del>${{ $element->price }}</del> </p>
+                                        <p class="text-center h3">${{ $element->discount }}</p>
+                                        @else
+                                            <p class="text-center h3">${{ $element->price }}</p>
+                                        @endif
+                                       
+                                        <div class="content-description mt-3">
+                                            {!! \Str::of($element->description)->limit(50) !!}
+                                        </div>
                                     </div>
-                                    <p class="card-text text-center mt-3 h5"> {{ $element->title }} </p>
-                                    <p class="text-center h6">${{ $element->price }}</p>
-                                    <div class="text-center h6">{!! $element->description !!}</div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         @endforeach
                     @endforeach
@@ -331,4 +341,31 @@
     {{-- widgets --}}
 </div>
 
+<!-- Modal producto -->
+<div class="modal fade" id="modal-product" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-product-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body" id="modal-product-body">
+                <div class="content-product">
+                    <img class="img-product" src="{{ asset('files/'.$element->image) }}" alt="" id="modal-product-img">
+                </div>
+                <p class="card-text text-center mt-3 h5" id="modal-product-title">  </p>
+                <p class="text-center h3" id="modal-product-price"> </p>
+                <p class="text-center h3" id="modal-product-discount"></p>
+               
+                <div class="content-description mt-3" id="modal-product-description">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

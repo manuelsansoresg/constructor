@@ -24,3 +24,19 @@ $(document).ready(function () {
 
 
 });
+
+window.openModalProduct = function(path, image, title, price, discount , description) {
+
+    if (image != '') {
+        $("#modal-product-img").attr("src", path+'/'+image);
+    }
+    $("#modal-product-title").html(title);
+    $("#modal-product-price").html(price);
+    if (discount != '') {
+        $("#modal-product-price").html('<del>' + price + '</del>');
+        $("#modal-product-discount").html(discount);
+    }
+    $("#modal-product-description").html(description);
+
+    $('#modal-product').modal('show');
+}

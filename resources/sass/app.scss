@@ -68,6 +68,18 @@
   object-fit: fill;
 }
 
+.content-description{
+  height: 80px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+#modal-product-description{
+  text-align: center !important;
+}
+
 .video-responsive {
 	height: 0;
 	overflow: hidden;

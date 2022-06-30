@@ -348,7 +348,7 @@
                                                                                         <td> <small>{{ $element->title }}</small> </td>
                                                                                         <td> <small>{{ $element->price }}</small> </td>
                                                                                         <td> <small>{{ $element->discount }}</small> </td>
-                                                                                        <td> <small> {!! $element->description !!} </small> </td>
+                                                                                        <td> <small> {!! \Str::of($element->description)->limit(50) !!} </small> </td>
                                                                                         
                                                                                         <td>
                                                                                             <div class="col-12">
