@@ -18,13 +18,25 @@ class SettingController extends Controller
         return view('setting', compact('my_setting'));
     }
 
-    public function deleteImage($setting_id)
+    public function deleteImage($setting_id, $type)
     {
         $setting = Setting::find($setting_id);
         $image = $setting->image;
-        $setting->image = '';
+        $favicon = $setting->favicon;
+        if ($type == 1) {
+            $setting->image = '';
+        } else {
+            $setting->favicon = '';
+        }
+       
         $setting->update();
-        @unlink('files/'.$image);
+       
+        if ($type == 1) {
+            @unlink('files/'.$image);
+        } else {
+            @unlink('files/'.$favicon);
+        }
+        
         return redirect('/admin/settings');
     }
 

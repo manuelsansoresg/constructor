@@ -11,7 +11,7 @@ class Setting extends Model
 
     protected $fillable = [
         'telefono', 'telefono2', 'correo', 'correo2', 'direccion', 'leyenda_footer',
-        'fb', 'instagram', 'twitter', 'youtube', 'tiktok', 'image'];
+        'fb', 'instagram', 'twitter', 'youtube', 'tiktok', 'image', 'favicon'];
 
 
     public static function saveEdit($data, $request = null)
@@ -34,6 +34,19 @@ class Setting extends Model
                 Setting::deleteImageWithImage(array('id' => $request->carusel_id), 'image');
                 $setting = Setting::find(1);
                 $setting->image = $name_image1;
+                $setting->update();
+            }
+        }
+        
+        if ($request->hasFile('favicon') != false && $request != null) {
+            $get_image1 = $request->file('favicon');
+            $name_image1 = rand(1, 999).'-'.$get_image1->getClientOriginalName();
+
+            if ($get_image1->move('files', $name_image1)) {
+                $data_images['image'] = $name_image1;
+                Setting::deleteImageWithImage(array('id' => $request->carusel_id), 'favicon');
+                $setting = Setting::find(1);
+                $setting->favicon = $name_image1;
                 $setting->update();
             }
         }

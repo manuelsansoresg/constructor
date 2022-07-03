@@ -15,6 +15,7 @@ class AddAditionalConfigToSettings extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             $table->string('image')->after('tiktok')->nullable();
+            $table->string('favicon')->after('image')->nullable();
         });
        
         Schema::table('builders', function (Blueprint $table) {

@@ -26,7 +26,19 @@
                                             <div class="row justify-content-center">
                                                 <div class="col-4 text-center">
                                                     <img class="preview_admin" src="{{ asset('files/' . $my_setting->image)}}" alt="">
-                                                    <a href="/admin/settings/{{ $my_setting->id }}/image/delete" class="btn btn-outline-danger btn-block mt-3">Borrar</a>
+                                                    <a href="/admin/settings/{{ $my_setting->id }}/image/delete/1" class="btn btn-outline-danger btn-block mt-3">Borrar</a>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="InputWidget"> Favicon </label>
+                                        <input type="file" name="favicon">
+                                        @if ($my_setting->favicon != '')
+                                            <div class="row justify-content-center">
+                                                <div class="col-4 text-center">
+                                                    <img class="preview_admin" src="{{ asset('files/' . $my_setting->favicon)}}" alt="">
+                                                    <a href="/admin/settings/{{ $my_setting->id }}/image/delete/2" class="btn btn-outline-danger btn-block mt-3">Borrar</a>
                                                 </div>
                                             </div>
                                         @endif

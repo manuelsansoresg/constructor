@@ -277,9 +277,9 @@ function showInfo(redirect) {
         icon: 'success',
         title: 'Información',
         text: 'Los datos han sido guardados',
-        showDenyButton: true,
+        showDenyButton: false,
         confirmButtonText: 'Continuar',
-        denyButtonText: `Cancelar`,
+        
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) { 
