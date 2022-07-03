@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Builder;
+use App\Models\Setting;
 use App\Models\WidgetBuilder;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class LandingController extends Controller
         $page           = ($request->segment(1) == null) ? 'Inicio' : $request->segment(1);
         $page_actual    = Builder::where('name', $page)->first();
         $my_widgets     = WidgetBuilder::getMyWidgets($page_actual->id);
-        
-        return view('content_landing', compact('page_actual', 'my_widgets', 'page'));
+        $my_setting     = Setting::find(1);
+        return view('content_landing', compact('page_actual', 'my_widgets', 'page', 'my_setting'));
     }
 }

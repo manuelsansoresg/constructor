@@ -18,6 +18,16 @@ class SettingController extends Controller
         return view('setting', compact('my_setting'));
     }
 
+    public function deleteImage($setting_id)
+    {
+        $setting = Setting::find($setting_id);
+        $image = $setting->image;
+        $setting->image = '';
+        $setting->update();
+        @unlink('files/'.$image);
+        return redirect('/admin/settings');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

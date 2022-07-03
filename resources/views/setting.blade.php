@@ -18,7 +18,20 @@
                     <div class="col-12 col-md-8">
                         <div class="card">
                             <div class="card-body">
-                                <form action="" method="post" id="frm-settings">
+                                <form action="" method="post" id="frm-settings" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="InputWidget"> Logo </label>
+                                        <input type="file" name="image">
+                                        @if ($my_setting->image != '')
+                                            <div class="row justify-content-center">
+                                                <div class="col-4 text-center">
+                                                    <img class="preview_admin" src="{{ asset('files/' . $my_setting->image)}}" alt="">
+                                                    <a href="/admin/settings/{{ $my_setting->id }}/image/delete" class="btn btn-outline-danger btn-block mt-3">Borrar</a>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+
                                     <div class="form-group">
                                         <label for="InputWidget">Correo</label>
                                         <input type="email" class="form-control" name="data[correo]" value="{{ $my_setting->correo }}">

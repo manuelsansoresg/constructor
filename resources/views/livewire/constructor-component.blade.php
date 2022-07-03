@@ -543,10 +543,31 @@
                                         <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 2 ? 'show active' : '' }}" id="fondo" role="tabpanel" aria-labelledby="fondo-tab">fondo</div>
                                         <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 3 ? 'show active' : '' }}" id="seo" role="tabpanel" aria-labelledby="seo-tab">seo</div>
                                         <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 4 ? 'show active' : '' }}" id="conf" role="tabpanel" aria-labelledby="conf-tab">
-                                            <div class="card mt-5">
-                                                <div class="card-header"> <h5>Footer</h5></div>
-                                                <div class="card-body">
-                                                    <form action=""  wire:submit.prevent="storeConfig(2)">
+                                            <form action=""  wire:submit.prevent="storeConfig(2)" class="pb-5">
+                                                <div class="card mt-5">
+                                                    <div class="card-header"> <h5>Menu</h5></div>
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Color Letra</label>
+                                                            <input type="color" wire:model="builder.color_text_menu">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Color fondo</label>
+                                                            <input type="color" wire:model="builder.background_menu">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Mostrar menu</label>
+                                                            <input type="checkbox" wire:model="builder.show_menu" value="1">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Mostrar logo</label>
+                                                            <input type="checkbox" wire:model="builder.show_logo_menu" value="1">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card mt-5">
+                                                    <div class="card-header"> <h5>Footer</h5></div>
+                                                    <div class="card-body">
                                                         <div class="form-group">
                                                             <label for="InputWidget">Color Letra</label>
                                                             <input type="color" wire:model="builder.color_footer">
@@ -576,12 +597,28 @@
                                                             <input type="checkbox" wire:model="builder.show_youtube" value="1">
                                                         </div>
                                                        
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-outline-primary">Guardar</button>
-                                                        </div>
-                                                    </form>
+                                                       
+                                                        
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                <div class="card mt-5">
+                                                    <div class="card-header"> <h5>Generales</h5></div>
+                                                    <div class="card-body">
+                                                      
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Mostrar botón whatsapp</label>
+                                                            <input type="checkbox" wire:model="builder.show_btn_whatsapp" value="1">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Mostrar logo</label>
+                                                            <input type="checkbox" wire:model="builder.show_logo_menu" value="1">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 pb-5">
+                                                    <button type="submit" class="btn btn-outline-primary float-right">Guardar</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                     {{-- tabs --}}

@@ -62181,6 +62181,13 @@ a.text-muted:hover {
      object-fit: fill;
 }
 
+.logo {
+  max-height: 80px;
+  max-width: 100%;
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+
 .content-description {
   height: 80px;
 }

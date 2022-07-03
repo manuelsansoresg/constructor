@@ -220,6 +220,7 @@ class AddWidgetsController extends Controller
     public function storeSetting(Request $request)
     {
         $data = $request->data;
-        Setting::saveEdit($data);
+        
+        Setting::saveEdit($data, $request);
     }
 }

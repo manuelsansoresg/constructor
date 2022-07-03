@@ -12,7 +12,9 @@ class Builder extends Model
     protected $fillable = [
         'name', 'slug', 'color', 'background_image', 'seo_title', 'seo_description',
         'seo_keyword', 'whatsapp_title', 'whatsapp_phone', 'is_visible', 'show_footer',
-        'show_facebook', 'show_twitter', 'show_instagram', 'show_youtube', 'background_footer', 'color_footer'
+        'show_facebook', 'show_twitter', 'show_instagram', 'show_youtube', 'background_footer', 'color_footer',
+        'background_menu', 'show_menu', 'show_logo_menu', 'text_menu',
+        'show_btn_whatsapp', 'cel_whatsap', 'color_text_menu'
     ];
 
     public static function saveEdit($data, $name_page)

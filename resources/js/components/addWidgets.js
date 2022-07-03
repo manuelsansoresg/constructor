@@ -21,7 +21,7 @@ $("#frm-encabezado").submit(function (e) {
             let result = response.data;
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
-            showInfo();
+            showInfo(1);
         })
         .catch(e => { 
             $('#loading-encabezado').hide();
@@ -40,7 +40,7 @@ $("#frm-carusel").submit(function (e) {
             let result = response.data;
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
-            showInfo();
+            showInfo(1);
         })
         .catch(e => { 
             $('#loading-carusel').hide();
@@ -62,7 +62,7 @@ $("#frm-texto").submit(function (e) {
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-texto').modal('hide');
-            showInfo();
+            showInfo(1);
         })
         .catch(e => { 
             $('#loading-texto').hide();
@@ -91,7 +91,7 @@ $("#frm-two-columns").submit(function (e) {
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-two-columns').modal('hide');
-            showInfo();
+            showInfo(1);
         })
         .catch(e => {
             $('#loading-two-columns').hide();
@@ -111,7 +111,7 @@ $("#frm-parallax").submit(function (e) {
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-parallax').modal('hide');
-            showInfo();
+            showInfo(1);
         })
         .catch(e => { 
             $('#modal-widget-parallax').modal('hide');
@@ -140,7 +140,7 @@ $("#frm-video").submit(function (e) {
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-video').modal('hide');
-            showInfo();
+            showInfo(1);
         })
         .catch(e => {
             $('#loading-video').hide();
@@ -160,7 +160,7 @@ $("#frm-gallery").submit(function (e) {
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-gallery').modal('hide');
-            showInfo();
+            showInfo(1);
         })
         .catch(e => {
             $('#loading-gallery').hide();
@@ -180,7 +180,7 @@ $("#frm-contacto").submit(function (e) {
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-contacto').modal('hide');
-            showInfo();
+            showInfo(1);
         })
         .catch(e => {
             $('#loading-contacto').hide();
@@ -203,7 +203,7 @@ $("#frm-product").submit(function (e) {
             Livewire.emit('updateMyWidgets');
             Livewire.emit('resetComponents');
             $('#modal-widget-product').modal('hide');
-            showInfo();
+            showInfo(1);
         })
         .catch(e => {
             $('#loading-product').hide();
@@ -224,7 +224,7 @@ $("#frm-element_contact").submit(function (e) {
             Livewire.emit('resetComponents');
             $('#modal-widget-element_contact').modal('hide');
             document.getElementById('frm-element_contact').reset();
-            showInfo();
+            showInfo(1);
         })
         .catch(e => { });
 
@@ -246,7 +246,7 @@ $("#frm-element_product").submit(function (e) {
             Livewire.emit('resetComponents');
             $('#modal-widget-element_product').modal('hide');
             document.getElementById('frm-element_product').reset();
-            showInfo();
+            showInfo(1);
         })
         .catch(e => { });
 
@@ -264,17 +264,30 @@ $("#frm-settings").submit(function (e) {
         .then(function (response) {
             $('#loading-setting').hide();
             let result = response.data;
-            showInfo();
+            showInfo(2);
         })
         .catch(e => { });
 });
 
 
 
-function showInfo() {
+function showInfo(redirect) {
+
     Swal.fire({
         icon: 'success',
         title: 'Información',
         text: 'Los datos han sido guardados',
+        showDenyButton: true,
+        confirmButtonText: 'Continuar',
+        denyButtonText: `Cancelar`,
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) { 
+            if (redirect == 1) { //*redirect back
+                window.history.back();
+            }
+            location.reload();
+        }
     })
+
 }

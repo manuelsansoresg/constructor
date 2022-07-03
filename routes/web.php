@@ -23,6 +23,7 @@ Route::get('/web/{page}', [App\Http\Controllers\LandingController::class, 'index
 
 
 Route::resource('/admin/settings', App\Http\Controllers\SettingController::class);
+Route::get('/admin/settings/{setting_id}/image/delete', [App\Http\Controllers\SettingController::class, 'deleteImage']);
 
 
 Route::post('/page/store', [App\Http\Livewire\ConstructorComponent::class, 'storePage']);

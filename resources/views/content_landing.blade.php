@@ -3,11 +3,44 @@
 @section('title', 'Landing')
     
 @section('content')
+
+@inject('widget_builder', 'App\Models\WidgetBuilder')
+@inject('builder', 'App\Models\Builder')
+@inject('setting', 'App\Models\Setting')
+
+@if ($page_actual->show_menu === 1)
+    {{-- landing --}}
+<nav class="navbar navbar-expand-sm bg-dark bg-default navbar-dark justify-content-end">
+    <a class="navbar-brand" href="/">
+        @if ($page_actual->show_logo_menu === 1)
+            <img class="logo" src="{{ asset('files/'.$my_setting->image) }}" alt="">
+        @endif
+    </a>
+    <div class="ml-auto mr-2"></div>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse flex-grow-0 collapse" id="navbarSupportedContent" style="">
+        <ul class="navbar-nav text-center text-md-right">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Inicio</a>
+            </li>
+                            <li class="nav-item active">
+                <a class="nav-link" href="/comunicados">Comunicados</a>
+            </li>
+                                            <li class="nav-item active">
+                <a class="nav-link" href="/noticias">Noticias</a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+{{-- landing --}}
+@endif
+
 <div>
     {{-- widgets --}}
-    @inject('widget_builder', 'App\Models\WidgetBuilder')
-    @inject('builder', 'App\Models\Builder')
-    @inject('setting', 'App\Models\Setting')
+   
 
     @foreach ($my_widgets as $my_widget)
         @if ($my_widget['id_rel'] == 1)
