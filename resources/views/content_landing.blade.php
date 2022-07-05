@@ -25,13 +25,11 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/">Inicio</a>
             </li>
-                            <li class="nav-item active">
-                <a class="nav-link" href="/comunicados">Comunicados</a>
+            @foreach ($pages as $get_page)
+            <li class="nav-item active">
+                <a class="nav-link" href="/{{$get_page->slug}}"> {{ $get_page->name }} </a>
             </li>
-                                            <li class="nav-item active">
-                <a class="nav-link" href="/noticias">Noticias</a>
-            </li>
-            
+            @endforeach
         </ul>
     </div>
 </nav>
@@ -316,7 +314,7 @@
     
     {{-- footer --}}
     <?php 
-        $config  = $builder->getByPageName($page);
+        $config  = $builder->getByPageName($page_actual->name);
         $setting = $setting->get();
     ?>
     @if ($config->show_footer == true)
@@ -336,28 +334,28 @@
                     <ul class="list-inline">
                         @if ($config->show_facebook == true)
                             <li class="list-inline-item">
-                                <a href="{{ $setting->fb }}" target="_blank">
+                                <a style="color:{{ $page_actual->color_footer }}" href="{{ $setting->fb }}" target="_blank">
                                     <i class="fab fa-facebook"></i>
                                 </a>
                             </li>
                         @endif
                         @if ($config->show_twitter == true)
                             <li class="list-inline-item">
-                                <a href="{{ $setting->twitter }}" target="_blank">
+                                <a style="color:{{ $page_actual->color_footer }}" href="{{ $setting->twitter }}" target="_blank">
                                     <i class="fab fa-twitter"></i>
                                 </a>
                             </li>
                         @endif
                         @if ($config->show_instagram == true)
                             <li class="list-inline-item">
-                                <a href="{{ $setting->instagram }}" target="_blank">
+                                <a style="color:{{ $page_actual->color_footer }}" href="{{ $setting->instagram }}" target="_blank">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                             </li>
                         @endif
                         @if ($config->show_youtube == true)
                             <li class="list-inline-item">
-                                <a href="{{ $setting->youtube }}" target="_blank">
+                                <a style="color:{{ $page_actual->color_footer }}" href="{{ $setting->youtube }}" target="_blank">
                                     <i class="fab fa-youtube"></i>
                                 </a>
                             </li>
@@ -386,7 +384,7 @@
             </div>
             <div class="modal-body" id="modal-product-body">
                 <div class="content-product">
-                    <img class="img-product" src="{{ asset('files/'.$element->image) }}" alt="" id="modal-product-img">
+                    <img class="img-product"  alt="" id="modal-product-img">
                 </div>
                 <p class="card-text text-center mt-3 h5" id="modal-product-title">  </p>
                 <p class="text-center h3" id="modal-product-price"> </p>

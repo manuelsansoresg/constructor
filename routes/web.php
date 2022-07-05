@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 Route::get('/', [App\Http\Controllers\LandingController::class, 'index']);
+Route::get('/{page}', [App\Http\Controllers\LandingController::class, 'index']);
 Route::get('/web/{page}', [App\Http\Controllers\LandingController::class, 'index']);
 
 

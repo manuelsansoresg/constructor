@@ -38,6 +38,7 @@ class AddAditionalConfigToSettings extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             $table->dropcolumn('image');
+            $table->dropcolumn('favicon');
         });
         
         Schema::table('builders', function (Blueprint $table) {
