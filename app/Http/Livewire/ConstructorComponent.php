@@ -102,6 +102,8 @@ class ConstructorComponent extends Component
     public function setPage($page)
     {
         $this->setParamsPage($page);
+        $slug = $this->page_actual->slug;
+        return redirect('/admin/home?page='.$slug);
         
     }
 

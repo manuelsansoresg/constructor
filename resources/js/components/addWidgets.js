@@ -224,7 +224,7 @@ $("#frm-element_contact").submit(function (e) {
             Livewire.emit('resetComponents');
             $('#modal-widget-element_contact').modal('hide');
             document.getElementById('frm-element_contact').reset();
-            showInfo(1);
+            showInfo(2);
         })
         .catch(e => { });
 

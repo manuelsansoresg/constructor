@@ -14,7 +14,10 @@
                                     <?php $cont = 0; ?>
                                     @foreach ($pages as $page)
                                         <?php $cont = $cont +1; ?>
-                                        <?php $selected = ($page->name == $page_actual) ? 'true' : 'false'; ?>
+                                        @php
+                                            $get_page = (isset($_GET['page'])) ? $_GET['page'] : '/';
+                                        @endphp
+                                        <?php $selected = ($page->slug == $get_page) ? 'true' : 'false'; ?>
                                         <li data-jstree='{ "selected" : {{ $selected }}}' > <a href="#" onclick="setPage('{{ $page->name }}')"> {{ $page->name }} </a>   </li>
                                     @endforeach
                                 </ul>
