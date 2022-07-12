@@ -15,10 +15,9 @@ class CreateTemplateWidget extends Migration
     {
         Schema::create('template_widgets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('widget_id')->nullable();
+            $table->bigInteger('widget_id')->nullable();
             $table->string('title');
             $table->integer('type')->nullable();
-            $table->foreign('widget_id')->references('id')->on('widgets')->onDelete('cascade');
             $table->timestamps();
         });
     }

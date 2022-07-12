@@ -11,8 +11,7 @@
 @inject('widget_builder', 'App\Models\WidgetBuilder')
 @inject('builder', 'App\Models\Builder')
 @inject('setting', 'App\Models\Setting')
-
-@if ($page_actual->show_menu === 1)
+@if ($page_actual->show_menu == 1)
     {{-- landing --}}
 <nav class="navbar navbar-expand-sm bg-dark bg-default navbar-dark justify-content-end">
     <a class="navbar-brand" href="/">

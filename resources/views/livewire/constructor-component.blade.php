@@ -18,7 +18,7 @@
                                             $get_page = (isset($_GET['page'])) ? $_GET['page'] : '/';
                                         @endphp
                                         <?php $selected = ($page->slug == $get_page) ? 'true' : 'false'; ?>
-                                        <li data-jstree='{ "selected" : {{ $selected }}}' > <a href="#" onclick="setPage('{{ $page->name }}')"> {{ $page->name }} </a>   </li>
+                                        <li data-jstree='{ "selected" : {{ $selected }}}' > <a href="#" onclick="setPage('{{ $page->slug }}')"> {{ $page->name }} </a>   </li>
                                     @endforeach
                                 </ul>
                             </li>

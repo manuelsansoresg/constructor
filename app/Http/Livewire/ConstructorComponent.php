@@ -60,6 +60,8 @@ class ConstructorComponent extends Component
     public $builder;
     public $section_tab;
 
+    public $mypage;
+
     protected $validationAttributes = [
         'header.title' => 'Título',
     ];
@@ -70,7 +72,8 @@ class ConstructorComponent extends Component
 
     public function mount()
     {
-        $this->setParamsPage('Inicio');
+        $this->mypage = (isset($_GET['page'])) ? $_GET['page'] : '/';
+        $this->setParamsPage($this->mypage);
         $this->section_tab    = 1;
         /* if ($this->page_actual->slug != "inicio") {
         } */
@@ -79,7 +82,7 @@ class ConstructorComponent extends Component
 
     public function setParamsPage($page)
     {
-        $this->page_actual    = Builder::where('name', $page)->first();
+        $this->page_actual    = Builder::where('slug', $page)->first();
         $this->builder        = $this->page_actual->toArray();
         $this->pages          = Builder::all();
         $this->widgets        = Widget::all();
@@ -95,12 +98,14 @@ class ConstructorComponent extends Component
 
     public function setTab($section)
     {
+        
         $this->section_tab = $section;
         self::resetComponents();
     }
 
     public function setPage($page)
     {
+        
         $this->setParamsPage($page);
         $slug = $this->page_actual->slug;
         return redirect('/admin/home?page='.$slug);
@@ -274,7 +279,7 @@ class ConstructorComponent extends Component
     public function storeConfig()
     {
         Builder::saveEdit($this->builder, $this->page_actual->name);
-        $this->builder    = Builder::where('name', 'Inicio')->first()->toArray();
+        $this->builder    = Builder::where('slug', $this->mypage)->first()->toArray();
         self::resetWidget();
     }
     
