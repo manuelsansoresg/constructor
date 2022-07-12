@@ -246,7 +246,7 @@ $("#frm-element_product").submit(function (e) {
             Livewire.emit('resetComponents');
             $('#modal-widget-element_product').modal('hide');
             document.getElementById('frm-element_product').reset();
-            showInfo(1);
+            showInfo(2);
         })
         .catch(e => { });
 

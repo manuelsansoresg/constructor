@@ -35,6 +35,44 @@ class WidgetProduct extends Model
         }
     }
 
+    public function saveProduct($data)
+    {
+        $product = new WidgetProduct($data);
+        $product->save();
+    }
+
+    public static function fillProductWithContent($content_product_id, $content_old_product_id)
+    {
+        $get_content        = ContentProduct::find($content_product_id);
+        $get_old_content    = ContentProduct::find($content_old_product_id);
+
+        if ($get_old_content !== null) {
+            $content_product_id    = $get_old_content->id;
+            $products     = WidgetProduct::where('content_product_id', $content_product_id)->get();
+            $path         = 'files/';
+
+            foreach ($products as $product) {
+                $image        = '';
+                if ($product->image != '') {
+                    $fichero    = $path.$product->image;
+                    $image    = 'clone-'.$product->image;
+                    copy($fichero, $path.$image);
+                }
+
+                $data_product = array(
+                    'content_product_id' => $get_content->id,
+                    'title' => $product->title,
+                    'price' => $product->price,
+                    'discount' => $product->discount,
+                    'description' => $product->description,
+                    'image' => $image,
+                );
+                $product = new WidgetProduct($data_product);
+                $product->save();
+            }
+        }
+    }
+
     public static function deleteImageWithImage($data_delete, $name_image)
     {
         $carusel = WidgetProduct::where($data_delete)->first();

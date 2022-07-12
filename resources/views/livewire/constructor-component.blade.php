@@ -1,11 +1,13 @@
 @inject('widget_builder', 'App\Models\WidgetBuilder')
+@inject('template_builder', 'App\Models\TemplateWidget')
+
 <div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="tree">
+                        <div class="tree" wire:ignore>
                             <ul>
                             <li  data-jstree='{"opened" : true }'> Páginas
                                 <ul>
@@ -57,9 +59,7 @@
                                         <li class="nav-item" role="presentation">
                                           <a class="nav-link {{ $section_tab == '' || $section_tab == 1 ? 'active' : '' }}"  wire:click="setTab('1')"  id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Contenido</a>
                                         </li>
-                                        <li class="nav-item" role="presentation">
-                                          <a class="nav-link {{ $section_tab == '' || $section_tab == 2 ? 'active' : '' }}"  wire:click="setTab('2')"  id="fondo-tab" data-toggle="tab" href="#fondo" role="tab" aria-controls="fondo" aria-selected="false">Fondo</a>
-                                        </li>
+                                        
                                         <li class="nav-item" role="presentation">
                                           <a class="nav-link {{ $section_tab == '' || $section_tab == 3 ? 'active' : '' }}"  wire:click="setTab('3')"  id="seo-tab" data-toggle="tab" href="#seo" role="tab" aria-controls="seo" aria-selected="false">SEO</a>
                                         </li>
@@ -77,7 +77,7 @@
                                                     @foreach ($headers as $header)
                                                         <div class="card mt-5 shadow">
                                                             <div class="card-header">
-                                                                <h5>Sección encabezado</h5>
+                                                                <h5>Sección encabezado Orden({{ $header->order }})</h5>
                                                             </div>
                                                             <div class="card-body">
                                                                 <div class="row">
@@ -102,6 +102,16 @@
                                                                 </div>
                                                                 <div class="form-group mt-3 float-right">
                                                                     <div class="col-12">
+                                                                        @php
+                                                                            $is_template = $template_builder->isExist($header->id, 1)
+                                                                        @endphp
+                                                                        @if ($is_template['status'] === 200)
+                                                                        <a class="btn btn-outline-success pointer" href="#" onclick="isExistTemplate({{ $header->id }}, 1)">Convertir a plantilla</a>
+                                                                        @else
+                                                                        <a class="btn btn-outline-danger pointer" href="#" wire:click="deleteTemplate({{$header->id}}, 1)">Borrar plantilla</a>
+                                                                        @endif
+                                                                        
+
                                                                         <a class="btn btn-outline-primary" href="/admin/encabezado/{{$page_actual->id}}/{{ $header->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $header->id }}, 'Encabezado')">Borrar</button>
                                                                     </div>
@@ -117,7 +127,7 @@
                                                     @foreach ($carusel_images as $carusel_image)
                                                         <div class="card mt-5 shadow">
                                                             <div class="card-header">
-                                                                <h5>Sección carusel</h5>
+                                                                <h5>Sección carusel Orden({{ $carusel_image->order }})</h5>
                                                             </div>
                                                             <div class="card-body">
                                                                 <div class="container">
@@ -149,70 +159,17 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="owl-carousel owl-theme owl-loaded owl-drag d-none">
-
-                                                                        <div class="item">
-
-                                                                            <div class="inner">
-                                                                                <div class="row row-content">
-                                                                                    <div class="col-md-12">
-                                                                                        <div class="headline-wrap">
-                                                                                            {{-- <h1><span class="reveal-text">H1 TITLE</span></h1>
-                                                                                            <h2><span class="reveal-text">H2 TITLE</span></h2> --}}
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row row-cta">
-                                                                                    <div class="col-md-12 cta-wrap">
-                                                                                        {{-- <a class="cta-main"><span class="cta-text reveal-text">CTA-MAIN</span></a> --}}
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    @if ($carusel_image->imagen2 != '')
-                                                                        <div class="item">
-                                                                            <img src="{{ asset('files/' . $carusel_image->imagen2) }}" alt="" />
-                                                                            <div class="inner">
-                                                                                <div class="row row-content">
-                                                                                    <div class="col-md-12">
-                                                                                        <div class="headline-wrap">
-                                                                                           {{--  <h1><span class="reveal-text">H1 TITLE</span></h1>
-                                                                                            <h2><span class="reveal-text">H2 TITLE</span></h2> --}}
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row row-cta">
-                                                                                    <div class="col-md-12 cta-wrap">
-                                                                                        {{-- <a class="cta-main"><span class="cta-text reveal-text">CTA-MAIN</span></a> --}}
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    @endif
-                                                                    @if ($carusel_image->imagen3 != '')
-                                                                        <div class="item">
-                                                                            <img src="{{ asset('files/' . $carusel_image->imagen3) }}" alt="" />
-                                                                            <div class="inner">
-                                                                                <div class="row row-content">
-                                                                                    <div class="col-md-12">
-                                                                                        <div class="headline-wrap">
-                                                                                           {{--  <h1><span class="reveal-text">H1 TITLE</span></h1>
-                                                                                            <h2><span class="reveal-text">H2 TITLE</span></h2> --}}
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row row-cta">
-                                                                                    <div class="col-md-12 cta-wrap">
-                                                                                        {{-- <a class="cta-main"><span class="cta-text reveal-text">CTA-MAIN</span></a> --}}
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    @endif
-                                                                </div>
+                                                                
                                                                 <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
+                                                                        @php
+                                                                            $is_template = $template_builder->isExist($carusel_image->id, 2)
+                                                                        @endphp
+                                                                        @if ($is_template['status'] === 200)
+                                                                        <a class="btn btn-outline-success pointer" href="#" onclick="isExistTemplate({{ $carusel_image->id }}, 2)">Convertir a plantilla</a>
+                                                                        @else
+                                                                        <a class="btn btn-outline-danger pointer" href="#" wire:click="deleteTemplate({{$carusel_image->id}}, 2)">Borrar plantilla</a>
+                                                                        @endif
                                                                         <a class="btn btn-outline-primary" href="/admin/carusel/{{$page_actual->id}}/{{ $carusel_image->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $carusel_image->id }}, 'Slider')">Borrar</button>
                                                                     </div>
@@ -229,12 +186,20 @@
                                                     @foreach ($titles as $title)
                                                         <div class="card mt-5 shadow">
                                                             <div class="card-header">
-                                                                <h5>Sección texto</h5>
+                                                                <h5>Sección texto Orden({{ $title->order }})</h5>
                                                             </div>
                                                             <div class="card-body">
                                                                 {!! $title->content !!}
                                                                 <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
+                                                                        @php
+                                                                            $is_template = $template_builder->isExist($title->id, 3)
+                                                                        @endphp
+                                                                        @if ($is_template['status'] === 200)
+                                                                        <a class="btn btn-outline-success pointer" href="#" onclick="isExistTemplate({{ $title->id }}, 3)">Convertir a plantilla</a>
+                                                                        @else
+                                                                        <a class="btn btn-outline-danger pointer" href="#" wire:click="deleteTemplate({{$title->id}}, 3)">Borrar plantilla</a>
+                                                                        @endif
                                                                         <a class="btn btn-outline-primary" href="/admin/texto/{{$page_actual->id}}/{{ $title->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $title->id }}, 'Texto')">Borrar</button>
                                                                     </div>
@@ -251,7 +216,7 @@
                                                     @foreach ($two_columns as $query)
                                                         <div class="card mt-5 shadow">
                                                             <div class="card-header">
-                                                                <h5>Sección 2 columnas </h5>
+                                                                <h5>Sección 2 columnas Orden({{ $query->order }})</h5>
                                                             </div>
                                                             <div class="card-body">
                                                                 <div class="row">
@@ -272,6 +237,15 @@
                                                                 </div>
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
+                                                                        @php
+                                                                            $is_template = $template_builder->isExist($query->id, 4)
+                                                                        @endphp
+                                                                        @if ($is_template['status'] === 200)
+                                                                        <a class="btn btn-outline-success pointer" href="#" onclick="isExistTemplate({{ $query->id }}, 4)">Convertir a plantilla</a>
+                                                                        @else
+                                                                        <a class="btn btn-outline-danger pointer" href="#" wire:click="deleteTemplate({{$query->id}}, 4)">Borrar plantilla</a>
+                                                                        @endif
+                                                                        
                                                                         <a class="btn btn-outline-primary" href="/admin/two-columns/{{$page_actual->id}}/{{ $query->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, '2 columnas')">Borrar</button>
                                                                     </div>
@@ -288,7 +262,7 @@
                                                     @foreach ($parallaxs as $query)
                                                         <div class="card mt-5 shadow">
                                                             <div class="card-header">
-                                                                <h5>Sección parallax </h5>
+                                                                <h5>Sección parallax Orden({{ $query->order }})</h5>
                                                             </div>
                                                             <div class="card-body">
                                                                 @if ($query->image != '')
@@ -303,6 +277,14 @@
                                                                 @endif
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
+                                                                        @php
+                                                                            $is_template = $template_builder->isExist($query->id, 5)
+                                                                        @endphp
+                                                                        @if ($is_template['status'] === 200)
+                                                                        <a class="btn btn-outline-success pointer" href="#" onclick="isExistTemplate({{ $query->id }}, 5)">Convertir a plantilla</a>
+                                                                        @else
+                                                                        <a class="btn btn-outline-danger pointer" href="#" wire:click="deleteTemplate({{$query->id}}, 5)">Borrar plantilla</a>
+                                                                        @endif
                                                                         <a class="btn btn-outline-primary" href="/admin/parallax/{{$page_actual->id}}/{{ $query->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Parallax')">Borrar</button>
                                                                     </div>
@@ -319,7 +301,7 @@
                                                     @foreach ($products as $query)
                                                         <div class="card mt-5 shadow">
                                                             <div class="card-header">
-                                                                <h5>Sección Producto </h5>
+                                                                <h5>Sección Producto Orden({{ $query->order }})</h5>
                                                             </div>
                                                             <div class="card-body">
                                                                 <div class="row">
@@ -366,6 +348,14 @@
                                                                 </div>
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
+                                                                        @php
+                                                                            $is_template = $template_builder->isExist($query->id, 6)
+                                                                        @endphp
+                                                                        @if ($is_template['status'] === 200)
+                                                                        <a class="btn btn-outline-success pointer" href="#" onclick="isExistTemplate({{ $query->id }}, 6)">Convertir a plantilla</a>
+                                                                        @else
+                                                                        <a class="btn btn-outline-danger pointer" href="#" wire:click="deleteTemplate({{$query->id}}, 6)">Borrar plantilla</a>
+                                                                        @endif
                                                                         <button class="btn btn-outline-secondary" onclick="openModalAddElementProduct(6,{{ $query->id }}, {{ $page_actual->id }})">Agregar elemento</button>
                                                                         <a class="btn btn-outline-primary" href="/admin/producto/{{$page_actual->id}}/{{ $query->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Productos')">Borrar</button>
@@ -383,7 +373,7 @@
                                                     @foreach ($video as $query)
                                                         <div class="card mt-5 shadow">
                                                             <div class="card-header">
-                                                                <h5>Sección video </h5>
+                                                                <h5>Sección video Orden({{ $query->order }})</h5>
                                                             </div>
                                                             <div class="card-body">
                                                                <div class="row">
@@ -404,6 +394,15 @@
                                                                </div>
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
+                                                                        @php
+                                                                            $is_template = $template_builder->isExist($query->id, 7)
+                                                                        @endphp
+                                                                        @if ($is_template['status'] === 200)
+                                                                        <a class="btn btn-outline-success pointer" href="#" onclick="isExistTemplate({{ $query->id }}, 7)">Convertir a plantilla</a>
+                                                                        @else
+                                                                        <a class="btn btn-outline-danger pointer" href="#" wire:click="deleteTemplate({{$query->id}}, 7)">Borrar plantilla</a>
+                                                                        @endif
+
                                                                         <a class="btn btn-outline-primary" href="/admin/video/{{$page_actual->id}}/{{ $query->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Video')">Borrar</button>
                                                                     </div>
@@ -419,7 +418,7 @@
                                                     @foreach ($galeria as $query)
                                                         <div class="card mt-5 shadow">
                                                             <div class="card-header">
-                                                                <h5>Sección galería </h5>
+                                                                <h5>Sección galería Orden({{ $query->order }})</h5>
                                                             </div>
                                                             <div class="card-body">
                                                                <div class="row">
@@ -474,6 +473,14 @@
                                                                </div>
                                                               <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
+                                                                        @php
+                                                                        $is_template = $template_builder->isExist($query->id, 8)
+                                                                        @endphp
+                                                                        @if ($is_template['status'] === 200)
+                                                                        <a class="btn btn-outline-success pointer" href="#" onclick="isExistTemplate({{ $query->id }}, 8)">Convertir a plantilla</a>
+                                                                        @else
+                                                                        <a class="btn btn-outline-danger pointer" href="#" wire:click="deleteTemplate({{$query->id}}, 8)">Borrar plantilla</a>
+                                                                        @endif
                                                                         <a class="btn btn-outline-primary" href="/admin/galeria/{{$page_actual->id}}/{{ $query->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Galería')">Borrar</button>
                                                                     </div>
@@ -489,7 +496,7 @@
                                                     @foreach ($contacto as $query)
                                                     <div class="card mt-5 shadow">
                                                         <div class="card-header">
-                                                            <h5>Sección contacto </h5>
+                                                            <h5>Sección contacto Orden({{ $query->order }})</h5>
                                                         </div>
                                                         <div class="card-body">
                                                            <div class="row">
@@ -526,6 +533,14 @@
                                                                 </div>
                                                                 <div class="form-group mt-5 float-right">
                                                                     <div class="col-12">
+                                                                        @php
+                                                                            $is_template = $template_builder->isExist($query->id, 9)
+                                                                        @endphp
+                                                                        @if ($is_template['status'] === 200)
+                                                                        <a class="btn btn-outline-success pointer" href="#" onclick="isExistTemplate({{ $query->id }}, 9)">Convertir a plantilla</a>
+                                                                        @else
+                                                                        <a class="btn btn-outline-danger pointer" href="#" wire:click="deleteTemplate({{$query->id}}, 9)">Borrar plantilla</a>
+                                                                        @endif
                                                                         <button class="btn btn-outline-secondary" onclick="openModalAddElementContact(9,{{ $query->id }}, {{ $page_actual->id }})">Agregar elemento</button>
                                                                         <a class="btn btn-outline-primary" href="/admin/contacto/{{$page_actual->id}}/{{ $query->id }}/edit">Editar</a>
                                                                         <button class="btn btn-outline-danger" wire:click="deleteWidget({{ $query->id }}, 'Contacto')">Borrar</button>
@@ -540,8 +555,37 @@
                                             @endforeach
                                             {{-- mywidgets --}}
                                         </div>
-                                        <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 2 ? 'show active' : '' }}" id="fondo" role="tabpanel" aria-labelledby="fondo-tab">fondo</div>
-                                        <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 3 ? 'show active' : '' }}" id="seo" role="tabpanel" aria-labelledby="seo-tab">seo</div>
+                                        
+                                        <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 3 ? 'show active' : '' }}" id="seo" role="tabpanel" aria-labelledby="seo-tab">
+                                            <form action=""  wire:submit.prevent="storeConfig(2)" class="pb-5">
+                                                <div class="alert alert-info mt-3" role="alert">
+                                                    Parametros no obligatorios para posicionamiento web
+                                                </div>
+                                                <div class="card mt-5">
+                                                    <div class="card-header">
+                                                        SEO
+                                                    </div>
+                                                    <div class="card-body">
+                                                        
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Título</label>
+                                                            <input type="text" class="form-control" wire:model="builder.seo_title" value="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Descripcion</label>
+                                                            <textarea name="" id="" cols="30" rows="4" class="form-control" wire:model="builder.seo_description"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Palabras clave separadas por ,</label>
+                                                            <input type="text" class="form-control" wire:model="builder.seo_keyword">
+                                                        </div>
+                                                        <div class="col-12 pb-5">
+                                                            <button type="submit" class="btn btn-outline-primary float-right">Guardar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                         <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 4 ? 'show active' : '' }}" id="conf" role="tabpanel" aria-labelledby="conf-tab">
                                             <form action=""  wire:submit.prevent="storeConfig(2)" class="pb-5">
                                                 <div class="card mt-5">
@@ -605,13 +649,27 @@
                                                     <div class="card-header"> <h5>Generales</h5></div>
                                                     <div class="card-body">
                                                       
+                                                       
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Color de fondo</label>
+                                                            <input type="color" wire:model="builder.color">
+                                                        </div>
+                                                     
+                                                    </div>
+                                                </div>
+                                                <div class="card mt-5">
+                                                    <div class="card-header"> <h5>Whatsapp</h5></div>
+                                                    <div class="card-body">
+                                                        
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Título</label>
+                                                            <input type="text" class="form-control" wire:model="builder.whatsapp_title" value="">
+                                                            <small>Texto de bienvenida que aparecera al darle click al botón de whatsapp</small>
+                                                        </div>
+
                                                         <div class="form-group">
                                                             <label for="InputWidget">Mostrar botón whatsapp</label>
                                                             <input type="checkbox" wire:model="builder.show_btn_whatsapp" value="1">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="InputWidget">Mostrar logo</label>
-                                                            <input type="checkbox" wire:model="builder.show_logo_menu" value="1">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -636,5 +694,6 @@
     @include('modal_image')
     @include('modal_add_element_contact')
     @include('modal_add_element_product')
+    @include('modal_template')
     <a href="#" onclick="modalSection()" class="btn-flotante btn btn-primary btn-circle mt-5"><i class="fas fa-plus"></i></a>
 </div>

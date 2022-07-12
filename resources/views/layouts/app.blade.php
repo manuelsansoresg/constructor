@@ -8,9 +8,24 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title> @yield('title') </title>
-
+    <meta name="description" content="@yield('title')" />
+    <meta name="keywords" content="@yield('keywords')" />
     
 
+    <!-- Favicon -->
+    <link rel="icon" href="@yield('favicon')">
+
+    <meta property="og:title" content="@yield('title')">
+    <meta property="og:description" content="@yield('description')">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="@yield('image')">
+    <meta property="og:image:secure_url" content="@yield('image')">
+    <meta property="og:locale" content="es_MX" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="@yield('title')">
+    <meta name="twitter:description" content="@yield('description')">
+    <meta name="twitter:image" content="@yield('image')">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -20,7 +35,8 @@
 </head>
 <body>
     @yield('content')
-
+  
+   
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

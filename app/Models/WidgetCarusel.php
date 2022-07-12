@@ -22,7 +22,7 @@ class WidgetCarusel extends Model
                     ->join('widget_builders', 'widget_builders.widget_id', '=', 'widget_carusel.id')->first();
     }
 
-    public static function saveEdit($data, $page, $carusel_id = null)
+    public static function saveEdit($data, $page, $carusel_id = 'null')
     {
         $data_page = array(
             'builder_id' => $page,

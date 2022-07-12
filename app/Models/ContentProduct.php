@@ -17,9 +17,14 @@ class ContentProduct extends Model
                     ->join('widget_builders', 'widget_builders.widget_id', '=', 'content_products.id')->first();
     }
 
-    public static function saveEdit($request, $page, $product_id = null)
+    public static function saveEdit($request, $page, $product_id = 'null', $is_array = false)
     {
-        $data = $request->data;
+        if ($is_array === false) {
+            $data = $request->data;
+        } else {
+            $data = $request;
+        }
+
         $data_page = array(
             'builder_id' => $page,
             'id_rel' => 6
@@ -40,39 +45,42 @@ class ContentProduct extends Model
             WidgetBuilder::setOrderBuilder($data_page, $data['order'], true);
         }
         //* elementos del producto
-        $id             = $request->id;
-        $title          = $request->title;
-        $imagen         = $request->imagen;
-        $price          = $request->price;
-        $discount       = $request->discount;
-        $description    = $request->description;
+        if (isset($request->id)) {
+            $id             = $request->id;
+            $title          = $request->title;
+            $imagen         = $request->imagen;
+            $price          = $request->price;
+            $discount       = $request->discount;
+            $description    = $request->description;
 
-        for ($i=0; $i < count($id); $i++) {
+            for ($i=0; $i < count($id); $i++) {
 
-            //*datos del producto
-            $data_product = array(
-                'title' => $title[$i],
-                'price' => $price[$i],
-                'discount' => $discount[$i],
-                'description' => $description[$i],
-            );
+                //*datos del producto
+                $data_product = array(
+                    'title' => $title[$i],
+                    'price' => $price[$i],
+                    'discount' => $discount[$i],
+                    'description' => $description[$i],
+                );
 
 
-            //*imagen
-            if ($request->hasFile($imagen[$i]) != false) {
-                $get_image1 = $request->file($imagen[$i]);
-                $name_image1 = 'gallery-'.rand(1, 999).'-'.$get_image1->getClientOriginalName();
-    
-                if ($get_image1->move('files', $name_image1)) {
-                    $data_product['image'] = $name_image1;
-                    WidgetProduct::deleteImageWithImage(array('id' => $id[$i]), 'image');
+                //*imagen
+                if ($request->hasFile($imagen[$i]) != false) {
+                    $get_image1 = $request->file($imagen[$i]);
+                    $name_image1 = 'gallery-'.rand(1, 999).'-'.$get_image1->getClientOriginalName();
+        
+                    if ($get_image1->move('files', $name_image1)) {
+                        $data_product['image'] = $name_image1;
+                        WidgetProduct::deleteImageWithImage(array('id' => $id[$i]), 'image');
+                    }
                 }
-            }
 
-            
-            $product = WidgetProduct::find($id[$i]);
-            $product->fill($data_product);
-            $product->update();
+                
+                $product = WidgetProduct::find($id[$i]);
+                $product->fill($data_product);
+                $product->update();
+            }
         }
+        return $product;
     }
 }

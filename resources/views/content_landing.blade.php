@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Landing')
+@section('title', ($page_actual != null)?$page_actual->seo_title: '')
+@section('description', ($page_actual != null)?$page_actual->seo_description: '')
+@section('keywords', ($page_actual != null)?$page_actual->seo_keyword: '')
+@section('image', ($my_setting != null)? asset('files/'.$my_setting->image) : '')
+@section('favicon', ($my_setting != null)? asset('files/'.$my_setting->favicon) : '')
     
 @section('content')
 
@@ -399,4 +403,11 @@
         </div>
     </div>
 </div>
+@if ($page_actual!= null && $page_actual->show_btn_whatsapp == 1)
+<div class="btn-whatsapp">
+    <a href="https://api.whatsapp.com/send?phone={{ ($my_setting != null)? $my_setting->telefono : '' }}&text={{ ($page_actual != null)? $page_actual->whatsapp_title : '' }}" target="_blank">
+    <img src="{{ asset('image/btn_whatsapp.png') }}" alt="">
+    </a>
+</div>
+@endif
 @endsection

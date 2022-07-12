@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 
 window.addTitle = function () {
     let title = $('#titlePage').val();
@@ -18,36 +19,52 @@ window.modalSection = function () {
 
 window.changeSection = function (page_actual) {
     let section_id = $('#section').val();
-    let name_section = 'encabezado';
-    switch (section_id) {
-        case '2':
-            name_section = 'slider'
-            break;
-        case '3':
-            name_section = 'carusel'
-            break;
-        case '4':
-            name_section = 'texto'
-            break;
-        case '5':
-            name_section = 'two-columns'
-            break;
-        case '6':
-            name_section = 'producto'
-            break;
-        case '7':
-            name_section = 'video'
-            break;
-        case '8':
-            name_section = 'galeria'
-            break;
-        case '9':
-            name_section = 'contacto'
-            break;
-    }
-    let url = '/admin/'+name_section+'/'+page_actual+'/null/edit'
+    let section_modal_section = $('#section-modal-section').val();
+    let section_template = $('#section-template').val();
+    if (section_modal_section == 1) {
+        let name_section = 'encabezado';
+        switch (section_id) {
+            case '2':
+                name_section = 'slider'
+                break;
+            case '3':
+                name_section = 'carusel'
+                break;
+            case '4':
+                name_section = 'texto'
+                break;
+            case '5':
+                name_section = 'two-columns'
+                break;
+            case '6':
+                name_section = 'producto'
+                break;
+            case '7':
+                name_section = 'video'
+                break;
+            case '8':
+                name_section = 'galeria'
+                break;
+            case '9':
+                name_section = 'contacto'
+                break;
+        }
+        let url = '/admin/'+name_section+'/'+page_actual+'/null/edit'
 
-    window.location = url;
+        window.location = url;
+    } else {
+        //selecciono la opcion template
+        axios
+        .post("/admin/template/store", { section_template: section_template, page_actual:page_actual })
+        .then(function (response) {
+            let result = response.data;
+            if (result == 200) {
+                location.reload();
+            }
+        })
+        .catch(e => { });
+    }
+    
 }
 
 
@@ -292,6 +309,71 @@ window.editProduct = function(section_id, content_id, product_id, page_actual)  
 window.closeModalSection = function (div) {
     $('#' + div + '').modal('hide');
 }
+
+window.changeModalAddSection = function (section) {
+
+    $('#content-section').hide();
+    $('#content-template').hide();
+    let section_select = 0;
+
+    if (section == 1) {
+        $('#content-section').show();
+        section_select = 1;
+    } else {
+        $('#content-template').show();
+        section_select = 0;
+    }
+    $('#section-modal-section').val(section_select);
+}
+
+window.isExistTemplate = function(widget_id, type) {
+    axios
+    .get('/admin/template/'+widget_id+'/'+type+'/exist')
+    .then(function (response) {
+       let result = response.data;
+       let status = result.status;
+       if (status == 500) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Información',
+            text: 'El template ya se encuentra creado, para visualizarlo elegir la opción template que aparece al darle click al boton flotante inferior con signo +',
+          });
+       } else {
+        $('#template_widget_id').val(widget_id);
+        $('#template_type').val(type);
+        $('#templateModal').modal('show');
+       }
+
+    })
+    .catch(e => { });
+}
+
+$("#form-template").submit(function (e) {
+    e.preventDefault();
+
+    const form = document.getElementById("form-template");
+    const data = new FormData(form);
+
+    axios
+        .post("/admin/template/create", data)
+        .then(function (response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Información',
+                text: 'Los datos han sido guardados',
+                showDenyButton: false,
+                confirmButtonText: 'Continuar',
+                
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                location.reload();
+            })
+        })
+        .catch(e => { });
+
+
+});
+
 
 
 $(function () {

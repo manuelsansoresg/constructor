@@ -7,6 +7,7 @@ use App\Models\Builder;
 use App\Models\ContactElement;
 use App\Models\ContentProduct;
 use App\Models\Section;
+use App\Models\TemplateWidget;
 use App\Models\Widget;
 use App\Models\WidgetBuilder;
 use App\Models\WidgetCarusel;
@@ -31,6 +32,7 @@ class ConstructorComponent extends Component
     public $page_actual;
     public $pages;
     public $widgets; //*lista de secciones
+    public $templates; //*lista de templates
     public $widget; //*valor entero del select
     public $is_edit = false;
     public $link_preview = '/data';
@@ -81,6 +83,7 @@ class ConstructorComponent extends Component
         $this->builder        = $this->page_actual->toArray();
         $this->pages          = Builder::all();
         $this->widgets        = Widget::all();
+        $this->templates      = TemplateWidget::all();
         $this->link_preview   = $this->page_actual->slug;
         $this->my_widgets     = WidgetBuilder::getMyWidgets($this->page_actual->id);
     }
@@ -131,6 +134,12 @@ class ConstructorComponent extends Component
         $element = ContactElement::find($contact_id);
         $element->delete();
         
+        self::resetWidget();
+    }
+
+    public function deleteTemplate($widget_id, $type)
+    {
+        $template = TemplateWidget::deleteTemplate($widget_id, $type);
         self::resetWidget();
     }
 

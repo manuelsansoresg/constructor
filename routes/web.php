@@ -80,4 +80,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('producto/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetProductController::class, 'edit']);
     Route::get('producto/{product_id}/get', [App\Http\Controllers\WidgetProductController::class, 'getProduct']);
 
+    Route::get('template/{widget_id}/{type}/exist', [App\Http\Controllers\WidgetProductController::class, 'isExistTemplate']);
+    Route::post('template/create', [App\Http\Controllers\WidgetProductController::class, 'createTemplate']);
+    
+    Route::post('template/store', [App\Http\Controllers\WidgetProductController::class, 'storeTemplate']);
+
 });

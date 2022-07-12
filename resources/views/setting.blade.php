@@ -51,6 +51,7 @@
                                     <div class="form-group">
                                         <label for="InputWidget">Teléfono 1</label>
                                         <input type="text" class="form-control" name="data[telefono]" value="{{ $my_setting->telefono }}">
+                                        <small class="text-info">Este teléfono sera usado para vincularlo a whatsapp</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="InputWidget">Teléfono 2</label>

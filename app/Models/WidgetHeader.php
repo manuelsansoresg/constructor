@@ -27,7 +27,7 @@ class WidgetHeader extends Model
         ];
     }
 
-    public static function saveEdit($data, $page, $header_id = null)
+    public static function saveEdit($data, $page, $header_id = 'null')
     {
         $data_page = array(
             'builder_id' => $page,

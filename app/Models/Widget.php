@@ -10,6 +10,6 @@ class Widget extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'name', 'execute_widget'
+        'id', 'name', 'execute_widget', 'url_redirect'
     ];
 }

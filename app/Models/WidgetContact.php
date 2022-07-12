@@ -37,4 +37,19 @@ class WidgetContact extends Model
             WidgetBuilder::setOrderBuilder($data_page, $data['order'], true);
         }
     }
+
+    public static function createContact($data, $page)
+    {
+        $contact = new WidgetContact($data);
+        $contact->save();
+        $data_page = array(
+            'builder_id' => $page,
+            'widget_id' => $contact->id,
+            'id_rel' => 9,
+            'order' => $data['order']
+        );
+        WidgetBuilder::setOrderBuilder($data_page, null);
+        return $contact;
+    }
+    
 }

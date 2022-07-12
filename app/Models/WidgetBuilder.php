@@ -43,7 +43,7 @@ class WidgetBuilder extends Model
     //*Relaciones
     public function pageHeader($widget_id, $type)
     {
-        $widget = WidgetBuilder::select('widget_headers.image', 'widget_headers.title', 'phone', 'phone2', 'widget_headers.id')
+        $widget = WidgetBuilder::select('widget_builders.order', 'widget_headers.image', 'widget_headers.title', 'phone', 'phone2', 'widget_headers.id')
             ->join('widget_headers', 'widget_headers.id', '=', 'widget_builders.widget_id')
             ->where(['widget_headers.id' => $widget_id, 'id_rel' => $type])->get();
         return $widget;
@@ -51,14 +51,14 @@ class WidgetBuilder extends Model
 
     public function pageCarusel($widget_id, $type)
     {
-        $widget = WidgetBuilder::select('imagen1', 'imagen2', 'imagen3', 'widget_carusel.id')
+        $widget = WidgetBuilder::select('widget_builders.order', 'imagen1', 'imagen2', 'imagen3', 'widget_carusel.id')
             ->join('widget_carusel', 'widget_carusel.id', '=', 'widget_builders.widget_id')
             ->where(['widget_carusel.id' => $widget_id, 'id_rel' => $type])->get();
         return $widget;
     }
     public function pageTitle($widget_id, $type)
     {
-        $widget = WidgetBuilder::select('content', 'widget_texts.id')
+        $widget = WidgetBuilder::select('widget_builders.order', 'content', 'widget_texts.id')
             ->join('widget_texts', 'widget_texts.id', '=', 'widget_builders.widget_id')
             ->where(['widget_texts.id' => $widget_id, 'id_rel' => $type])->get();
         return $widget;
@@ -66,7 +66,7 @@ class WidgetBuilder extends Model
     
     public function pageTwoColumns($widget_id, $type)
     {
-        $widget = WidgetBuilder::select('title', 'subtitle', 'description', 'image', 'widget_two_columns.id')
+        $widget = WidgetBuilder::select('widget_builders.order', 'title', 'subtitle', 'description', 'image', 'widget_two_columns.id')
             ->join('widget_two_columns', 'widget_two_columns.id', '=', 'widget_builders.widget_id')
             ->where(['widget_two_columns.id' => $widget_id, 'id_rel' => $type])->get();
         return $widget;
@@ -74,7 +74,7 @@ class WidgetBuilder extends Model
     
     public function pageParallax($widget_id, $type)
     {
-        $widget = WidgetBuilder::select('widget_parallaxs.id', 'image')
+        $widget = WidgetBuilder::select('widget_builders.order', 'widget_parallaxs.id', 'image')
             ->join('widget_parallaxs', 'widget_parallaxs.id', '=', 'widget_builders.widget_id')
             ->where(['widget_parallaxs.id' => $widget_id, 'id_rel' => $type])->get();
 
@@ -83,7 +83,7 @@ class WidgetBuilder extends Model
 
     public function pageVideo($widget_id, $type)
     {
-        $widget = WidgetBuilder::select('widget_videos.id', 'title', 'subtitle', 'description', 'video')
+        $widget = WidgetBuilder::select('widget_builders.order', 'widget_videos.id', 'title', 'subtitle', 'description', 'video')
             ->join('widget_videos', 'widget_videos.id', '=', 'widget_builders.widget_id')
             ->where(['widget_videos.id' => $widget_id, 'id_rel' => $type])->get();
 
@@ -92,7 +92,7 @@ class WidgetBuilder extends Model
     
     public function pageProduct($widget_id, $type)
     {
-        $widget = WidgetBuilder::select('content_products.id', 'name')
+        $widget = WidgetBuilder::select('widget_builders.order', 'content_products.id', 'name')
             ->join('content_products', 'content_products.id', '=', 'widget_builders.widget_id')
             ->where(['content_products.id' => $widget_id, 'id_rel' => $type])->get();
 
@@ -101,7 +101,7 @@ class WidgetBuilder extends Model
     
     public function pageGallery($widget_id, $type)
     {
-        $widget = WidgetBuilder::select('widget_galleries.id', 'imagen1', 'imagen2', 'imagen3', 'imagen4', 'imagen5', 'imagen6')
+        $widget = WidgetBuilder::select('widget_builders.order', 'widget_galleries.id', 'imagen1', 'imagen2', 'imagen3', 'imagen4', 'imagen5', 'imagen6')
             ->join('widget_galleries', 'widget_galleries.id', '=', 'widget_builders.widget_id')
             ->where(['widget_galleries.id' => $widget_id, 'id_rel' => $type])->get();
         return $widget;
@@ -109,7 +109,7 @@ class WidgetBuilder extends Model
     
     public function pageContact($widget_id, $type)
     {
-        $widget = WidgetBuilder::select('widget_contacts.id', 'name')
+        $widget = WidgetBuilder::select('widget_builders.order', 'widget_contacts.id', 'name')
             ->join('widget_contacts', 'widget_contacts.id', '=', 'widget_builders.widget_id')
             ->where(['widget_contacts.id' => $widget_id, 'id_rel' => $type])->get();
         return $widget;

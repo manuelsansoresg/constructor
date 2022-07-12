@@ -70,9 +70,25 @@ class ContactElement extends Model
         return array('contact' => $contact , 'content_form' => $view_elements, 'widget_id' => $widget_contact_id, 'order' => $get_order);
     }
 
-    public function fillElements($object)
+    public static function fillElementWithContact($content_contact_id, $content_old_contact_id)
     {
-        # code...
+        $get_content        = WidgetContact::find($content_contact_id);
+        $get_old_content    = WidgetContact::find($content_old_contact_id);
+
+        if ($get_old_content !== null) {
+            $content_contact_id   = $get_old_content->id;
+            $contacts             = ContactElement::where('widget_contact_id', $content_contact_id)->get();
+
+            foreach ($contacts as $element) {
+                $data_element = array(
+                    'widget_contact_id' => $get_content->id,
+                    'name' => $element->name,
+                    'placeholder' => $element->placeholder,
+                );
+                $contact_element = new ContactElement($data_element);
+                $contact_element->save();
+            }
+        }
     }
 
     public static function editElements($request, $contacto_id)
