@@ -55,7 +55,7 @@ class ConstructorComponent extends Component
     //*title
     public $title;
     //*datos guardados widgets
-    public $my_widgets;
+    public $my_widgets = null;
 
     public $builder;
     public $section_tab;
@@ -67,7 +67,8 @@ class ConstructorComponent extends Component
     ];
 
     protected $listeners = [
-        'updatePages', 'updateSection', 'setTitle', 'updateImage', 'updateMyWidgets', 'resetComponents', 'setPage'
+        'updatePages', 'updateSection', 'setTitle', 'updateImage', 'updateMyWidgets', 'resetComponents', 'setPage',
+        'deletePage'
     ];
 
     public function mount()
@@ -83,12 +84,15 @@ class ConstructorComponent extends Component
     public function setParamsPage($page)
     {
         $this->page_actual    = Builder::where('slug', $page)->first();
-        $this->builder        = $this->page_actual->toArray();
-        $this->pages          = Builder::all();
-        $this->widgets        = Widget::all();
-        $this->templates      = TemplateWidget::all();
-        $this->link_preview   = $this->page_actual->slug;
-        $this->my_widgets     = WidgetBuilder::getMyWidgets($this->page_actual->id);
+        if ($this->page_actual != null) {
+            $this->builder        = $this->page_actual->toArray();
+            $this->link_preview   = $this->page_actual->slug;
+            $this->my_widgets     = WidgetBuilder::getMyWidgets($this->page_actual->id);
+            $this->pages          = Builder::all();
+            $this->widgets        = Widget::all();
+            $this->templates      = TemplateWidget::all();
+        }
+        
     }
 
     public function render()
@@ -111,6 +115,8 @@ class ConstructorComponent extends Component
         return redirect('/admin/home?page='.$slug);
         
     }
+
+    
 
     public function editWidget($widget_id, $name_widget)
     {
@@ -176,36 +182,57 @@ class ConstructorComponent extends Component
         
         if ($get_widget->execute_widget == 'carusel') {
             $my_widget = WidgetCarusel::find($widget_id);
-            self::deleteImage($get_widget->id, 'Encabezado', 'imagen1');
-            self::deleteImage($get_widget->id, 'Encabezado', 'imagen2');
-            self::deleteImage($get_widget->id, 'Encabezado', 'imagen3');
+            self::deleteImage($my_widget->id, 'Slider', 'imagen1');
+            self::deleteImage($my_widget->id, 'Slider', 'imagen2');
+            self::deleteImage($my_widget->id, 'Slider', 'imagen3');
             $my_widget->delete();
         }
         
         if ($get_widget->execute_widget == 'gallery') {
             $my_widget = WidgetGallery::find($widget_id);
-            self::deleteImage($get_widget->id, 'Galería', 'imagen1');
-            self::deleteImage($get_widget->id, 'Galería', 'imagen2');
-            self::deleteImage($get_widget->id, 'Galería', 'imagen3');
-            self::deleteImage($get_widget->id, 'Galería', 'imagen4');
-            self::deleteImage($get_widget->id, 'Galería', 'imagen5');
-            self::deleteImage($get_widget->id, 'Galería', 'imagen6');
+            self::deleteImage($my_widget->id, 'Galería', 'imagen1');
+            self::deleteImage($my_widget->id, 'Galería', 'imagen2');
+            self::deleteImage($my_widget->id, 'Galería', 'imagen3');
+            self::deleteImage($my_widget->id, 'Galería', 'imagen4');
+            self::deleteImage($my_widget->id, 'Galería', 'imagen5');
+            self::deleteImage($my_widget->id, 'Galería', 'imagen6');
             $my_widget->delete();
         }
 
         if ($get_widget->execute_widget == 'parallax') {
             $my_widget = WidgetCarusel::find($widget_id);
-            self::deleteImage($get_widget->id, 'Parallax', 'image');
+            self::deleteImage($my_widget->id, 'Parallax', 'image');
+            $my_widget->delete();
+        }
+        
+        if ($get_widget->execute_widget == 'two_column') {
+            $my_widget = WidgetTwoColumn::find($widget_id);
+            if ($my_widget != null) {
+                self::deleteImage($get_widget->id, '2 columnas', 'image');
+                $my_widget->delete();
+            }
         }
         
         if ($get_widget->execute_widget == 'product') {
             $my_widget = ContentProduct::find($widget_id);
+            self::deleteImage($my_widget->id, 'Productos', 'image');
             $my_widget->delete();
         }
        
         self::resetWidget();
     }
 
+    public function deletePage($page_id)
+    {
+        $widget_builders = WidgetBuilder::where('builder_id', $page_id)->get();
+        foreach ($widget_builders as $widget_builder) {
+            $widget = Widget::find($widget_builder->id_rel);
+            if ($widget != null) {
+                self::deleteWidget($widget_builder->widget_id, $widget->name);
+            }
+        }
+        self::resetWidget();
+    }
     
     /**
      * Agrega imagenes desde el modal disparado en agregar imagenes desde los widgets que contengan imagen
@@ -278,9 +305,11 @@ class ConstructorComponent extends Component
     
     public function storeConfig()
     {
-        Builder::saveEdit($this->builder, $this->page_actual->name);
-        $this->builder    = Builder::where('slug', $this->mypage)->first()->toArray();
-        self::resetWidget();
+        $save_builder = Builder::saveEdit($this->builder, $this->page_actual->name);
+        /* $this->builder    = Builder::where('slug', $save_builder->slug)->first()->toArray();
+        self::setParamsPage($save_builder->slug);
+        self::resetWidget(); */
+        return redirect('/admin/home?page='.$save_builder->slug);
     }
     
 
@@ -302,6 +331,18 @@ class ConstructorComponent extends Component
         );
         $builder = new Builder($data_title);
         $builder->save();
+    }
+
+    /**
+     * salcar pestaña configuracion por página
+     *
+     * @return void
+     */
+    public function storeConfiguration(Request $request)
+    {
+        $builder = $request->builder;
+        $save_builder = Builder::saveEdit($builder, $request->page_actual);
+        return redirect('/admin/home?page='.$save_builder->slug);
     }
 
     /**

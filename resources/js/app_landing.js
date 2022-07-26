@@ -1,5 +1,8 @@
+require('./bootstrap');
+
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel';
+import Swal from 'sweetalert2'
 
 $(document).ready(function () {
 
@@ -40,3 +43,28 @@ window.openModalProduct = function(path, image, title, price, discount , descrip
 
     $('#modal-product').modal('show');
 }
+
+$("#frm-contact-landing").submit(function (e) {
+    e.preventDefault();
+    $('#loading-contacto').show();
+    const form = document.getElementById("frm-contact-landing");
+    const data = new FormData(form);
+    axios.post("/correo/send", data)
+        .then(function (response) {
+            $('#loading-contacto').hide();
+            $('#frm-contact-landing').trigger("reset");
+            Swal.fire({
+                icon: 'success',
+                title: 'Formulario de contacto',
+                text: 'En breve nos comunicaremos contigo',
+                showDenyButton: false,
+                confirmButtonText: 'Continuar',
+                
+            })
+           
+        })
+        .catch(e => {
+            $('#loading-contacto').hide();
+         });
+
+});

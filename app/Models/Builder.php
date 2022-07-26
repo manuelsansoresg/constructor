@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Builder extends Model
 {
@@ -19,26 +20,64 @@ class Builder extends Model
 
     public static function saveEdit($data, $name_page)
     {
-        if($data['background_footer'] == null) {
+        if ($data['background_footer'] == null) {
             $data['background_footer'] = "#000000";
         }
         
-        if($data['color_footer'] == null) {
+        if ($data['color_footer'] == null) {
             $data['color_footer'] = "#000000";
         }
 
+        if ($data['color'] == null) {
+            $data['color'] = "#000000";
+        }
+        
+        if (!isset($data['show_menu'])) {
+            $data['show_menu'] = 0;
+        }
+        
+        if (!isset($data['show_logo_menu'])) {
+            $data['show_logo_menu'] = 0;
+        }
+        
+        if (!isset($data['show_footer'])) {
+            $data['show_footer'] = 0;
+        }
+        if (!isset($data['show_facebook'])) {
+            $data['show_facebook'] = 0;
+        }
+        if (!isset($data['show_twitter'])) {
+            $data['show_twitter'] = 0;
+        }
+        if (!isset($data['show_instagram'])) {
+            $data['show_instagram'] = 0;
+        }
+        if (!isset($data['show_youtube'])) {
+            $data['show_youtube'] = 0;
+        }
+        if (!isset($data['show_btn_whatsapp'])) {
+            $data['show_btn_whatsapp'] = 0;
+        }
+
+
         $builder = Builder::where(['name' => $name_page])->first();
         if ($builder !== null) {
+            if ($name_page != 'Inicio') {
+                $data['slug'] = Str::slug($data['name']);
+            }
             $builder->fill($data);
             $builder->update();
         } else {
             $builder = new Builder($data);
             $builder->save;
         }
+        return $builder;
     }
 
     public function getByPageName($name)
     {
         return Builder::where('name', $name)->first();
     }
+
+   
 }

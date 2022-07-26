@@ -144,6 +144,7 @@ class WidgetBuilder extends Model
 
     public static function deleteImage($widget_id, $name_widget, $name_image = null)
     {
+        $widget = null;
         switch ($name_widget) {
             case 'Slider':
                 $widget = WidgetCarusel::find($widget_id);
@@ -162,6 +163,14 @@ class WidgetBuilder extends Model
                     $widget->update();
                 }
                 break;
+            case '2 columnas':
+                $widget = WidgetTwoColumn::find($widget_id);
+                @unlink('files/' . $widget->$name_image);
+                if ($widget != null) {
+                    $widget->$name_image = '';
+                    $widget->update();
+                }
+                break;
             
             case 'Galería':
                 $widget = WidgetGallery::find($widget_id);
@@ -171,13 +180,28 @@ class WidgetBuilder extends Model
                     $widget->update();
                 }
                 break;
+            case 'Productos':
+                $products = WidgetProduct::where('content_product_id', $widget_id)->get();
+                foreach ($products as $product) {
+                    $get_product = WidgetProduct::find($product->id);
+                    @unlink('files/' . $get_product->$name_image);
+                    if ($widget != null) {
+                        $get_product->$name_image = '';
+                        $get_product->update();
+                    }
+                }
+                break;
 
-            default:
-                $widget = WidgetHeader::find($widget_id)->first();
-                @unlink('files/' . $widget->image);
-                if ($widget != null) {
-                    $widget->image = '';
-                    $widget->update();
+            case 'Encabezado':
+                try {
+                    $widget = WidgetHeader::find($widget_id)->first();
+                    @unlink('files/' . $widget->image);
+                    if ($widget != null) {
+                        $widget->image = '';
+                        $widget->update();
+                    }
+                } catch (\Exception $e) {
+                    //throw $th;
                 }
                 break;
         }

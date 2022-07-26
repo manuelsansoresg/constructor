@@ -23,18 +23,19 @@ window.changeSection = function (page_actual) {
     let section_template = $('#section-template').val();
     if (section_modal_section == 1) {
         let name_section = 'encabezado';
+       
         switch (section_id) {
             case '2':
-                name_section = 'slider'
-                break;
-            case '3':
                 name_section = 'carusel'
                 break;
-            case '4':
+            case '3':
                 name_section = 'texto'
                 break;
-            case '5':
+            case '4':
                 name_section = 'two-columns'
+                break;
+            case '5':
+                name_section = 'parallax'
                 break;
             case '6':
                 name_section = 'producto'
@@ -482,5 +483,20 @@ $(function () {
         console.log(title);
         $('#title').val(title);
     })
+
+    window.deletePage = function (id) {
+        Swal.fire({
+            icon: 'warning',
+            text: '¿Esta seguro que desea borrar la página?',
+            showDenyButton: false,
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No',
+            
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            Livewire.emit('deletePage', id);
+        })
+    }
 
 });

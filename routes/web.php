@@ -17,10 +17,7 @@ Route::get('/', [App\Http\Controllers\LandingController::class, 'index']);
 Route::get('/{page}', [App\Http\Controllers\LandingController::class, 'index']);
 Route::get('/web/{page}', [App\Http\Controllers\LandingController::class, 'index']);
 
-
-
-
-
+Route::post('/correo/send', [App\Http\Controllers\LandingController::class, 'sendEmail']);
 
 
 Route::resource('/admin/settings', App\Http\Controllers\SettingController::class);
@@ -79,10 +76,11 @@ Route::group(['prefix' => 'admin'], function () {
     
     Route::get('producto/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetProductController::class, 'edit']);
     Route::get('producto/{product_id}/get', [App\Http\Controllers\WidgetProductController::class, 'getProduct']);
-
+    
     Route::get('template/{widget_id}/{type}/exist', [App\Http\Controllers\WidgetProductController::class, 'isExistTemplate']);
     Route::post('template/create', [App\Http\Controllers\WidgetProductController::class, 'createTemplate']);
     
     Route::post('template/store', [App\Http\Controllers\WidgetProductController::class, 'storeTemplate']);
-
+    
+    Route::post('/page/constructor/store', [App\Http\Livewire\ConstructorComponent::class, 'storeConfiguration']);
 });

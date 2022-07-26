@@ -52,8 +52,9 @@
                                 </div>
                                 <div class="col-12 col-md-7 py-3 py-md-0 align-self-center">
                                     <div class="float-right">
-                                        <a href="{{ $link_preview }}" target="_blank" class="btn btn-outline-primary"><i class="fas fa-eye"></i> Vista previa</a>
+                                        <a href="{{ asset($link_preview) }}" target="_blank" class="btn btn-outline-primary"><i class="fas fa-eye"></i> Vista previa</a>
                                         <a href="#" data-toggle="modal" data-target="#pageModal" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Agregar página</a>
+                                        <a href="#" onclick="deletePage({{ $page_actual->id }})" class="btn btn-outline-danger"><i class="fas fa-plus"></i> Borrar página</a>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -73,6 +74,7 @@
                                     <div class="tab-content" id="myTabContent">
                                         <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 1 ? 'show active' : '' }}" id="home" role="tabpanel" aria-labelledby="home-tab">
                                             {{-- mywidgets --}}
+                                            @if ($my_widgets != null)
                                             @foreach ($my_widgets as $my_widget)
 
                                             @if ($my_widget['id_rel'] == 1)
@@ -557,6 +559,8 @@
 
                                             @endforeach
                                             {{-- mywidgets --}}
+                                            @endif
+                                            
                                         </div>
                                         
                                         <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 3 ? 'show active' : '' }}" id="seo" role="tabpanel" aria-labelledby="seo-tab">
@@ -590,25 +594,44 @@
                                             </form>
                                         </div>
                                         <div class="tab-pane fade {{ $section_tab == '' || $section_tab == 4 ? 'show active' : '' }}" id="conf" role="tabpanel" aria-labelledby="conf-tab">
-                                            <form action=""  wire:submit.prevent="storeConfig(2)" class="pb-5">
+                                            <form action="/admin/page/constructor/store" method="POST" class="pb-5" wire:ignore>
+                                                @csrf
+                                                <div class="card mt-5">
+                                                    <div class="card-header"> <h5>Generales</h5></div>
+                                                    <div class="card-body">
+                                                      
+                                                       
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Nombre de la página</label>
+                                                            <input type="text" class="form-control" name="builder[name]" value="{{ $builder['name'] }}">
+                                                        </div>
+                                                        
+                                                        <div class="form-group">
+                                                            <label for="InputWidget">Color de fondo</label>
+                                                            <input type="color" name="builder[color]" value="{{ $builder['color'] }}">
+                                                        </div>
+                                                     
+                                                    </div>
+                                                </div>
+
                                                 <div class="card mt-5">
                                                     <div class="card-header"> <h5>Menu</h5></div>
                                                     <div class="card-body">
                                                         <div class="form-group">
                                                             <label for="InputWidget">Color Letra</label>
-                                                            <input type="color" wire:model="builder.color_text_menu">
+                                                            <input type="color" name="builder[color_text_menu]" value="{{ $builder['color_text_menu'] }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputWidget">Color fondo</label>
-                                                            <input type="color" wire:model="builder.background_menu">
+                                                            <input type="color" name="builder[background_menu]" value="{{ $builder['background_menu'] }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputWidget">Mostrar menu</label>
-                                                            <input type="checkbox" wire:model="builder.show_menu" value="1">
+                                                            <input type="checkbox" name="builder[show_menu]" value="1" {{ ($builder['show_menu'] == 1) ? 'checked' : '' }}>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputWidget">Mostrar logo</label>
-                                                            <input type="checkbox" wire:model="builder.show_logo_menu" value="1">
+                                                            <input type="checkbox" name="builder[show_logo_menu]" value="1" {{ ($builder['show_logo_menu'] == 1) ? 'checked' : '' }}>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -617,65 +640,55 @@
                                                     <div class="card-body">
                                                         <div class="form-group">
                                                             <label for="InputWidget">Color Letra</label>
-                                                            <input type="color" wire:model="builder.color_footer">
+                                                            <input type="color" name="builder[color_footer]" value="{{ $builder['color_footer'] }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputWidget">Color fondo</label>
-                                                            <input type="color" wire:model="builder.background_footer">
+                                                            <input type="color" name="builder[background_footer]" value="{{ $builder['background_footer'] }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputWidget">Mostrar footer</label>
-                                                            <input type="checkbox" wire:model="builder.show_footer" value="1">
+                                                            <input type="checkbox" name="builder[show_footer]" value="1" {{ ($builder['show_footer'] == 1) ? 'checked' : '' }}>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputWidget">Mostrar fb</label>
-                                                            <input type="checkbox" wire:model="builder.show_facebook" value="1">
+                                                            <input type="checkbox" name="builder[show_facebook]" value="1" {{ ($builder['show_facebook'] == 1) ? 'checked' : '' }}>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputWidget">Mostrar twitter</label>
-                                                            <input type="checkbox" wire:model="builder.show_twitter" value="1">
+                                                            <input type="checkbox" name="builder[show_twitter]" value="1" {{ ($builder['show_twitter'] == 1) ? 'checked' : '' }}>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputWidget">Mostrar instagram</label>
-                                                            <input type="checkbox" wire:model="builder.show_instagram" value="1">
+                                                            <input type="checkbox" name="builder[show_instagram]" value="1" {{ ($builder['show_instagram'] == 1) ? 'checked' : '' }}>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="InputWidget">Mostrar youtube</label>
-                                                            <input type="checkbox" wire:model="builder.show_youtube" value="1">
+                                                            <input type="checkbox" name="builder[show_youtube]" value="1" {{ ($builder['show_youtube'] == 1) ? 'checked' : '' }}>
                                                         </div>
                                                        
                                                        
                                                         
                                                     </div>
                                                 </div>
-                                                <div class="card mt-5">
-                                                    <div class="card-header"> <h5>Generales</h5></div>
-                                                    <div class="card-body">
-                                                      
-                                                       
-                                                        <div class="form-group">
-                                                            <label for="InputWidget">Color de fondo</label>
-                                                            <input type="color" wire:model="builder.color">
-                                                        </div>
-                                                     
-                                                    </div>
-                                                </div>
+                                                
                                                 <div class="card mt-5">
                                                     <div class="card-header"> <h5>Whatsapp</h5></div>
                                                     <div class="card-body">
                                                         
                                                         <div class="form-group">
                                                             <label for="InputWidget">Título</label>
-                                                            <input type="text" class="form-control" wire:model="builder.whatsapp_title" value="">
+                                                            <input type="text" class="form-control" name="builder[whatsapp_title]" value="{{ $builder['whatsapp_title'] }}">
                                                             <small>Texto de bienvenida que aparecera al darle click al botón de whatsapp</small>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="InputWidget">Mostrar botón whatsapp</label>
-                                                            <input type="checkbox" wire:model="builder.show_btn_whatsapp" value="1">
+                                                            <input type="checkbox" name="builder[show_btn_whatsapp]" value="1" {{ ($builder['show_btn_whatsapp'] == 1) ? 'checked' : '' }}>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <input type="hidden" name="page_actual" value={{ $page_actual->name}}>
                                                 <div class="col-12 pb-5">
                                                     <button type="submit" class="btn btn-outline-primary float-right">Guardar</button>
                                                 </div>
