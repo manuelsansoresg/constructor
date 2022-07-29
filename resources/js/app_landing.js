@@ -28,6 +28,10 @@ $(document).ready(function () {
 
 });
 
+window.cerrarModal = function() {
+    $('#modal-product').modal('hide');
+}
+
 window.openModalProduct = function(path, image, title, price, discount , description) {
 
     if (image != '') {
