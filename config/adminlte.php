@@ -476,6 +476,16 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
+                    'location' => '/vendor/ckeditor/plugins/colorbutton/plugin.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '/vendor/ckeditor/plugins/panelbutton/plugin.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
                     'location' => '/vendor/ckeditor/lang/es-mx.js',
                 ],
             ],

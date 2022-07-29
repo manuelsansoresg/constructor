@@ -51,12 +51,33 @@
         @if ($my_widget['id_rel'] == 1)
             <?php $headers = $widget_builder->pageHeader($my_widget['widget_id'], 1); ?>
             @foreach ($headers as $header)
-                <div class="container">
+            <div class="container py-3">
+                <div class="row">
+                    <div class="col-12 ">
+                        <div class="col-12 d-flex justify-content-center flex-wrap">
+                            @if ($header->image != '')
+                                <div class="col-12 col-md-3 text-center text-md-left">
+                                    <img src="{{ asset('files/' . $header->image) }}" alt="Profiler"
+                                        class="img-fluid">
+                                </div>
+                                <div class="col-12 col-md-6 text-center title-header">
+                                    {!! $header->title !!}
+                                </div>
+                                <div class="col-12 col-md-2 text-center text-md-left title-header">
+                                    <p>{!! $header->phone !!}</p>
+                                    <p>{!! $header->phone2 !!}</p>
+                                </div>
+                             @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+                {{-- <div class="container">
                     <div class="row">
                         @if ($header->image != '')
                             <div class="col-12 col-md-3 text-center text-md-left">
                                 <img src="{{ asset('files/' . $header->image) }}" alt="Profiler"
-                                    class="preview_admin">
+                                    class="img-fluid">
                             </div>
                         @endif
                         <div class="col-12 col-md-6 text-center">
@@ -67,7 +88,7 @@
                             <p>{!! $header->phone2 !!}</p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             @endforeach
         @endif
         @if ($my_widget['id_rel'] == 2)
@@ -142,7 +163,7 @@
             @foreach ($titles as $title)
                 <div class="container mt-5">
                     <div class="row">
-                        <div class="col-12 text-center">
+                        <div class="col-12 text-left">
                             {!! $title->content !!}
                         </div>
                     </div>
@@ -193,11 +214,11 @@
                                         <p class="card-text text-center mt-3 h5 text-body"> {{ $element->title }}
                                         </p>
                                         @if ($element->discount > 0)
-                                            <p class="text-center h3"> <del>${{ $element->price }}</del> </p>
-                                            <p class="text-center h3">${{ $element->discount }}</p>
+                                            <p class="text-center h3"> <del>{{ $element->price }}</del> </p>
+                                            <p class="text-center h3">{{ $element->discount }}</p>
                                         @else
                                             <p class="text-center h3"> &nbsp; </p>
-                                            <p class="text-center h3">${{ $element->price }}</p>
+                                            <p class="text-center h3">{{ $element->price }}</p>
                                         @endif
 
                                         <div class="content-description mt-3">
@@ -311,21 +332,29 @@
                                 <div class="col-12 col-md-10">
                                     <div class="form-group">
                                         <label for="InputWidget">{{ $element->name }}</label>
-                                        @if ($element->name === 'Nombre')
-                                            <input type="text" class="form-control"
-                                                name="data[{{ \Str::slug($element->name) }}]" {{ $required }}
-                                                placeholder="{{ $element->placeholder }}">
-                                        @endif
-
-                                        @if ($element->name === 'Correo')
+                                      
+                                        
+                                        @if ($element->name !== 'Nombre' && $element->name !== 'Correo' && $element->name !== 'Mensaje')
                                             <input type="email" class="form-control"
-                                                name="data[{{ \Str::slug($element->name) }}]" {{ $required }}
-                                                placeholder="{{ $element->placeholder }}">
-                                        @endif
+                                            name="data[{{ \Str::slug($element->name) }}]" {{ $required }}
+                                            placeholder="{{ $element->placeholder }}">
+                                            @else 
+                                                @if ($element->name === 'Nombre')
+                                                <input type="text" class="form-control"
+                                                    name="data[{{ \Str::slug($element->name) }}]" {{ $required }}
+                                                    placeholder="{{ $element->placeholder }}">
+                                            @endif
 
-                                        @if ($element->name === 'Mensaje')
-                                            <textarea id="" cols="30" rows="4" name="data[{{ \Str::slug($element->name) }}]"
-                                                placeholder="{{ $element->placeholder }}" class="form-control"></textarea>
+                                            @if ($element->name === 'Correo')
+                                                <input type="email" class="form-control"
+                                                    name="data[{{ \Str::slug($element->name) }}]" {{ $required }}
+                                                    placeholder="{{ $element->placeholder }}">
+                                            @endif
+
+                                            @if ($element->name === 'Mensaje')
+                                                <textarea id="" cols="30" rows="4" name="data[{{ \Str::slug($element->name) }}]"
+                                                    placeholder="{{ $element->placeholder }}" class="form-control"></textarea>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>

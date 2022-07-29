@@ -384,37 +384,46 @@ $(function () {
         let ckeditor = CKEDITOR.replace('encabezado-title', {
             language: 'es-mx',
         });
+        CKEDITOR.config.extraPlugins = 'colorbutton';
     }
     if (document.getElementById('encabezado-phone')) {
         let ckeditor = CKEDITOR.replace('encabezado-phone', {
             language: 'es-mx',
         });
+        CKEDITOR.config.extraPlugins = 'colorbutton';
     }
     if (document.getElementById('encabezado-phone2')) {
         let ckeditor = CKEDITOR.replace('encabezado-phone2', {
             language: 'es-mx',
         });
+        CKEDITOR.config.extraPlugins = 'colorbutton';
     }
     
     if (document.getElementById('texto-content')) {
         let ckeditor = CKEDITOR.replace('texto-content', {
             language: 'es-mx',
+            
         });
+
+        CKEDITOR.config.extraPlugins = 'colorbutton';
     }
     if (document.getElementById('two-columns-title')) {
         let ckeditor = CKEDITOR.replace('two-columns-title', {
             language: 'es-mx',
         });
+        CKEDITOR.config.extraPlugins = 'colorbutton';
     }
     if (document.getElementById('two-columns-subtitle')) {
         let ckeditor = CKEDITOR.replace('two-columns-subtitle', {
             language: 'es-mx',
         });
+        CKEDITOR.config.extraPlugins = 'colorbutton';
     }
     if (document.getElementById('two-columns-description')) {
         let ckeditor = CKEDITOR.replace('two-columns-description', {
             language: 'es-mx',
         });
+        CKEDITOR.config.extraPlugins = 'colorbutton';
     }
     
     if (document.getElementById('config-derechos')) {
@@ -422,6 +431,7 @@ $(function () {
         let ckeditor = CKEDITOR.replace('config-derechos', {
             language: 'es-mx',
         });
+        CKEDITOR.config.extraPlugins = 'colorbutton';
         resolveTextSetting();
         
     }

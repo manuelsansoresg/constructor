@@ -62200,6 +62200,10 @@ a.text-muted:hover {
   text-align: left !important;
 }
 
+.title-header p {
+  margin-bottom: 0px !important;
+}
+
 .btn-whatsapp {
   display: block;
   width: 70px;

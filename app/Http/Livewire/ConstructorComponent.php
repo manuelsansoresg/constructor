@@ -173,7 +173,7 @@ class ConstructorComponent extends Component
             'id_rel' => $get_widget->id,
             'widget_id' => $widget_id
         );
-        WidgetBuilder::where($data_widget_builder)->delete();
+        
         if ($get_widget->execute_widget == 'header') {
             $my_widget = WidgetHeader::find($widget_id);
             @unlink('files/' . $my_widget->image);
@@ -182,27 +182,33 @@ class ConstructorComponent extends Component
         
         if ($get_widget->execute_widget == 'carusel') {
             $my_widget = WidgetCarusel::find($widget_id);
-            self::deleteImage($my_widget->id, 'Slider', 'imagen1');
-            self::deleteImage($my_widget->id, 'Slider', 'imagen2');
-            self::deleteImage($my_widget->id, 'Slider', 'imagen3');
-            $my_widget->delete();
+            if ($my_widget != null) {
+                self::deleteImage($my_widget->id, 'Slider', 'imagen1');
+                self::deleteImage($my_widget->id, 'Slider', 'imagen2');
+                self::deleteImage($my_widget->id, 'Slider', 'imagen3');
+                $my_widget->delete();
+            }
         }
         
         if ($get_widget->execute_widget == 'gallery') {
             $my_widget = WidgetGallery::find($widget_id);
-            self::deleteImage($my_widget->id, 'Galería', 'imagen1');
-            self::deleteImage($my_widget->id, 'Galería', 'imagen2');
-            self::deleteImage($my_widget->id, 'Galería', 'imagen3');
-            self::deleteImage($my_widget->id, 'Galería', 'imagen4');
-            self::deleteImage($my_widget->id, 'Galería', 'imagen5');
-            self::deleteImage($my_widget->id, 'Galería', 'imagen6');
-            $my_widget->delete();
+            if ($my_widget != null) {
+                self::deleteImage($my_widget->id, 'Galería', 'imagen1');
+                self::deleteImage($my_widget->id, 'Galería', 'imagen2');
+                self::deleteImage($my_widget->id, 'Galería', 'imagen3');
+                self::deleteImage($my_widget->id, 'Galería', 'imagen4');
+                self::deleteImage($my_widget->id, 'Galería', 'imagen5');
+                self::deleteImage($my_widget->id, 'Galería', 'imagen6');
+                $my_widget->delete();
+            }
         }
 
         if ($get_widget->execute_widget == 'parallax') {
-            $my_widget = WidgetCarusel::find($widget_id);
-            self::deleteImage($my_widget->id, 'Parallax', 'image');
-            $my_widget->delete();
+            $my_widget = WidgetParallax::find($widget_id);
+            if ($my_widget != null) {
+                self::deleteImage($my_widget->id, 'Parallax', 'image');
+                $my_widget->delete();
+            }
         }
         
         if ($get_widget->execute_widget == 'two_column') {
@@ -215,10 +221,12 @@ class ConstructorComponent extends Component
         
         if ($get_widget->execute_widget == 'product') {
             $my_widget = ContentProduct::find($widget_id);
-            self::deleteImage($my_widget->id, 'Productos', 'image');
-            $my_widget->delete();
+            if ($my_widget != null) {
+                self::deleteImage($my_widget->id, 'Productos', 'image');
+                $my_widget->delete();
+            }
         }
-       
+        WidgetBuilder::where($data_widget_builder)->delete();
         self::resetWidget();
     }
 
