@@ -239,7 +239,8 @@ class ConstructorComponent extends Component
                 self::deleteWidget($widget_builder->widget_id, $widget->name);
             }
         }
-        self::resetWidget();
+        Builder::find($page_id)->delete();
+        return redirect('/admin/home');
     }
     
     /**
