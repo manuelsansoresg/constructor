@@ -31,7 +31,7 @@ class EmailSend extends Mailable
     {
         $data = $this->data['contacts'];
         $send = $this->view('email', $this->data)
-        ->from('contacto@xpertsystems.com.mx')->subject('Formulario de contacto');
+        ->from('contacto@glacialrefrigeracion.com')->subject('Formulario de contacto');
         if (isset($data['cc'])) {
             $send->cc($data['cc']);
         }

@@ -4,6 +4,7 @@ return [
     'contact' => [
         'Nombre',
         'Correo',
+        'Teléfono',
         'Mensaje'
     ],
     'element_fields' => [
