@@ -333,29 +333,15 @@
                                     <div class="form-group">
                                         <label for="InputWidget">{{ $element->name }}</label>
                                       
-                                        
-                                        @if ($element->name !== 'Nombre' && $element->name !== 'Correo' && $element->name !== 'Mensaje')
-                                            <input type="email" class="form-control"
+                                        @if ($element->type_field == 3)
+                                            <textarea id="" cols="30" rows="4" name="data[{{ \Str::slug($element->name) }}]"
+                                            placeholder="{{ $element->placeholder }}" class="form-control" {{ $required }}></textarea>
+                                            @else
+                                            <input type="{{ config('enums.fields')[$element->type_field] }}" class="form-control"
                                             name="data[{{ \Str::slug($element->name) }}]" {{ $required }}
                                             placeholder="{{ $element->placeholder }}">
-                                            @else 
-                                                @if ($element->name === 'Nombre')
-                                                <input type="text" class="form-control"
-                                                    name="data[{{ \Str::slug($element->name) }}]" {{ $required }}
-                                                    placeholder="{{ $element->placeholder }}">
-                                            @endif
-
-                                            @if ($element->name === 'Correo')
-                                                <input type="email" class="form-control"
-                                                    name="data[{{ \Str::slug($element->name) }}]" {{ $required }}
-                                                    placeholder="{{ $element->placeholder }}">
-                                            @endif
-
-                                            @if ($element->name === 'Mensaje')
-                                                <textarea id="" cols="30" rows="4" name="data[{{ \Str::slug($element->name) }}]"
-                                                    placeholder="{{ $element->placeholder }}" class="form-control"></textarea>
-                                            @endif
                                         @endif
+                                        
                                     </div>
                                 </div>
                             @endforeach

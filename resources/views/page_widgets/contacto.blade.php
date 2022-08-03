@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Galería')
+@section('title', 'Contacto')
 
 @section('content_header')
     <div class="content-header">
@@ -8,15 +8,15 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">
-                        Sección galería
+                        Sección contacto
                     </h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/admin/home">Páginas</a></li>
-                        <li class="breadcrumb-item active">GALERÍA</li>
+                        <li class="breadcrumb-item"><a href="/admin/home">Contacto</a></li>
+                        <li class="breadcrumb-item active">Contacto</li>
                     </ol>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                         <form action="" id="frm-contacto" enctype="multipart/form-data" wire:ignore>
                                 {{-- contenido --}}
                 
-                                <h5>Sección Contacto</h5>
+                                <h5>Sección contacto</h5>
                                   
                                 <div class="form-group">
                                     <label for="InputWidget">Orden</label>

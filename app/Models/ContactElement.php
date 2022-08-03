@@ -11,7 +11,7 @@ class ContactElement extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'widget_contact_id', 'name', 'placeholder', 'required'];
+        'widget_contact_id', 'name', 'placeholder', 'required', 'type_field'];
 
     public static function getElements($widget_id, $page_actual)
     {
@@ -24,11 +24,11 @@ class ContactElement extends Model
             'builder_id' => $page_actual, 'id_rel' => 9, 'widget_id' => $widget_contact_id
         ])
             ->first();
-
+        
         if ($widget_contact_id != 'null') {
             $contact = WidgetContact::find($widget_contact_id);
             $elements = ContactElement::where('widget_contact_id', $widget_contact_id)
-                    ->get();
+            ->get();
         } else {
             /* $object = new stdClass(); */
             $get_elements = config('enums.contact');
@@ -36,6 +36,7 @@ class ContactElement extends Model
             $data_contact = array(
                 'name' => ''
             );
+            
             $get_element = WidgetContact::where($data_contact)->first();
             
             if ($get_element == null) {
@@ -44,7 +45,6 @@ class ContactElement extends Model
 
                 $widget_contact_id = $contact->id;
                 foreach ($get_elements as $key => $element) {
-                
                     $data_elements    = array(
                         'widget_contact_id' => $widget_contact_id,
                         'name' =>$element ,
@@ -84,6 +84,7 @@ class ContactElement extends Model
                     'widget_contact_id' => $get_content->id,
                     'name' => $element->name,
                     'placeholder' => $element->placeholder,
+                    'type_field' => $element->type_field
                 );
                 $contact_element = new ContactElement($data_element);
                 $contact_element->save();
@@ -97,6 +98,7 @@ class ContactElement extends Model
         $name       = $request->name;
         $leyenda    = $request->leyenda;
         $requerido  = $request->requerido;
+        $type_field = $request->type_field;
 
         for ($i=0; $i < count($name); $i++) {
             $val_requerido = (isset($requerido[$i])) ? $requerido[$i] : 0;
@@ -104,6 +106,7 @@ class ContactElement extends Model
                 'widget_contact_id' => $contacto_id,
                 'name' => $name[$i],
                 'placeholder' => $leyenda[$i],
+                'type_field' =>  $type_field[$i],
                 'required' => $val_requerido,
             );
             $contact_elements = new ContactElement($data_elements);
