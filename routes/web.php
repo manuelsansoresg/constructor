@@ -83,4 +83,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('template/store', [App\Http\Controllers\WidgetProductController::class, 'storeTemplate']);
     
     Route::post('/page/constructor/store', [App\Http\Livewire\ConstructorComponent::class, 'storeConfiguration']);
+    
+    /* Route::post('/page/constructor/install-domain', [App\Http\Livewire\ConstructorComponent::class, 'installDomain']); */
+
+});
+
+Route::group(['prefix' => 'api'], function () {
+    Route::resource('/user', App\Http\Controllers\Api\UserController::class);
+    Route::post('/user/{user_id}/update', [App\Http\Controllers\Api\UserController::class, 'update']);
+    Route::post('/user/{user_id}/update-password', [App\Http\Controllers\Api\UserController::class, 'updatePassword']);
+    Route::get('/user/{user_id}/delete', [App\Http\Controllers\Api\UserController::class, 'deleteUser']);
 });

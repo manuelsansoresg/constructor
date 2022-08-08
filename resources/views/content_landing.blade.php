@@ -476,4 +476,5 @@
         </a>
     </div>
 @endif
+<input type="hidden" id="domain" value="{{ asset('') }}">
 @endsection

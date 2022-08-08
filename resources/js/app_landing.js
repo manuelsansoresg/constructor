@@ -25,8 +25,21 @@ $(document).ready(function () {
         autoHeight: true,
     });
 
+    createDomain();
 
 });
+
+function createDomain() {
+    let domain = $('#domain').val();
+    axios.post("http://adminconstructor.local/project", {domain:domain})
+        .then(function (response) {
+           console.log(response.data);
+        })
+        .catch(e => {
+           
+         });
+
+}
 
 window.cerrarModal = function() {
     $('#modal-product').modal('hide');

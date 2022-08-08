@@ -59,9 +59,7 @@ window.changeSection = function (page_actual) {
         .post("/admin/template/store", { section_template: section_template, page_actual:page_actual })
         .then(function (response) {
             let result = response.data;
-            if (result == 200) {
-                location.reload();
-            }
+            location.reload();
         })
         .catch(e => { });
     }
