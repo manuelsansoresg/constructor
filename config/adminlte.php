@@ -260,7 +260,7 @@ return [
             /* 'label'       => 4,
             'label_color' => 'success', */
         ],
-        ['header' => 'Configuracion'],
+        /* ['header' => 'Configuracion'],
         [
             'text' => 'Perfil',
             'url'  => 'admin/profile',
@@ -270,7 +270,7 @@ return [
             'text' => 'Cambiar password',
             'url'  => 'admin/password',
             'icon' => 'fas fa-fw fa-lock',
-        ],
+        ], */
         /* [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
