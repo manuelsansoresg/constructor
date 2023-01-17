@@ -126,7 +126,7 @@ class AddWidgetsController extends Controller
     
     public function storeGallery(Request $request)
     {
-        $data_images                = array();
+        $data_images                = $request->data;
         $data_images['widget_id']   = $request->widget_id;
         $data_images['order']   = $request->order;
 

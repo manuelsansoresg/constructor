@@ -15,7 +15,7 @@ class SettingComponent extends Component
 
     public function mount()
     {
-        $setting = Setting::find(1);
+        $setting = Setting::get();
         if ($setting !== null) {
             $this->data = $setting->toArray();
         }

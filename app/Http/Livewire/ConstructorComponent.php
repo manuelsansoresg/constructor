@@ -7,6 +7,7 @@ use App\Models\Builder;
 use App\Models\ContactElement;
 use App\Models\ContentProduct;
 use App\Models\Section;
+use App\Models\Setting;
 use App\Models\TemplateWidget;
 use App\Models\Widget;
 use App\Models\WidgetBuilder;
@@ -84,11 +85,12 @@ class ConstructorComponent extends Component
     public function setParamsPage($page)
     {
         $this->page_actual    = Builder::where('slug', $page)->first();
+        
         if ($this->page_actual != null) {
             $this->builder        = $this->page_actual->toArray();
             $this->link_preview   = $this->page_actual->slug;
             $this->my_widgets     = WidgetBuilder::getMyWidgets($this->page_actual->id);
-            $this->pages          = Builder::all();
+            $this->pages          = Builder::getAll();
             $this->widgets        = Widget::all();
             $this->templates      = TemplateWidget::all();
         }
@@ -333,10 +335,13 @@ class ConstructorComponent extends Component
 
     public function storePage(Request $request)
     {
+        $setting = Setting::get();
+        
         $title = $request->title;
         $data_title = array(
             'name' => $title,
-            'slug' => Str::slug($title)
+            'slug' => Str::slug($title),
+            'setting_id' => $setting->id
         );
         $builder = new Builder($data_title);
         $builder->save();
@@ -361,7 +366,7 @@ class ConstructorComponent extends Component
      */
     public function updatePages()
     {
-        $this->pages = Builder::all();
+        $this->pages = Builder::getAll();
         $this->emit('setTree');
     }
     

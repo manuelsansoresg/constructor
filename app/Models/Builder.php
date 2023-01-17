@@ -9,13 +9,13 @@ use Illuminate\Support\Str;
 class Builder extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'name', 'slug', 'color', 'background_image', 'seo_title', 'seo_description',
         'seo_keyword', 'whatsapp_title', 'whatsapp_phone', 'is_visible', 'show_footer',
         'show_facebook', 'show_twitter', 'show_instagram', 'show_youtube', 'background_footer', 'color_footer',
         'background_menu', 'show_menu', 'show_logo_menu', 'text_menu',
-        'show_btn_whatsapp', 'cel_whatsap', 'color_text_menu'
+        'show_btn_whatsapp', 'cel_whatsap', 'color_text_menu', 'setting_id'
     ];
 
     public static function saveEdit($data, $name_page)
@@ -23,7 +23,7 @@ class Builder extends Model
         if ($data['background_footer'] == null) {
             $data['background_footer'] = "#000000";
         }
-        
+
         if ($data['color_footer'] == null) {
             $data['color_footer'] = "#000000";
         }
@@ -31,15 +31,15 @@ class Builder extends Model
         if ($data['color'] == null) {
             $data['color'] = "#000000";
         }
-        
+
         if (!isset($data['show_menu'])) {
             $data['show_menu'] = 0;
         }
-        
+
         if (!isset($data['show_logo_menu'])) {
             $data['show_logo_menu'] = 0;
         }
-        
+
         if (!isset($data['show_footer'])) {
             $data['show_footer'] = 0;
         }
@@ -59,8 +59,8 @@ class Builder extends Model
             $data['show_btn_whatsapp'] = 0;
         }
 
-
-        $builder = Builder::where(['name' => $name_page])->first();
+        $setting = Setting::get();
+        $builder = Builder::where(['name' => $name_page, 'setting_id' => $setting->id])->first();
         if ($builder !== null) {
             if ($name_page != 'Inicio') {
                 $data['slug'] = Str::slug($data['name']);
@@ -79,5 +79,9 @@ class Builder extends Model
         return Builder::where('name', $name)->first();
     }
 
-   
+    public static function getAll()
+    {
+        $setting = Setting::get();
+        return Builder::where('setting_id', $setting->id)->get();
+    }
 }

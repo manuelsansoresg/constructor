@@ -19,6 +19,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <form action="" method="post" id="frm-settings" enctype="multipart/form-data">
+                                  {{--   <div class="form-group">
+                                        <label for="InputWidget">Dominio</label>
+                                        <input type="text" class="form-control" name="data[domain]" value="{{ $my_setting->domain }}">
+                                    </div> --}}
                                     <div class="form-group">
                                         <label for="InputWidget"> Logo </label>
                                         <input type="file" name="image">

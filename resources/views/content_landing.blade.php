@@ -273,38 +273,50 @@
                             <div class="col-12 d-flex justify-content-center flex-wrap">
                                 @if ($query->imagen1 != '')
                                     <div class="col-12 col-md-3 mt-4 offset-md-1">
-                                        <img class="img-fluid" src="{{ asset('files/' . $query->imagen1) }}"
+                                       <a href="{{ $query->linkimagen1 !== '' ? $query->linkimagen1 : '#' }}">
+                                            <img class="img-fluid" src="{{ asset('files/' . $query->imagen1) }}"
                                             alt="" />
+                                       </a>
                                     </div>
                                 @endif
                                 @if ($query->imagen2 != '')
                                     <div class="col-12 col-md-3 mt-4 offset-md-1">
+                                        <a href="{{ $query->linkimagen2 !== '' ? $query->linkimagen2 : '#' }}">
+                                        </a>
                                         <img class="img-fluid" src="{{ asset('files/' . $query->imagen2) }}"
                                             alt="" />
                                     </div>
                                 @endif
                                 @if ($query->imagen3 != '')
                                     <div class="col-12 col-md-3 mt-4 offset-md-1">
-                                        <img class="img-fluid" src="{{ asset('files/' . $query->imagen3) }}"
-                                            alt="" />
+                                        <a href="{{ $query->linkimagen3 !== '' ? $query->linkimagen3 : '#' }}">
+                                            <img class="img-fluid" src="{{ asset('files/' . $query->imagen3) }}"
+                                                alt="" />
+                                        </a>
                                     </div>
                                 @endif
                                 @if ($query->imagen4 != '')
                                     <div class="col-12 col-md-3 mt-4 offset-md-1">
-                                        <img class="img-fluid" src="{{ asset('files/' . $query->imagen4) }}"
-                                            alt="" />
+                                        <a href="{{ $query->linkimagen4 !== '' ? $query->linkimagen4 : '#' }}">
+                                            <img class="img-fluid" src="{{ asset('files/' . $query->imagen4) }}"
+                                                alt="" />
+                                        </a>
                                     </div>
                                 @endif
                                 @if ($query->imagen5 != '')
                                     <div class="col-12 col-md-3 mt-4 offset-md-1">
-                                        <img class="img-fluid" src="{{ asset('files/' . $query->imagen5) }}"
-                                            alt="" />
+                                        <a href="{{ $query->linkimagen5 !== '' ? $query->linkimagen5 : '#' }}">
+                                            <img class="img-fluid" src="{{ asset('files/' . $query->imagen5) }}"
+                                                alt="" />
+                                        </a>
                                     </div>
                                 @endif
                                 @if ($query->imagen6 != '')
                                     <div class="col-12 col-md-3 mt-4 offset-md-1">
-                                        <img class="img-fluid" src="{{ asset('files/' . $query->imagen6) }}"
-                                            alt="" />
+                                        <a href="{{ $query->linkimagen6 !== '' ? $query->linkimagen6 : '#' }}">
+                                            <img class="img-fluid" src="{{ asset('files/' . $query->imagen6) }}"
+                                                alt="" />
+                                        </a>
                                     </div>
                                 @endif
                             </div>

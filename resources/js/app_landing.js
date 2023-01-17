@@ -31,7 +31,7 @@ $(document).ready(function () {
 
 function createDomain() {
     let domain = $('#domain').val();
-    axios.post("http://adminconstructor.local/project", {domain:domain})
+    axios.post("https://admin.webenmexico.com/project", {domain:domain})
         .then(function (response) {
            console.log(response.data);
         })

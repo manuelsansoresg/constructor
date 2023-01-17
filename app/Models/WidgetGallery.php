@@ -21,6 +21,16 @@ class WidgetGallery extends Model
         'imagen8',
         'imagen9',
         'imagen10',
+        'linkimagen1',
+        'linkimagen2',
+        'linkimagen3',
+        'linkimagen4',
+        'linkimagen5',
+        'linkimagen6',
+        'linkimagen7',
+        'linkimagen8',
+        'linkimagen9',
+        'linkimagen10',
         'is_template'
     ];
 

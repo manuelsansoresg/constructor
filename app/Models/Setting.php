@@ -11,20 +11,19 @@ class Setting extends Model
 
     protected $fillable = [
         'telefono', 'telefono2', 'correo', 'correo2', 'direccion', 'leyenda_footer',
-        'fb', 'instagram', 'twitter', 'youtube', 'tiktok', 'image', 'favicon'];
+        'fb', 'instagram', 'twitter', 'youtube', 'tiktok', 'image', 'favicon', 'domain'];
 
 
     public static function saveEdit($data, $request = null)
     {
-        $setting = Setting::find(1);
-        if ($setting === null) {
+        $setting = Setting::where('domain', env('APP_DOMAIN'));
+        
+        if ($setting->count() === 0) {
             $setting = new Setting($data);
             $setting->save();
         } else {
-            $setting->fill($data);
-            $setting->update();
+            $setting->update($data);
         }
-        
         if ($request->hasFile('image') != false && $request != null) {
             $get_image1 = $request->file('image');
             $name_image1 = rand(1, 999).'-'.$get_image1->getClientOriginalName();
@@ -63,9 +62,8 @@ class Setting extends Model
         }
     }
 
-    public function get()
+    public static function get()
     {
-        return Setting::find(1);
+        return Setting::where('domain', env('APP_DOMAIN'))->first();
     }
-
 }

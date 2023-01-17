@@ -688,7 +688,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="page_actual" value={{ $page_actual->name}}>
+                                                <input type="hidden" name="page_actual" value="{{ $page_actual->name}}">
                                                 <div class="col-12 pb-5">
                                                     <button type="submit" class="btn btn-outline-primary float-right">Guardar</button>
                                                 </div>
