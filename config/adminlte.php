@@ -257,8 +257,20 @@ return [
             'text'        => 'Configuración',
             'url'         => 'admin/settings',
             'icon'        => 'far fa-fw fa-file',
-            /* 'label'       => 4,
-            'label_color' => 'success', */
+            
+        ],
+        [
+            'text'        => 'Elegir dominio',
+            'url'         => '#',
+            'id'         => 'id-change_domain',
+            'icon'        => 'fa-solid fa-globe',
+            
+        ],
+        [
+            'text'        => 'Dominios',
+            'url'         => '/admin/domains',
+            'icon'        => 'fa-solid fa-globe',
+            
         ],
         /* ['header' => 'Configuracion'],
         [
@@ -362,24 +374,40 @@ return [
     */
 
     'plugins' => [
-        
+        'Jquery' => [
+            'active' => true,
+            'files' => [
+                /* [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css',
+                ], */
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js',
+                ],
+            ],
+        ],
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
+                    'location' => '//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js',
                 ],
+                
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
+                    'location' => '//cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js',
                 ],
+                
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
+                    'location' => '//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css',
                 ],
             ],
         ],
@@ -433,21 +461,7 @@ return [
                 ],
             ],
         ],
-        'Jquery' => [
-            'active' => true,
-            'files' => [
-                /* [
-                    'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css',
-                ], */
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js',
-                ],
-            ],
-        ],
+       
         'Tree' => [
             'active' => true,
             'files' => [

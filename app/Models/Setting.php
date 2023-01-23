@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
 
 class Setting extends Model
 {
@@ -11,13 +12,12 @@ class Setting extends Model
 
     protected $fillable = [
         'telefono', 'telefono2', 'correo', 'correo2', 'direccion', 'leyenda_footer',
-        'fb', 'instagram', 'twitter', 'youtube', 'tiktok', 'image', 'favicon', 'domain'];
+        'fb', 'instagram', 'twitter', 'youtube', 'tiktok', 'image', 'favicon', 'domain_id'];
 
 
     public static function saveEdit($data, $request = null)
     {
-        $setting = Setting::where('domain', env('APP_DOMAIN'));
-        
+        $setting = Setting::where('domain_id', Session::get('domain_id'));
         if ($setting->count() === 0) {
             $setting = new Setting($data);
             $setting->save();
@@ -27,13 +27,12 @@ class Setting extends Model
         if ($request->hasFile('image') != false && $request != null) {
             $get_image1 = $request->file('image');
             $name_image1 = rand(1, 999).'-'.$get_image1->getClientOriginalName();
-
+            
             if ($get_image1->move('files', $name_image1)) {
                 $data_images['image'] = $name_image1;
                 Setting::deleteImageWithImage(array('id' => $request->carusel_id), 'image');
-                $setting = Setting::find(1);
-                $setting->image = $name_image1;
-                $setting->update();
+                $setting = Setting::where('domain_id', Session::get('domain_id'));
+                $setting->update(['image' => $name_image1]);
             }
         }
         
@@ -44,9 +43,8 @@ class Setting extends Model
             if ($get_image1->move('files', $name_image1)) {
                 $data_images['image'] = $name_image1;
                 Setting::deleteImageWithImage(array('id' => $request->carusel_id), 'favicon');
-                $setting = Setting::find(1);
-                $setting->favicon = $name_image1;
-                $setting->update();
+                $setting = Setting::where('domain_id', Session::get('domain_id'));
+                $setting->update(['favicon' => $name_image1]);
             }
         }
 
@@ -64,6 +62,7 @@ class Setting extends Model
 
     public static function get()
     {
-        return Setting::where('domain', env('APP_DOMAIN'))->first();
+        $domain = Session::get('domain_id');
+        return Setting::where('domain_id', $domain)->first();
     }
 }

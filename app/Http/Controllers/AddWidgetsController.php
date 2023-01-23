@@ -26,7 +26,7 @@ class AddWidgetsController extends Controller
         if ($request->hasFile('image') != false) {
             $document = $request->file('image');
             $name_full = rand(1, 999).'-'.$document->getClientOriginalName();
-
+            
             if ($document->move('files', $name_full)) {
                 $data['image']   = $name_full;
             }

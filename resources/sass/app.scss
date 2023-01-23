@@ -119,6 +119,10 @@
     width: 100%;
     padding-bottom: 15px;
 	}
+
+  #create-domain{
+    z-index: 9999 !important;
+  }
 // Bootstrap
 // Already imported by AdminLTE
 //@import '~bootstrap/scss/bootstrap';

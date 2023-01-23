@@ -704,12 +704,13 @@
             </div>
         </div>
    </div>
-   
+   <input type="hidden" id="domain_id" value="{{ $domain }}">
     @include('page_modal')
     @include('section_modal')
     @include('modal_image')
     @include('modal_add_element_contact')
     @include('modal_add_element_product')
     @include('modal_template')
+    
     <a href="#" onclick="modalSection()" class="btn-flotante btn btn-primary btn-circle mt-5"><i class="fas fa-plus"></i></a>
 </div>

@@ -264,7 +264,7 @@ $("#frm-settings").submit(function (e) {
         .then(function (response) {
             $('#loading-setting').hide();
             let result = response.data;
-            showInfo(2);
+            showInfo(1);
         })
         .catch(e => { });
 });

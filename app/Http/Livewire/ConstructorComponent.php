@@ -63,6 +63,8 @@ class ConstructorComponent extends Component
 
     public $mypage;
 
+    public $domain;
+
     protected $validationAttributes = [
         'header.title' => 'Título',
     ];
@@ -72,9 +74,10 @@ class ConstructorComponent extends Component
         'deletePage'
     ];
 
-    public function mount()
+    public function mount(Request $request)
     {
-        $this->mypage = (isset($_GET['page'])) ? $_GET['page'] : '/';
+        $this->domain         = $request->session()->get('domain_id');
+        $this->mypage         = (isset($_GET['page'])) ? $_GET['page'] : '/';
         $this->setParamsPage($this->mypage);
         $this->section_tab    = 1;
         /* if ($this->page_actual->slug != "inicio") {

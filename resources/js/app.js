@@ -11,12 +11,57 @@ import 'owl.carousel';
 require('./components/title')
 require('./components/addImage')
 require('./components/addWidgets')
+require('./components/domain')
 
 if (document.getElementById('parallax')) {
     $('.parallax-window').parallax();
 }
 
+function openModal() {
+    if (document.getElementById('domain_id')) {
+        let domain_id = document.getElementById('domain_id').value;
+        if (domain_id == '') {
+            $('#modal-select-domain').modal('show');
+        }
+    }
+}
 
+$(document).ready(function(){
+    openModal();
+    if (document.getElementById('dt-domains')) {
+        $('#dt-domains').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            },
+        });
+    }
+});
+
+$('#modal-select-domain').on('hidden.bs.modal', function (e) {
+    openModal();
+  })
+
+  $("#frm-select-domain").submit(function (e) {
+    e.preventDefault();
+
+    const form = document.getElementById("frm-select-domain");
+    const data = new FormData(form);
+
+    axios
+        .post("/admin/settings/setDomain", data)
+        .then(function (response) {
+            location.reload();
+        })
+        .catch(e => { });
+
+
+});
+
+$("#id-change_domain" ).click(function() {
+    $('#modal-select-domain').modal('show');
+});
+
+  
 /* window.Vue = require('vue').default; */
 
 /**

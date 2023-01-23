@@ -26,7 +26,7 @@
                                     <div class="form-group">
                                         <label for="InputWidget"> Logo </label>
                                         <input type="file" name="image">
-                                        @if ($my_setting->image != '')
+                                        @if ($my_setting!= null && $my_setting->image != '')
                                             <div class="row justify-content-center">
                                                 <div class="col-4 text-center">
                                                     <img class="preview_admin" src="{{ asset('files/' . $my_setting->image)}}" alt="">
@@ -38,7 +38,7 @@
                                     <div class="form-group">
                                         <label for="InputWidget"> Favicon </label>
                                         <input type="file" name="favicon">
-                                        @if ($my_setting->favicon != '')
+                                        @if ($my_setting!= null && $my_setting->favicon != '')
                                             <div class="row justify-content-center">
                                                 <div class="col-4 text-center">
                                                     <img class="preview_admin" src="{{ asset('files/' . $my_setting->favicon)}}" alt="">
@@ -50,38 +50,38 @@
 
                                     <div class="form-group">
                                         <label for="InputWidget">Correo</label>
-                                        <input type="email" class="form-control" name="data[correo]" value="{{ $my_setting->correo }}">
+                                        <input type="email" class="form-control" name="data[correo]" value="{{ $my_setting!= null ? $my_setting->correo : null }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="InputWidget">Teléfono 1</label>
-                                        <input type="text" class="form-control" name="data[telefono]" value="{{ $my_setting->telefono }}">
+                                        <input type="text" class="form-control" name="data[telefono]" value="{{ $my_setting!= null ? $my_setting->telefono : null }}">
                                         <small class="text-info">Este teléfono sera usado para vincularlo a whatsapp</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="InputWidget">Teléfono 2</label>
-                                        <input type="text" class="form-control" name="data[telefono2]" value="{{ $my_setting->telefono2 }}">
+                                        <input type="text" class="form-control" name="data[telefono2]" value="{{ $my_setting!= null ? $my_setting->telefono2 : null }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="InputWidget">Derechos reservados</label>
                                         <input type="text" class="form-control" name="data[leyenda_footer]" id="config-derechos" >
-                                        <input type="hidden"  value="{!!  $my_setting->leyenda_footer !!}" id="content-config-derechos" >
+                                        <input type="hidden"  value="{!!  $my_setting!= null ? $my_setting->leyenda_footer : null !!}" id="content-config-derechos" >
 
                                     </div>
                                     <div class="form-group">
                                         <label for="InputWidget">Facebook</label>
-                                        <input type="text" class="form-control" name="data[fb]" value="{{ $my_setting->fb }}">
+                                        <input type="text" class="form-control" name="data[fb]" value="{{ $my_setting!= null ? $my_setting->fb : null }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="InputWidget">Twitter</label>
-                                        <input type="text" class="form-control" name="data[twitter]" value="{{ $my_setting->twitter }}">
+                                        <input type="text" class="form-control" name="data[twitter]" value="{{ $my_setting!= null ? $my_setting->twitter : null }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="InputWidget">Instagram</label>
-                                        <input type="text" class="form-control" name="data[instagram]" value="{{ $my_setting->instagram }}">
+                                        <input type="text" class="form-control" name="data[instagram]" value="{{ $my_setting!= null ? $my_setting->instagram : null }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="InputWidget">Youtube</label>
-                                        <input type="text" class="form-control" name="data[youtube]" value="{{ $my_setting->youtube }}">
+                                        <input type="text" class="form-control" name="data[youtube]" value="{{ $my_setting!= null ? $my_setting->youtube : null }}">
                                     </div>
 
                                     <div class="row" style="display: none" id="loading-setting">
@@ -111,7 +111,7 @@
 
     @stop
 
-
+    @include('modal_select_domain')
 
     @section('js')
     @stop

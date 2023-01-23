@@ -22,7 +22,8 @@ Route::post('/correo/send', [App\Http\Controllers\LandingController::class, 'sen
 
 Route::resource('/admin/settings', App\Http\Controllers\SettingController::class);
 Route::get('/admin/settings/{setting_id}/image/delete/{type}', [App\Http\Controllers\SettingController::class, 'deleteImage']);
-
+//*guardar seleccion del dominio
+Route::post('/admin/settings/setDomain', [App\Http\Controllers\SettingController::class, 'setDomain']);
 
 Route::post('/page/store', [App\Http\Livewire\ConstructorComponent::class, 'storePage']);
 Route::post('/image/add', [App\Http\Livewire\ConstructorComponent::class, 'imageAdd']);
@@ -85,7 +86,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/page/constructor/store', [App\Http\Livewire\ConstructorComponent::class, 'storeConfiguration']);
     
     /* Route::post('/page/constructor/install-domain', [App\Http\Livewire\ConstructorComponent::class, 'installDomain']); */
-
+    Route::resource('/domains', App\Http\Controllers\DomainController::class);
+    Route::get('/domains/{domain_id}/delete', [App\Http\Controllers\DomainController::class, 'destroy']);
 });
 
 Route::group(['prefix' => 'api'], function () {

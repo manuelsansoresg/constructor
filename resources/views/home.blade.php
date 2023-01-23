@@ -8,6 +8,7 @@
 
 @section('content')
     @livewire('constructor-component')
+    @include('modal_select_domain')
 @stop
 
 

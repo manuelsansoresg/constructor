@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Setting;
+use App\Http\Requests\DomainRequest;
+use App\Models\Domain;
 use Illuminate\Http\Request;
 
-class SettingController extends Controller
+class DomainController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,37 +15,8 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //$my_setting = Setting::get();
-        $my_setting = null;
-        return view('setting', compact('my_setting'));
-    }
-
-    public function deleteImage($setting_id, $type)
-    {
-        $setting = Setting::find($setting_id);
-        $image = $setting->image;
-        $favicon = $setting->favicon;
-        if ($type == 1) {
-            $setting->image = '';
-        } else {
-            $setting->favicon = '';
-        }
-       
-        $setting->update();
-       
-        if ($type == 1) {
-            @unlink('files/'.$image);
-        } else {
-            @unlink('files/'.$favicon);
-        }
-        
-        return redirect('/admin/settings');
-    }
-
-    public function setDomain(Request $request)
-    {
-        $data = $request->data;
-        $request->session()->put('domain_id', $data['name']);
+        $domains = Domain::all();
+        return view('domains.index', compact('domains'));
     }
 
     /**
@@ -54,7 +26,8 @@ class SettingController extends Controller
      */
     public function create()
     {
-        //
+        $domain = null;
+        return view('domains.form', compact('domain'));
     }
 
     /**
@@ -63,9 +36,13 @@ class SettingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DomainRequest $request)
     {
-        //
+        if ($request->domain_id == null) {
+            Domain::create($request->data);
+        } else {
+            Domain::find($request->domain_id)->update($request->data);
+        }
     }
 
     /**
@@ -87,7 +64,8 @@ class SettingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $domain = Domain::find($id);
+        return view('domains.form', compact('domain'));
     }
 
     /**
@@ -110,6 +88,7 @@ class SettingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $domain = Domain::find($id);
+        $domain->delete();
     }
 }

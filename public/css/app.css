@@ -62234,3 +62234,7 @@ a.text-muted:hover {
   width: 100%;
   padding-bottom: 15px;
 }
+
+#create-domain {
+  z-index: 9999 !important;
+}
