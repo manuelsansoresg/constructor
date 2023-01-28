@@ -46,7 +46,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Enlace imagen1</label>
-                                <input type="text" class="form-control" name="data[linkimagen1]" value="{{ $query->linkimagen1 }}">
+                                <input type="text" class="form-control" name="data[linkimagen1]" value="{{ isset($query->linkimagen1) ? $query->linkimagen1 : null }}">
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Imagen2</label>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Enlace imagen2</label>
-                                <input type="text" class="form-control" name="data[linkimagen2]" value="{{ $query->linkimagen2 }}">
+                                <input type="text" class="form-control" name="data[linkimagen2]" value="{{ isset($query->linkimagen2) ? $query->linkimagen2 : null }}">
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Imagen3</label>
@@ -62,7 +62,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Enlace imagen3</label>
-                                <input type="text" class="form-control" name="data[linkimagen3]" value="{{ $query->linkimagen3 }}">
+                                <input type="text" class="form-control" name="data[linkimagen3]" value="{{ isset($query->linkimagen3) ? $query->linkimagen3 : null }}">
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Imagen4</label>
@@ -70,7 +70,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Enlace imagen4</label>
-                                <input type="text" class="form-control" name="data[linkimagen4]" value="{{ $query->linkimagen4 }}">
+                                <input type="text" class="form-control" name="data[linkimagen4]" value="{{ isset($query->linkimagen4) ? $query->linkimagen4 : null }}">
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Imagen5</label>
@@ -78,7 +78,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Enlace imagen5</label>
-                                <input type="text" class="form-control" name="data[linkimagen5]" value="{{ $query->linkimagen5 }}">
+                                <input type="text" class="form-control" name="data[linkimagen5]" value="{{ isset($query->linkimagen5) ? $query->linkimagen5 : null }}">
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Imagen6</label>
@@ -86,7 +86,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Enlace imagen6</label>
-                                <input type="text" class="form-control" name="data[linkimagen6]" value="{{ $query->linkimagen6 }}">
+                                <input type="text" class="form-control" name="data[linkimagen6]" value="{{ isset($query->linkimagen6) ? $query->linkimagen6 : null }}">
                             </div>
                             
                             <div class="row" style="display: none" id="loading-gallery">

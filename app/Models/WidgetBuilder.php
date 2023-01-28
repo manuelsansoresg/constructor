@@ -116,7 +116,7 @@ class WidgetBuilder extends Model
     public function pageProduct($widget_id, $type)
     {
         $setting = Setting::get();
-        $widget = WidgetBuilder::select('widget_builders.order', 'content_products.id', 'name')
+        $widget = WidgetBuilder::select('widget_builders.order', 'content_products.id', 'content_products.name')
             ->join('content_products', 'content_products.id', '=', 'widget_builders.widget_id')
             ->join('builders', 'builders.id', '=', 'widget_builders.builder_id')
             ->where('setting_id', $setting->id)

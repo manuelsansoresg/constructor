@@ -14,7 +14,7 @@ window.deleteDomain = function(domain_id) {
             axios.get("/admin/domains/"+domain_id+'/delete')
             .then(function (response) {
                 let result = response.data;
-                showInfo(2);
+                window.location = '/admin/domains'
             })
             .catch(e => { });
         }
