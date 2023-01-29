@@ -229,7 +229,7 @@
                                             </div>
                                             <div class="col-6 align-self-center d-none d-sm-none d-md-block">
                                                 <a onclick="openModalProduct('{{ asset('files') }}', '{{ $element->image }}', '{{ $element->title }}', '{{ $element->price }}', '{{ $element->discount }}', '{{ $element->description }}')"
-                                                    class="pointer float-right"><i class="fa-solid fa-circle-info fa-xl"></i></a>
+                                                    class="pointer float-right"><i class="fa-solid fa-circle-info fa-xl text-secondary"></i></a>
                                             </div>
                                         </div>
                                        
@@ -468,8 +468,8 @@
                 <div id="title-modal-product">
                     <h5 class="modal-title" id="modal-product-title"></h5>
                 </div>
-                <button type="button" class="close text-primary" data-dismiss="modal" aria-label="Close" onclick="cerrarModal()">
-                    <i class="fa-solid fa-circle-xmark fa-xl text-primary"></i>
+                <button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close" onclick="cerrarModal()">
+                    <i class="fa-solid fa-circle-xmark fa-xl"></i>
                 </button>
             </div>
             <div class="modal-body" id="modal-product-body">
