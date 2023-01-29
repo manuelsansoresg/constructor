@@ -62238,3 +62238,8 @@ a.text-muted:hover {
 #create-domain {
   z-index: 9999 !important;
 }
+
+#title-modal-product {
+  width: 100%;
+  text-align: center;
+}
