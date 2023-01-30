@@ -17,7 +17,7 @@
     {{-- landing --}}
     <nav class="navbar navbar-expand-sm bg-dark bg-default navbar-dark justify-content-end"
         style="background-color: {{ $page_actual->background_menu }} !important; color:{{ $page_actual->color_text_menu }} !important">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="/" 
             @if ($page_actual->show_logo_menu === 1)
                 <img class="logo" src="{{ asset('files/' . $my_setting->image) }}" alt="">
             @endif
@@ -30,11 +30,11 @@
         <div class="navbar-collapse flex-grow-0 collapse" id="navbarSupportedContent" style="">
             <ul class="navbar-nav text-center text-md-right">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Inicio</a>
+                    <a class="nav-link" href="/" style="color:{{ $page_actual->color_text_menu }} !important">Inicio</a>
                 </li>
                 @foreach ($pages as $get_page)
                     <li class="nav-item active">
-                        <a class="nav-link" href="/{{ $get_page->slug }}"> {{ $get_page->name }} </a>
+                        <a class="nav-link" style="color:{{ $page_actual->color_text_menu }} !important" href="/{{ $get_page->slug }}"> {{ $get_page->name }} </a>
                     </li>
                 @endforeach
             </ul>
