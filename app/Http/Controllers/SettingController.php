@@ -14,8 +14,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //$my_setting = Setting::get();
-        $my_setting = null;
+        $my_setting = Setting::get();
         return view('setting', compact('my_setting'));
     }
 
