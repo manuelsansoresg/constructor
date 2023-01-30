@@ -62243,3 +62243,7 @@ a.text-muted:hover {
   width: 100%;
   text-align: center;
 }
+
+.nav-item > a:hover {
+  opacity: 0.6 !important;
+}
