@@ -37,7 +37,7 @@ class WidgetBuilder extends Model
     public static function getMyWidgets($page)
     {
         $setting = Setting::get();
-        //dd($page, $setting->id);
+        dd($page, $setting->id);
         $widgets = WidgetBuilder::
         join('builders', 'builders.id', '=', 'builder_id')
         ->where('builder_id', $page)
