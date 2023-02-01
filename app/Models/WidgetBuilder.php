@@ -139,7 +139,7 @@ class WidgetBuilder extends Model
     public function pageContact($widget_id, $type)
     {
         $setting = Setting::get();
-        $widget = WidgetBuilder::select('widget_builders.order', 'widget_contacts.id', 'name')
+        $widget = WidgetBuilder::select('widget_builders.order', 'widget_contacts.id', 'widget_contacts.name')
             ->join('widget_contacts', 'widget_contacts.id', '=', 'widget_builders.widget_id')
             ->join('builders', 'builders.id', '=', 'widget_builders.builder_id')
             ->where('setting_id', $setting->id)

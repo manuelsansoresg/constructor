@@ -162,6 +162,7 @@ window.getDataModal = function (section_id, widget_id, page_actual) {
                     break;
                 case '7':
                     $('#video-order').val(result.order);
+                    console.log(result);
                     CKEDITOR.instances['video-title'].setData(result.title);
                     CKEDITOR.instances['video-subtitle'].setData(result.subtitle);
                     CKEDITOR.instances['video-description'].setData(result.description);
@@ -195,76 +196,79 @@ window.getDataModal = function (section_id, widget_id, page_actual) {
         .catch(e => { });
 }
 
-if (document.getElementById('modal-encabezado-section_id')) {
-    let section_id    = $('#modal-encabezado-section_id').val();
-    let widget_id     = $('#modal-encabezado-widget_id').val();
-    let page_actual   = $('#modal-encabezado-page_actual').val();
-
-    getDataModal(section_id, widget_id, page_actual);
-}
-
-if (document.getElementById('modal-carusel-section_id')) {
-    let section_id    = $('#modal-carusel-section_id').val();
-    let widget_id     = $('#modal-carusel-widget_id').val();
-    let page_actual   = $('#modal-carusel-page_actual').val();
-
-    getDataModal(section_id, widget_id, page_actual);
-}
-
-if (document.getElementById('modal-texto-section_id')) {
-    let section_id    = $('#modal-texto-section_id').val();
-    let widget_id     = $('#modal-texto-widget_id').val();
-    let page_actual   = $('#modal-texto-page_actual').val();
-
-    getDataModal(section_id, widget_id, page_actual);
-}
-
-if (document.getElementById('modal-two-columns-section_id')) {
-    let section_id    = $('#modal-two-columns-section_id').val();
-    let widget_id     = $('#modal-two-columns-widget_id').val();
-    let page_actual   = $('#modal-two-columns-page_actual').val();
-
-    getDataModal(section_id, widget_id, page_actual);
-}
-
-if (document.getElementById('modal-parallax-section_id')) {
-    let section_id    = $('#modal-parallax-section_id').val();
-    let widget_id     = $('#modal-parallax-widget_id').val();
-    let page_actual   = $('#modal-parallax-page_actual').val();
-
-    getDataModal(section_id, widget_id, page_actual);
-}
-
-if (document.getElementById('modal-video-section_id')) {
-    let section_id    = $('#modal-video-section_id').val();
-    let widget_id     = $('#modal-video-widget_id').val();
-    let page_actual   = $('#modal-video-page_actual').val();
-
-    getDataModal(section_id, widget_id, page_actual);
-}
-
-if (document.getElementById('modal-gallery-section_id')) {
-    let section_id    = $('#modal-gallery-section_id').val();
-    let widget_id     = $('#modal-gallery-widget_id').val();
-    let page_actual   = $('#modal-gallery-page_actual').val();
-
-    getDataModal(section_id, widget_id, page_actual);
-}
-if (document.getElementById('modal-contacto-section_id')) {
-    let section_id    = $('#modal-contacto-section_id').val();
-    let widget_id     = $('#modal-contacto-widget_id').val();
-    let page_actual   = $('#modal-contacto-page_actual').val();
-
-    getDataModal(section_id, widget_id, page_actual);
-}
-
-if (document.getElementById('modal-product-section_id')) {
-    let section_id    = $('#modal-product-section_id').val();
-    let widget_id     = $('#modal-product-widget_id').val();
-    let page_actual   = $('#modal-product-page_actual').val();
-
-    getDataModal(section_id, widget_id, page_actual);
-}
+$(document).ready(function(){
+    //Código que se ejecutará al cargar la página
+    if (document.getElementById('modal-encabezado-section_id')) {
+        let section_id    = $('#modal-encabezado-section_id').val();
+        let widget_id     = $('#modal-encabezado-widget_id').val();
+        let page_actual   = $('#modal-encabezado-page_actual').val();
+    
+        getDataModal(section_id, widget_id, page_actual);
+    }
+    
+    if (document.getElementById('modal-carusel-section_id')) {
+        let section_id    = $('#modal-carusel-section_id').val();
+        let widget_id     = $('#modal-carusel-widget_id').val();
+        let page_actual   = $('#modal-carusel-page_actual').val();
+    
+        getDataModal(section_id, widget_id, page_actual);
+    }
+    
+    if (document.getElementById('modal-texto-section_id')) {
+        let section_id    = $('#modal-texto-section_id').val();
+        let widget_id     = $('#modal-texto-widget_id').val();
+        let page_actual   = $('#modal-texto-page_actual').val();
+    
+        getDataModal(section_id, widget_id, page_actual);
+    }
+    
+    if (document.getElementById('modal-two-columns-section_id')) {
+        let section_id    = $('#modal-two-columns-section_id').val();
+        let widget_id     = $('#modal-two-columns-widget_id').val();
+        let page_actual   = $('#modal-two-columns-page_actual').val();
+    
+        getDataModal(section_id, widget_id, page_actual);
+    }
+    
+    if (document.getElementById('modal-parallax-section_id')) {
+        let section_id    = $('#modal-parallax-section_id').val();
+        let widget_id     = $('#modal-parallax-widget_id').val();
+        let page_actual   = $('#modal-parallax-page_actual').val();
+    
+        getDataModal(section_id, widget_id, page_actual);
+    }
+    
+    if (document.getElementById('modal-video-section_id')) {
+        let section_id    = $('#modal-video-section_id').val();
+        let widget_id     = $('#modal-video-widget_id').val();
+        let page_actual   = $('#modal-video-page_actual').val();
+    
+        getDataModal(section_id, widget_id, page_actual);
+    }
+    
+    if (document.getElementById('modal-gallery-section_id')) {
+        let section_id    = $('#modal-gallery-section_id').val();
+        let widget_id     = $('#modal-gallery-widget_id').val();
+        let page_actual   = $('#modal-gallery-page_actual').val();
+    
+        getDataModal(section_id, widget_id, page_actual);
+    }
+    if (document.getElementById('modal-contacto-section_id')) {
+        let section_id    = $('#modal-contacto-section_id').val();
+        let widget_id     = $('#modal-contacto-widget_id').val();
+        let page_actual   = $('#modal-contacto-page_actual').val();
+    
+        getDataModal(section_id, widget_id, page_actual);
+    }
+    
+    if (document.getElementById('modal-product-section_id')) {
+        let section_id    = $('#modal-product-section_id').val();
+        let widget_id     = $('#modal-product-widget_id').val();
+        let page_actual   = $('#modal-product-page_actual').val();
+    
+        getDataModal(section_id, widget_id, page_actual);
+    }
+});
 
 window.openModalAddElementContact = function (section_id, widget_id, page_actual) {
     $('#modal-element_contact-section_id').val(section_id);
