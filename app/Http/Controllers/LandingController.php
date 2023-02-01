@@ -17,7 +17,10 @@ class LandingController extends Controller
     {
         
         $page           = ($request->segment(1) === null) ? '/' : $request->segment(1);
-        $page_actual    = Builder::where('slug', $page)->first();
+        $setting = Setting::get();
+        $page_actual    = Builder::where('slug', $page)
+                            ->where('setting_id', $setting->id)
+                            ->first();
         $my_widgets     = WidgetBuilder::getMyWidgets($page_actual->id);
         $my_setting     = Setting::get();
         $pages          = Builder::where('slug', '!=', '/')->get();
