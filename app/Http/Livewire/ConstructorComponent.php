@@ -87,8 +87,10 @@ class ConstructorComponent extends Component
 
     public function setParamsPage($page)
     {
-        $this->page_actual    = Builder::where('slug', $page)->first();
-        
+        $setting = Setting::get();
+        $this->page_actual    = Builder::where('slug', $page)
+                                        ->where('setting_id', $setting->id)
+                                        ->first();
         if ($this->page_actual != null) {
             $this->builder        = $this->page_actual->toArray();
             $this->link_preview   = $this->page_actual->slug;

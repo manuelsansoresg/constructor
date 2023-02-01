@@ -66,6 +66,7 @@ class Setting extends Model
         $setting  = Setting::where('domain_id', $domain)->first();
         if ($setting == null) {
             $setting = Setting::create(['domain_id' => $domain]);
+            Builder::create(['name' => 'Inicio', 'slug' => '/', 'setting_id' => $setting->id]);
         }
         return $setting;
     }
