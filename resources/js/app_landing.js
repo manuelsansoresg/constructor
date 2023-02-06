@@ -22,7 +22,7 @@ $(document).ready(function () {
         dots: false,
         autoplay: true,
         autoplayTimeout: 5000,
-        autoHeight: true,
+        autoHeight: false,
     });
 
     createDomain();

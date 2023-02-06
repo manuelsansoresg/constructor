@@ -404,9 +404,7 @@ $(function () {
     if (document.getElementById('texto-content')) {
         let ckeditor = CKEDITOR.replace('texto-content', {
             language: 'es-mx',
-            
         });
-
         CKEDITOR.config.extraPlugins = 'colorbutton';
     }
     if (document.getElementById('two-columns-title')) {

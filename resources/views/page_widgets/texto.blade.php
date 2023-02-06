@@ -43,7 +43,7 @@
             
                                 <div class="form-group" wire:ignore>
                                     <label for="InputWidget">Texto</label>
-                                    <textarea name="data[content]" id="texto-content" cols="30" rows="10" class="form-control summernote"></textarea>
+                                    <textarea name="data[content]" id="texto-content" cols="30" rows="10" class="form-control "></textarea>
                                 </div>
                                 <div class="row" style="display: none" id="loading-texto">
                                     <div class="col-12 text-center">
