@@ -40,6 +40,27 @@
                                     <label for="InputWidget">Orden</label>
                                     <input type="text" class="form-control" name="data[order]" id="texto-order">
                                 </div>
+
+                                <div class="form-group" wire:ignore>
+                                    <label for="InputWidget">Alineacion</label>
+                                    <select name="data[align]" id="texto-align" class="form-control">
+                                        <option value="">Seleccione una opción</option>
+                                        <option value="text-left">Izquierda</option>
+                                        <option value="text-right">Derecha</option>
+                                        <option value="text-center">Centro</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="InputWidget">Alto</label>
+                                    <input type="text" class="form-control" name="data[height]" id="texto-height">
+                                    <small>Colocar el valor del alto en pixeles, esto es usado para crear un texto con fondo y un alto especifico, solo colocar el valor ejemplo: 10</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="InputWidget">Color de fondo</label>
+                                    <input type="color" name="data[background_color]" id="texto-background_color">
+                                </div>
             
                                 <div class="form-group" wire:ignore>
                                     <label for="InputWidget">Texto</label>

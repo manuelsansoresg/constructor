@@ -76,7 +76,10 @@ class Builder extends Model
 
     public function getByPageName($name)
     {
-        return Builder::where('name', $name)->first();
+        $setting = Setting::get();
+        return Builder::where('name', $name)
+                ->where('setting_id', $setting->id)
+                ->first();
     }
 
     public static function getAll()

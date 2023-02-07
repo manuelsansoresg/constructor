@@ -31,7 +31,17 @@ class WidgetGallery extends Model
         'linkimagen8',
         'linkimagen9',
         'linkimagen10',
-        'is_template'
+        'is_template',
+        'size_col_image1',
+        'size_col_image2',
+        'size_col_image3',
+        'size_col_image4',
+        'size_col_image5',
+        'size_col_image6',
+        'size_col_image7',
+        'size_col_image8',
+        'size_col_image9',
+        'size_col_image10',
     ];
 
     public static function getById($id)

@@ -71,7 +71,7 @@ class WidgetBuilder extends Model
     public function pageTitle($widget_id, $type)
     {
         $setting = Setting::get();
-        $widget = WidgetBuilder::select('widget_builders.order', 'content', 'widget_texts.id')
+        $widget = WidgetBuilder::select('widget_builders.order', 'content', 'widget_texts.id', 'align', 'height', 'background_color')
             ->join('widget_texts', 'widget_texts.id', '=', 'widget_builders.widget_id')
             ->join('builders', 'builders.id', '=', 'widget_builders.builder_id')
             ->where('setting_id', $setting->id)

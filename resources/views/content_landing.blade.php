@@ -163,7 +163,12 @@
             @foreach ($titles as $title)
                 <div class="container mt-5">
                     <div class="row">
-                        <div class="col-12 text-left">
+                        @php
+                            $height = $title->height != '' ? 'height:'.$title->height.'px;' : '';
+                            $background = $title->background_color != '' ? 'background-color:'.$title->background_color.';' : '';
+                        @endphp
+                        <div class="col-12 {{ $title->align }}" style="{{ $height }} {{ $background }}">
+
                             {!! $title->content !!}
                         </div>
                     </div>

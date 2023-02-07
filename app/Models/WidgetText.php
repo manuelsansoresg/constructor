@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class WidgetText extends Model
 {
     use HasFactory;
-    protected $fillable = ['widget_id', 'content', 'is_template'];
+    protected $fillable = ['widget_id', 'content', 'is_template', 'align', 'height', 'background_color'];
 
     public static function getById($id)
     {
-        return WidgetText:: select('widget_texts.id as id', 'content', 'widget_builders.order')
+        return WidgetText:: select('widget_texts.id as id', 'content', 'widget_builders.order', 'align', 'height', 'background_color')
                     ->where(['widget_texts.id'=> $id, 'id_rel' => 3])
                     ->join('widget_builders', 'widget_builders.widget_id', '=', 'widget_texts.id')->first();
     }

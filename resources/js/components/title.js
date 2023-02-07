@@ -145,6 +145,9 @@ window.getDataModal = function (section_id, widget_id, page_actual) {
                     break;
                 case '3':
                     $('#texto-order').val(result.order);
+                    $('#texto-height').val(result.height);
+                    $('#texto-background_color').val(result.background_color);
+                    $("#texto-align").val(result.align);
                     CKEDITOR.instances['texto-content'].setData(result.content);
                     break;
                 case '4':
