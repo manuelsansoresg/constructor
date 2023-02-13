@@ -165,7 +165,6 @@ window.getDataModal = function (section_id, widget_id, page_actual) {
                     break;
                 case '7':
                     $('#video-order').val(result.order);
-                    console.log(result);
                     CKEDITOR.instances['video-title'].setData(result.title);
                     CKEDITOR.instances['video-subtitle'].setData(result.subtitle);
                     CKEDITOR.instances['video-description'].setData(result.description);
@@ -173,6 +172,18 @@ window.getDataModal = function (section_id, widget_id, page_actual) {
                     break;
                 case '8':
                     $('#gallery-order').val(result.order);
+                    $('#gallery-size_col_image1').val(result.size_col_image1);
+                    $('#gallery-size_col_image2').val(result.size_col_image2);
+                    $('#gallery-size_col_image3').val(result.size_col_image3);
+                    $('#gallery-size_col_image4').val(result.size_col_image4);
+                    $('#gallery-size_col_image5').val(result.size_col_image5);
+                    $('#gallery-size_col_image6').val(result.size_col_image6);
+                   /*  $('#gallery-size_col_image7').val(result.size_col_image7);
+                    $('#gallery-size_col_image8').val(result.size_col_image8);
+                    $('#gallery-size_col_image9').val(result.size_col_image9);
+                    $('#gallery-size_col_image10').val(result.size_col_image10);
+                    $('#gallery-size_col_image11').val(result.size_col_image11);
+                    $('#gallery-size_col_image12').val(result.size_col_image12); */
                     break;
                 case '9':
                     $('#contacto-order').val(result.order);

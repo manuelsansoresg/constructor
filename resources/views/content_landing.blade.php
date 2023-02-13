@@ -46,10 +46,10 @@
 <div>
     {{-- widgets --}}
 
-
+    
     @foreach ($my_widgets as $my_widget)
         @if ($my_widget['id_rel'] == 1)
-            <?php $headers = $widget_builder->pageHeader($my_widget['widget_id'], 1); ?>
+            <?php $headers = $widget_builder->pageHeader($my_widget['widget_id'], 1, $domain_id); ?>
             @foreach ($headers as $header)
             <div class="container py-3">
                 <div class="row">
@@ -92,7 +92,7 @@
             @endforeach
         @endif
         @if ($my_widget['id_rel'] == 2)
-            <?php $carusel_images = $widget_builder->pageCarusel($my_widget['widget_id'], 2); ?>
+            <?php $carusel_images = $widget_builder->pageCarusel($my_widget['widget_id'], 2, $domain_id, $domain_id); ?>
             @foreach ($carusel_images as $carusel_image)
                 <div class="owl-carousel owl-theme owl-loaded owl-drag">
 
@@ -159,7 +159,7 @@
             @endforeach
         @endif
         @if ($my_widget['id_rel'] == 3)
-            <?php $titles = $widget_builder->pageTitle($my_widget['widget_id'], 3); ?>
+            <?php $titles = $widget_builder->pageTitle($my_widget['widget_id'], 3, $domain_id); ?>
             @foreach ($titles as $title)
                 <div class="container mt-5">
                     <div class="row">
@@ -176,7 +176,7 @@
             @endforeach
         @endif
         @if ($my_widget['id_rel'] == 4)
-            <?php $two_columns = $widget_builder->pageTwoColumns($my_widget['widget_id'], 4); ?>
+            <?php $two_columns = $widget_builder->pageTwoColumns($my_widget['widget_id'], 4, $domain_id); ?>
             @foreach ($two_columns as $two_column)
                 <div class="container mt-5">
                     <div class="row">
@@ -193,7 +193,7 @@
             @endforeach
         @endif
         @if ($my_widget['id_rel'] == 5)
-            <?php $parallax = $widget_builder->pageParallax($my_widget['widget_id'], 5); ?>
+            <?php $parallax = $widget_builder->pageParallax($my_widget['widget_id'], 5, $domain_id); ?>
             <input type="hidden" id="parallax" value="true">
             @foreach ($parallax as $parallax)
                 <div class="parallax-window mt-5" data-parallax="scroll"
@@ -201,13 +201,13 @@
             @endforeach
         @endif
         @if ($my_widget['id_rel'] == 6)
-            <?php $products = $widget_builder->pageProduct($my_widget['widget_id'], 6); ?>
+            <?php $products = $widget_builder->pageProduct($my_widget['widget_id'], 6, $domain_id); ?>
 
             <div class="container mt-5">
                 <div class="row">
                     {{-- <input type="hidden" id="gallery" value="true"> --}}
                     @foreach ($products as $query)
-                        <?php $get_elements = $widget_builder->elementsProduct($query->id); ?>
+                        <?php $get_elements = $widget_builder->elementsProduct($query->id, $domain_id); ?>
                         @foreach ($get_elements as $element)
                             <div class="col-12 col-md-3 py-4 offset-md-1">
                                 <div class="card">
@@ -249,7 +249,7 @@
             </div>
         @endif
         @if ($my_widget['id_rel'] == 7)
-            <?php $video = $widget_builder->pageVideo($my_widget['widget_id'], 7); ?>
+            <?php $video = $widget_builder->pageVideo($my_widget['widget_id'], 7, $domain_id); ?>
             {{-- <input type="hidden" id="video" value="true"> --}}
             @foreach ($video as $query)
                 <div class="container mt-5">
@@ -276,7 +276,7 @@
             @endforeach
         @endif
         @if ($my_widget['id_rel'] == 8)
-            <?php $gallery = $widget_builder->pageGallery($my_widget['widget_id'], 8); ?>
+            <?php $gallery = $widget_builder->pageGallery($my_widget['widget_id'], 8, $domain_id); ?>
             {{-- <input type="hidden" id="gallery" value="true"> --}}
             @foreach ($gallery as $query)
                 <div class="container mt-5">
@@ -284,7 +284,7 @@
                         <div class="col-12 ">
                             <div class="col-12 d-flex justify-content-center flex-wrap">
                                 @if ($query->imagen1 != '')
-                                    <div class="col-12 col-md-3 mt-4 offset-md-1">
+                                    <div class="col-12 {{ ($query->size_col_image1 == null) ? 'col-md-3' : $query->size_col_image1 }} mt-4 offset-md-1">
                                        <a href="{{ $query->linkimagen1 !== '' ? $query->linkimagen1 : '#' }}">
                                             <img class="img-fluid" src="{{ asset('files/' . $query->imagen1) }}"
                                             alt="" />
@@ -292,7 +292,7 @@
                                     </div>
                                 @endif
                                 @if ($query->imagen2 != '')
-                                    <div class="col-12 col-md-3 mt-4 offset-md-1">
+                                    <div class="col-12 {{ ($query->size_col_image2 == null) ? 'col-md-3' : $query->size_col_image2 }} mt-4 offset-md-1">
                                         <a href="{{ $query->linkimagen2 !== '' ? $query->linkimagen2 : '#' }}">
                                         </a>
                                         <img class="img-fluid" src="{{ asset('files/' . $query->imagen2) }}"
@@ -300,7 +300,7 @@
                                     </div>
                                 @endif
                                 @if ($query->imagen3 != '')
-                                    <div class="col-12 col-md-3 mt-4 offset-md-1">
+                                    <div class="col-12 {{ ($query->size_col_image3 == null) ? 'col-md-3' : $query->size_col_image3 }} mt-4 offset-md-1">
                                         <a href="{{ $query->linkimagen3 !== '' ? $query->linkimagen3 : '#' }}">
                                             <img class="img-fluid" src="{{ asset('files/' . $query->imagen3) }}"
                                                 alt="" />
@@ -308,7 +308,7 @@
                                     </div>
                                 @endif
                                 @if ($query->imagen4 != '')
-                                    <div class="col-12 col-md-3 mt-4 offset-md-1">
+                                    <div class="col-12 {{ ($query->size_col_image4 == null) ? 'col-md-3' : $query->size_col_image4 }} mt-4 offset-md-1">
                                         <a href="{{ $query->linkimagen4 !== '' ? $query->linkimagen4 : '#' }}">
                                             <img class="img-fluid" src="{{ asset('files/' . $query->imagen4) }}"
                                                 alt="" />
@@ -316,7 +316,7 @@
                                     </div>
                                 @endif
                                 @if ($query->imagen5 != '')
-                                    <div class="col-12 col-md-3 mt-4 offset-md-1">
+                                    <div class="col-12 {{ ($query->size_col_image5 == null) ? 'col-md-3' : $query->size_col_image5 }} mt-4 offset-md-1">
                                         <a href="{{ $query->linkimagen5 !== '' ? $query->linkimagen5 : '#' }}">
                                             <img class="img-fluid" src="{{ asset('files/' . $query->imagen5) }}"
                                                 alt="" />
@@ -324,7 +324,7 @@
                                     </div>
                                 @endif
                                 @if ($query->imagen6 != '')
-                                    <div class="col-12 col-md-3 mt-4 offset-md-1">
+                                    <div class="col-12 {{ ($query->size_col_image6 == null) ? 'col-md-3' : $query->size_col_image6 }} mt-4 offset-md-1">
                                         <a href="{{ $query->linkimagen6 !== '' ? $query->linkimagen6 : '#' }}">
                                             <img class="img-fluid" src="{{ asset('files/' . $query->imagen6) }}"
                                                 alt="" />
@@ -338,10 +338,10 @@
             @endforeach
         @endif
         @if ($my_widget['id_rel'] == 9)
-            <?php $contacto = $widget_builder->pageContact($my_widget['widget_id'], 9); ?>
+            <?php $contacto = $widget_builder->pageContact($my_widget['widget_id'], 9, $domain_id); ?>
             {{-- <input type="hidden" id="gallery" value="true"> --}}
             @foreach ($contacto as $query)
-                <?php $get_elements = $widget_builder->elementsContact($query->id); ?>
+                <?php $get_elements = $widget_builder->elementsContact($query->id, $domain_id); ?>
                 <form method="post" action="" class="py-5" id="frm-contact-landing">
                     <div class="container mt-5">
                         <div class="row">

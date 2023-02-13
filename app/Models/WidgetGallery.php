@@ -46,12 +46,35 @@ class WidgetGallery extends Model
 
     public static function getById($id)
     {
-        return WidgetGallery:: select('widget_galleries.id as id', 'imagen1', 'imagen2', 'imagen3', 'imagen4', 'imagen5', 'imagen6', 'imagen7', 'imagen8', 'imagen9', 'imagen10', 'widget_builders.order')
-                    ->where(['widget_galleries.id'=> $id, 'id_rel' => 8])
-                    ->join('widget_builders', 'widget_builders.widget_id', '=', 'widget_galleries.id')->first();
+        return WidgetGallery::select(
+            'widget_galleries.id as id',
+            'imagen1',
+            'imagen2',
+            'imagen3',
+            'imagen4',
+            'imagen5',
+            'imagen6',
+            'imagen7',
+            'imagen8',
+            'imagen9',
+            'imagen10',
+            'widget_builders.order',
+            'size_col_image1',
+            'size_col_image2',
+            'size_col_image3',
+            'size_col_image4',
+            'size_col_image5',
+            'size_col_image6',
+            'size_col_image7',
+            'size_col_image8',
+            'size_col_image9',
+            'size_col_image10',
+        )
+            ->where(['widget_galleries.id' => $id, 'id_rel' => 8])
+            ->join('widget_builders', 'widget_builders.widget_id', '=', 'widget_galleries.id')->first();
     }
 
-    
+
     public static function saveEdit($data, $page, $text_id = null)
     {
         $data_page = array(
@@ -62,9 +85,9 @@ class WidgetGallery extends Model
         if ($text_id == 'null') {
             $text = new WidgetGallery($data);
             $text->save();
-            
+
             $data_page['order'] = $data['order'];
-            $data_page['widget_id'] =$text->id;
+            $data_page['widget_id'] = $text->id;
             WidgetBuilder::setOrderBuilder($data_page, null);
         } else {
             $text = WidgetGallery::find($text_id);
@@ -81,7 +104,7 @@ class WidgetGallery extends Model
         $carusel = WidgetGallery::where($data_delete)->first();
         if ($carusel != null) {
             $nombre_imagen = $carusel->$name_image;
-            @unlink('files/'.$nombre_imagen);
+            @unlink('files/' . $nombre_imagen);
         }
     }
 }

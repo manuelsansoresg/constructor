@@ -60,9 +60,9 @@ class Setting extends Model
         }
     }
 
-    public static function get()
+    public static function get($domain_id = null)
     {
-        $domain = Session::get('domain_id');
+        $domain = $domain_id == null ? Session::get('domain_id') : $domain_id;
         $setting  = Setting::where('domain_id', $domain)->first();
         if ($setting == null) {
             $setting = Setting::create(['domain_id' => $domain]);

@@ -33,7 +33,13 @@
                     <div class="card-body">  
                         <form action="" id="frm-gallery" enctype="multipart/form-data">
                                {{-- contenido --}}
-                
+                                <div class="alert alert-warning" role="alert">
+                                    <small>Los campos de alineacion solo serviran para pantallas que no sean de celular. la pantalla de columnas totales de la pantalla son 12
+                                        
+                                        <br>
+                                        Ejemplo: si elije que la imagen contenta 2 equivaldra al ancho de 2 columnas.
+                                    </small>
+                                </div>
                                <div class="form-group">
                                 <label for="InputWidget">Orden</label>
                                 <input type="text" class="form-control" name="order" id="gallery-order">
@@ -45,12 +51,50 @@
                                 <input type="file" class="form-control" name="imagen1">
                             </div>
                             <div class="form-group">
+                                <label for="InputWidget">Tamaño de columna Imagen1</label>
+                                <select name="data[size_col_image1]" id="gallery-size_col_image1" class="form-control">
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="col-md-1">1</option>
+                                    <option value="col-md-2">2</option>
+                                    <option value="col-md-3">3</option>
+                                    <option value="col-md-4">4</option>
+                                    <option value="col-md-5">5</option>
+                                    <option value="col-md-6">6</option>
+                                    <option value="col-md-7">7</option>
+                                    <option value="col-md-8">8</option>
+                                    <option value="col-md-9">9</option>
+                                    <option value="col-md-10">10</option>
+                                    <option value="col-md-11">11</option>
+                                    <option value="col-md-12">12</option>
+                                </select>
+                            </div>
+                                
+                            
+                            <div class="form-group">
                                 <label for="InputWidget">Enlace imagen1</label>
                                 <input type="text" class="form-control" name="data[linkimagen1]" value="{{ isset($query->linkimagen1) ? $query->linkimagen1 : null }}">
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Imagen2</label>
                                 <input type="file" class="form-control" name="imagen2">
+                            </div>
+                            <div class="form-group">
+                                <label for="InputWidget">Tamaño de columna Imagen1</label>
+                                <select name="data[size_col_image2]" id="gallery-size_col_image2" class="form-control">
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="col-md-1">1</option>
+                                    <option value="col-md-2">2</option>
+                                    <option value="col-md-3">3</option>
+                                    <option value="col-md-4">4</option>
+                                    <option value="col-md-5">5</option>
+                                    <option value="col-md-6">6</option>
+                                    <option value="col-md-7">7</option>
+                                    <option value="col-md-8">8</option>
+                                    <option value="col-md-9">9</option>
+                                    <option value="col-md-10">10</option>
+                                    <option value="col-md-11">11</option>
+                                    <option value="col-md-12">12</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Enlace imagen2</label>
@@ -61,12 +105,48 @@
                                 <input type="file" class="form-control" name="imagen3">
                             </div>
                             <div class="form-group">
+                                <label for="InputWidget">Tamaño de columna Imagen1</label>
+                                <select name="data[size_col_image3]" id="gallery-size_col_image3" class="form-control">
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="col-md-1">1</option>
+                                    <option value="col-md-2">2</option>
+                                    <option value="col-md-3">3</option>
+                                    <option value="col-md-4">4</option>
+                                    <option value="col-md-5">5</option>
+                                    <option value="col-md-6">6</option>
+                                    <option value="col-md-7">7</option>
+                                    <option value="col-md-8">8</option>
+                                    <option value="col-md-9">9</option>
+                                    <option value="col-md-10">10</option>
+                                    <option value="col-md-11">11</option>
+                                    <option value="col-md-12">12</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="InputWidget">Enlace imagen3</label>
                                 <input type="text" class="form-control" name="data[linkimagen3]" value="{{ isset($query->linkimagen3) ? $query->linkimagen3 : null }}">
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Imagen4</label>
                                 <input type="file" class="form-control" name="imagen4">
+                            </div>
+                            <div class="form-group">
+                                <label for="InputWidget">Tamaño de columna Imagen1</label>
+                                <select name="data[size_col_image4]" id="gallery-size_col_image4" class="form-control">
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="col-md-1">1</option>
+                                    <option value="col-md-2">2</option>
+                                    <option value="col-md-3">3</option>
+                                    <option value="col-md-4">4</option>
+                                    <option value="col-md-5">5</option>
+                                    <option value="col-md-6">6</option>
+                                    <option value="col-md-7">7</option>
+                                    <option value="col-md-8">8</option>
+                                    <option value="col-md-9">9</option>
+                                    <option value="col-md-10">10</option>
+                                    <option value="col-md-11">11</option>
+                                    <option value="col-md-12">12</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Enlace imagen4</label>
@@ -77,12 +157,48 @@
                                 <input type="file" class="form-control" name="imagen5">
                             </div>
                             <div class="form-group">
+                                <label for="InputWidget">Tamaño de columna Imagen1</label>
+                                <select name="data[size_col_image5]" id="gallery-size_col_image5" class="form-control">
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="col-md-1">1</option>
+                                    <option value="col-md-2">2</option>
+                                    <option value="col-md-3">3</option>
+                                    <option value="col-md-4">4</option>
+                                    <option value="col-md-5">5</option>
+                                    <option value="col-md-6">6</option>
+                                    <option value="col-md-7">7</option>
+                                    <option value="col-md-8">8</option>
+                                    <option value="col-md-9">9</option>
+                                    <option value="col-md-10">10</option>
+                                    <option value="col-md-11">11</option>
+                                    <option value="col-md-12">12</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="InputWidget">Enlace imagen5</label>
                                 <input type="text" class="form-control" name="data[linkimagen5]" value="{{ isset($query->linkimagen5) ? $query->linkimagen5 : null }}">
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Imagen6</label>
                                 <input type="file" class="form-control" name="imagen6">
+                            </div>
+                            <div class="form-group">
+                                <label for="InputWidget">Tamaño de columna Imagen1</label>
+                                <select name="data[size_col_image6]" id="gallery-size_col_image6" class="form-control">
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="col-md-1">1</option>
+                                    <option value="col-md-2">2</option>
+                                    <option value="col-md-3">3</option>
+                                    <option value="col-md-4">4</option>
+                                    <option value="col-md-5">5</option>
+                                    <option value="col-md-6">6</option>
+                                    <option value="col-md-7">7</option>
+                                    <option value="col-md-8">8</option>
+                                    <option value="col-md-9">9</option>
+                                    <option value="col-md-10">10</option>
+                                    <option value="col-md-11">11</option>
+                                    <option value="col-md-12">12</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="InputWidget">Enlace imagen6</label>
