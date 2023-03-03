@@ -68,7 +68,12 @@ Route::group(['prefix' => 'admin'], function () {
     
     Route::get('encabezado/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetHeaderController::class, 'edit']);
     Route::get('carusel/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetCaruselController::class, 'edit']);
+    
     Route::get('texto/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetTextController::class, 'edit']);
+    
+    Route::post('texto/image/upload', [App\Http\Controllers\WidgetTextController::class, 'uploadImage']);
+    Route::get('texto/image/server', [App\Http\Controllers\WidgetTextController::class, 'imageServer']);
+
     Route::get('two-columns/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetTwoColumnController::class, 'edit']);
     Route::get('parallax/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetParallaxController::class, 'edit']);
     Route::get('video/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetVideoController::class, 'edit']);

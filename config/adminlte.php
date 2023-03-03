@@ -481,27 +481,34 @@ return [
         'Ckeditor' => [
             'active' => true,
             'files' => [
-               
                 [
                     'type' => 'js',
-                    'asset' => true,
-                    'location' => '/vendor/ckeditor/ckeditor.js',
+                    'asset' => false,
+                    'location' => 'https://cdn.ckeditor.com/4.16.1/full-all/ckeditor.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => true,
-                    'location' => '/vendor/ckeditor/plugins/colorbutton/plugin.js',
+                    'asset' => false,
+                    'location' => 'https://cdn.ckeditor.com/4.16.1/full-all/lang/es.js',
+                ],
+              /*   */
+                /* 
+                 */
+                /* [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => 'https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/font-size/build/ckeditor.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => true,
-                    'location' => '/vendor/ckeditor/plugins/panelbutton/plugin.js',
+                    'asset' => false,
+                    'location' => 'https://cdn.ckeditor.com/ckeditor5/30.0.0/color/build/ckeditor.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => true,
-                    'location' => '/vendor/ckeditor/lang/es-mx.js',
-                ],
+                    'asset' => false,
+                    'location' => 'https://cdn.ckeditor.com/ckeditor5/30.0.0/ckfinder/build/ckeditor.js',
+                ], */
             ],
         ],
         'App' => [

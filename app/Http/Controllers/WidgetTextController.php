@@ -27,6 +27,37 @@ class WidgetTextController extends Controller
         //
     }
 
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+            if ($file->isValid()) {
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                // Use move() to move the uploaded file
+                $file->move(public_path('image_server'), $fileName);
+                $url = asset('image_server/' . $fileName);
+            }
+        }
+        return response()->json(['uploaded' => true, 'url' => $url]);
+    }
+
+    public function imageServer()
+    {
+        // Ruta a la carpeta donde se guardan las imágenes
+        $images_folder = "image_server/";
+        // Obtener todas las imágenes en la carpeta
+        $images = glob($images_folder . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+        $images = \View::make('image_server', compact('images'))->render();
+
+       /*  foreach ($images as $image) {
+            $url_image = asset($image);
+            echo "<li><a href=\"#\" onclick=\"selectImage('$url_image')\"> <img src=\"$url_image\" style=\"width: 200px\"> </a></li>";
+        } */
+
+        // Devolver la salida
+        return $images;
+    }
+
     /**
      * Store a newly created resource in storage.
      *

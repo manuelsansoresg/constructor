@@ -414,12 +414,64 @@ $(function () {
         });
         CKEDITOR.config.extraPlugins = 'colorbutton';
     }
-    
+   
     if (document.getElementById('texto-content')) {
-        let ckeditor = CKEDITOR.replace('texto-content', {
-            language: 'es-mx',
+
+        
+        CKEDITOR.replace( 'texto-content', {
+            toolbar: [
+                { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Font', 'FontSize', 'TextColor', 'BGColor', 'RemoveFormat' ] },
+                { name: 'paragraph', items: [ 'NumberedList', 'BulletedList' ] },
+                { name: 'insert', items: [ 'Image', 'Table' ] }
+            ],
+            font_names: 'Arial/Arial, Helvetica, sans-serif;' +
+            'Comic Sans MS/Comic Sans MS, cursive;' +
+            'Courier New/Courier New, Courier, monospace;' +
+            'Georgia/Georgia, serif;' +
+            'Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;' +
+            'Tahoma/Tahoma, Geneva, sans-serif;' +
+            'Times New Roman/Times New Roman, Times, serif;' +
+            'Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;' +
+            'Verdana/Verdana, Geneva, sans-serif',
+            fontSize_sizes: '8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;',
+            language: 'es',
+            extraPlugins: 'image2,font',
+            image2_alignClasses: ['image-align-left', 'image-align-center', 'image-align-right'],
+            image2_captionedClass: 'image-captioned',
+            filebrowserUploadMethod: 'form',
+            removePlugins: 'elementspath',
+            allowedContent: true,
+            removeFormatAttributes: '',
+            removeButtons: '',
+            removeDialogTabs: '',
+            filebrowserImageUploadUrl: '/admin/texto/image/upload',
+            filebrowserImageBrowseUrl: '/admin/texto/image/server',
+            //filebrowserUploadUrl: '/procesador_imagenes/upload.php',
+            filebrowserWindowWidth: '800',
+            filebrowserWindowHeight: '500',
+            image2_prefillDimensions: true,
+            image2_disableResizer: false,
+            on: {
+                'dialogDefinition': function(ev) {
+                    var dialogName = ev.data.name;
+                    var dialogDefinition = ev.data.definition;
+                    console.log(dialogName);
+                    if (dialogName === 'image2') {
+                        var infoTab = dialogDefinition.getContents('info');
+                        var urlField = infoTab.get('txtUrl');
+                        urlField['validate'] = function() {};
+                    }
+                }
+            }
         });
-        CKEDITOR.config.extraPlugins = 'colorbutton';
+
+        // Add an event listener for contentDom event
+        CKEDITOR.instances.texto-content.on('contentDom', function() {
+            // Get the editable element
+            var editable = CKEDITOR.instances.texto-content.editable();
+            // Attach a click listener to it
+            editable.attachListener(editable, 'click', onImageClick);
+        });
     }
     if (document.getElementById('two-columns-title')) {
         let ckeditor = CKEDITOR.replace('two-columns-title', {
