@@ -32,13 +32,22 @@ class WidgetTextController extends Controller
         if ($request->hasFile('upload')) {
             $file = $request->file('upload');
             if ($file->isValid()) {
+                $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+
                 $fileName = time() . '_' . $file->getClientOriginalName();
                 // Use move() to move the uploaded file
                 $file->move(public_path('image_server'), $fileName);
                 $url = asset('image_server/' . $fileName);
+
+                $msg = 'Imagen subida correctamente';
+                $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+                      
+                @header('Content-type: text/html; charset=utf-8');
+                echo $response;
             }
         }
-        return response()->json('Imagen guardada');
+       
+        //return response()->json('Imagen guardada');
     }
 
     public function imageServer()

@@ -19,6 +19,9 @@
 <body>
     <div class="container">
         <div class="row mt-5">
+            <div class="col-12">
+                <h5>Listado de imagenes en el servidor</h5>
+            </div>
             @foreach ($images as $image)
                 @php
                     $url_image = asset($image);
