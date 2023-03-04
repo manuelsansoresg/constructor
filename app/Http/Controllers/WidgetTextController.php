@@ -38,7 +38,7 @@ class WidgetTextController extends Controller
                 $url = asset('image_server/' . $fileName);
             }
         }
-        return response()->json(['uploaded' => true, 'url' => $url]);
+        return response()->json('Imagen guardada');
     }
 
     public function imageServer()
