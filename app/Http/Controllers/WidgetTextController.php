@@ -48,14 +48,13 @@ class WidgetTextController extends Controller
         // Obtener todas las imágenes en la carpeta
         $images = glob($images_folder . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
         $images = \View::make('image_server', compact('images'))->render();
-
-       /*  foreach ($images as $image) {
-            $url_image = asset($image);
-            echo "<li><a href=\"#\" onclick=\"selectImage('$url_image')\"> <img src=\"$url_image\" style=\"width: 200px\"> </a></li>";
-        } */
-
-        // Devolver la salida
         return $images;
+    }
+
+    public function deleteImageServer(Request $request)
+    {
+        $image = $request->image;
+        unlink($image);
     }
 
     /**

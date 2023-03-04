@@ -14,5 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'api/*',
         '/admin/texto/image/upload',
+        '/texto/image/delete/server',
     ];
 }

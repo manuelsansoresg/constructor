@@ -73,6 +73,7 @@ Route::group(['prefix' => 'admin'], function () {
     
     Route::post('texto/image/upload', [App\Http\Controllers\WidgetTextController::class, 'uploadImage']);
     Route::get('texto/image/server', [App\Http\Controllers\WidgetTextController::class, 'imageServer']);
+    Route::post('texto/image/delete/server', [App\Http\Controllers\WidgetTextController::class, 'deleteImageServer']);
 
     Route::get('two-columns/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetTwoColumnController::class, 'edit']);
     Route::get('parallax/{page}/{widget_id}/edit', [App\Http\Controllers\WidgetParallaxController::class, 'edit']);
