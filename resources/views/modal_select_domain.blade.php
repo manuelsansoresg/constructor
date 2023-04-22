@@ -32,7 +32,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" onclick="closeModalSection('modal-select-domain')">Cerrar</button>
-                    <button type="submit" class="btn btn-outline-primary">Agregar</button>
+                    <button type="submit" class="btn btn-outline-primary">Seleccionar</button>
                 </div>
         </form>
     </div>

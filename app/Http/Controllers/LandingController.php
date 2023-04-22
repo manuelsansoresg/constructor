@@ -16,7 +16,7 @@ class LandingController extends Controller
 {
     public function index(Request $request)
     {
-        $domain = 'dominiopruebamanuel';
+        $domain = 'pruebamotosmexico.com';
         $get_domain = Domain::where('name', $domain)->first();
         $domain_id = $get_domain->id;
         $page           = ($request->segment(1) === null) ? '/' : $request->segment(1);
@@ -24,6 +24,7 @@ class LandingController extends Controller
         $page_actual    = Builder::where('slug', $page)
                             ->where('setting_id', $setting->id)
                             ->first();
+        //dd($page_actual);
         $my_widgets     = WidgetBuilder::getMyWidgets($page_actual->id, $domain_id);
         $my_setting     = Setting::get($domain_id);
         $pages          = Builder::where('slug', '!=', '/')

@@ -4,6 +4,9 @@
 
 @section('content_header')
     <h1>Constructor de sitios</h1>
+    @if (isset( $domain->name))
+        <small> Dominio :  {{ $domain->name }}</small>
+    @endif
 @stop
 
 @section('content')
