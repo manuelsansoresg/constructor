@@ -210,7 +210,7 @@ window.getDataModal = function (section_id, widget_id, page_actual) {
         .catch(e => { });
 }
 
-$(document).ready(function(){
+window.onload = function() {
     //Código que se ejecutará al cargar la página
     if (document.getElementById('modal-encabezado-section_id')) {
         let section_id    = $('#modal-encabezado-section_id').val();
@@ -282,7 +282,7 @@ $(document).ready(function(){
     
         getDataModal(section_id, widget_id, page_actual);
     }
-});
+}
 
 window.openModalAddElementContact = function (section_id, widget_id, page_actual) {
     $('#modal-element_contact-section_id').val(section_id);
