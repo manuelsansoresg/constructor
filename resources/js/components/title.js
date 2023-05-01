@@ -136,8 +136,12 @@ window.setDataModal = function (page_actual, section_id, widget_id) {
 
 
 window.getDataModal = function (section_id, widget_id, page_actual) {
+    
     axios.get("/admin/getDataWidget/"+section_id+'/'+widget_id+ '/' + page_actual)
         .then(function (response) {
+
+
+
             let result = response.data;
             switch (section_id) {
                 case '2':
@@ -210,14 +214,42 @@ window.getDataModal = function (section_id, widget_id, page_actual) {
         .catch(e => { });
 }
 
-window.onload = function() {
+function setTimer(section_id, widget_id, page_actual) {
+    // Crear elemento de loading
+    var loading = document.createElement('div');
+    loading.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+    loading.style.display = 'flex';
+    loading.style.justifyContent = 'center';
+    loading.style.alignItems = 'center';
+    loading.style.position = 'fixed';
+    loading.style.top = '50%';
+    loading.style.transform = 'translateY(-50%)';
+    loading.style.left = '0';
+    loading.style.width = '100%';
+    loading.style.height = '100%';
+    loading.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+    loading.style.zIndex = '9999';
+    document.body.appendChild(loading);
+    // Esperar 5 segundos antes de ocultar el loading
+    setTimeout(function() {
+        // Ocultar el loading
+        document.body.removeChild(loading);
+        // Llamar a la función getDataModal con los parámetros especificados
+        getDataModal(section_id, widget_id, page_actual);
+    }, 5000);
+}
+
+window.addEventListener('load', function() {
+
+
+
     //Código que se ejecutará al cargar la página
     if (document.getElementById('modal-encabezado-section_id')) {
         let section_id    = $('#modal-encabezado-section_id').val();
         let widget_id     = $('#modal-encabezado-widget_id').val();
         let page_actual   = $('#modal-encabezado-page_actual').val();
     
-        getDataModal(section_id, widget_id, page_actual);
+        setTimer(section_id, widget_id, page_actual);
     }
     
     if (document.getElementById('modal-carusel-section_id')) {
@@ -225,7 +257,7 @@ window.onload = function() {
         let widget_id     = $('#modal-carusel-widget_id').val();
         let page_actual   = $('#modal-carusel-page_actual').val();
     
-        getDataModal(section_id, widget_id, page_actual);
+        setTimer(section_id, widget_id, page_actual);
     }
     
     if (document.getElementById('modal-texto-section_id')) {
@@ -233,7 +265,7 @@ window.onload = function() {
         let widget_id     = $('#modal-texto-widget_id').val();
         let page_actual   = $('#modal-texto-page_actual').val();
     
-        getDataModal(section_id, widget_id, page_actual);
+        setTimer(section_id, widget_id, page_actual);
     }
     
     if (document.getElementById('modal-two-columns-section_id')) {
@@ -241,7 +273,7 @@ window.onload = function() {
         let widget_id     = $('#modal-two-columns-widget_id').val();
         let page_actual   = $('#modal-two-columns-page_actual').val();
     
-        getDataModal(section_id, widget_id, page_actual);
+        setTimer(section_id, widget_id, page_actual);
     }
     
     if (document.getElementById('modal-parallax-section_id')) {
@@ -249,7 +281,7 @@ window.onload = function() {
         let widget_id     = $('#modal-parallax-widget_id').val();
         let page_actual   = $('#modal-parallax-page_actual').val();
     
-        getDataModal(section_id, widget_id, page_actual);
+        setTimer(section_id, widget_id, page_actual);
     }
     
     if (document.getElementById('modal-video-section_id')) {
@@ -257,7 +289,7 @@ window.onload = function() {
         let widget_id     = $('#modal-video-widget_id').val();
         let page_actual   = $('#modal-video-page_actual').val();
     
-        getDataModal(section_id, widget_id, page_actual);
+        setTimer(section_id, widget_id, page_actual);
     }
     
     if (document.getElementById('modal-gallery-section_id')) {
@@ -265,14 +297,14 @@ window.onload = function() {
         let widget_id     = $('#modal-gallery-widget_id').val();
         let page_actual   = $('#modal-gallery-page_actual').val();
     
-        getDataModal(section_id, widget_id, page_actual);
+        setTimer(section_id, widget_id, page_actual);
     }
     if (document.getElementById('modal-contacto-section_id')) {
         let section_id    = $('#modal-contacto-section_id').val();
         let widget_id     = $('#modal-contacto-widget_id').val();
         let page_actual   = $('#modal-contacto-page_actual').val();
     
-        getDataModal(section_id, widget_id, page_actual);
+        setTimer(section_id, widget_id, page_actual);
     }
     
     if (document.getElementById('modal-product-section_id')) {
@@ -280,10 +312,10 @@ window.onload = function() {
         let widget_id     = $('#modal-product-widget_id').val();
         let page_actual   = $('#modal-product-page_actual').val();
     
-        getDataModal(section_id, widget_id, page_actual);
+        setTimer(section_id, widget_id, page_actual);
     }
-}
 
+});
 window.openModalAddElementContact = function (section_id, widget_id, page_actual) {
     $('#modal-element_contact-section_id').val(section_id);
     $('#modal-element_contact-widget_id').val(widget_id);
