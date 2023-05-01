@@ -236,7 +236,7 @@ function setTimer(section_id, widget_id, page_actual) {
         document.body.removeChild(loading);
         // Llamar a la función getDataModal con los parámetros especificados
         getDataModal(section_id, widget_id, page_actual);
-    }, 5000);
+    }, 3000);
 }
 
 window.addEventListener('load', function() {
