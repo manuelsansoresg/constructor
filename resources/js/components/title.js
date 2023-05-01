@@ -257,7 +257,7 @@ window.addEventListener('load', function() {
         let widget_id     = $('#modal-carusel-widget_id').val();
         let page_actual   = $('#modal-carusel-page_actual').val();
     
-        setTimer(section_id, widget_id, page_actual);
+        getDataModal(section_id, widget_id, page_actual);
     }
     
     if (document.getElementById('modal-texto-section_id')) {
@@ -281,7 +281,7 @@ window.addEventListener('load', function() {
         let widget_id     = $('#modal-parallax-widget_id').val();
         let page_actual   = $('#modal-parallax-page_actual').val();
     
-        setTimer(section_id, widget_id, page_actual);
+        getDataModal(section_id, widget_id, page_actual);
     }
     
     if (document.getElementById('modal-video-section_id')) {
@@ -289,7 +289,7 @@ window.addEventListener('load', function() {
         let widget_id     = $('#modal-video-widget_id').val();
         let page_actual   = $('#modal-video-page_actual').val();
     
-        setTimer(section_id, widget_id, page_actual);
+        getDataModal(section_id, widget_id, page_actual);
     }
     
     if (document.getElementById('modal-gallery-section_id')) {
@@ -297,14 +297,14 @@ window.addEventListener('load', function() {
         let widget_id     = $('#modal-gallery-widget_id').val();
         let page_actual   = $('#modal-gallery-page_actual').val();
     
-        setTimer(section_id, widget_id, page_actual);
+        getDataModal(section_id, widget_id, page_actual);
     }
     if (document.getElementById('modal-contacto-section_id')) {
         let section_id    = $('#modal-contacto-section_id').val();
         let widget_id     = $('#modal-contacto-widget_id').val();
         let page_actual   = $('#modal-contacto-page_actual').val();
     
-        setTimer(section_id, widget_id, page_actual);
+        getDataModal(section_id, widget_id, page_actual);
     }
     
     if (document.getElementById('modal-product-section_id')) {
@@ -312,7 +312,7 @@ window.addEventListener('load', function() {
         let widget_id     = $('#modal-product-widget_id').val();
         let page_actual   = $('#modal-product-page_actual').val();
     
-        setTimer(section_id, widget_id, page_actual);
+        getDataModal(section_id, widget_id, page_actual);
     }
 
 });
