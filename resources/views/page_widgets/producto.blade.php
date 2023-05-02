@@ -59,8 +59,8 @@
                                 <input type="hidden" name="data[widget_id]" id="modal-product-section_id" value="{{ $section_id }}">
                                 <input type="hidden" name="product_id" id="modal-product-widget_id" value="{{ (isset($query->id))? $query->id : 'null' }}">
                                 <input type="hidden" name="page_actual" id="modal-product-page_actual" value="{{$page}}">
-                                <button type="button" class="btn btn-outline-secondary" onclick="closeModalSection('modal-widget-product')">Cerrar</button>
-                                <button type="submit" class="btn btn-outline-primary">Agregar</button>
+                                <a type="button" href="/admin/home" class="btn btn-outline-secondary" >Cerrar</a>
+                                <button type="submit" class="btn btn-outline-primary">Guardar</button>
                             </div>
                         </form>
                     </div>

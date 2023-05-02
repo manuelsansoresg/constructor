@@ -254,9 +254,9 @@ class WidgetBuilder extends Model
 
             case 'Encabezado':
                 try {
-                    $widget = WidgetHeader::find($widget_id)->first();
-                    @unlink('files/' . $widget->image);
+                    $widget = WidgetHeader::find($widget_id);
                     if ($widget != null) {
+                        @unlink('files/' . $widget->image);
                         $widget->image = '';
                         $widget->update();
                     }

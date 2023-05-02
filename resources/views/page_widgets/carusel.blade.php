@@ -40,19 +40,48 @@
                                 <label for="InputWidget">Orden</label>
                                 <input type="text" class="form-control" name="order" id="carusel-order">
                             </div>
-
+                           @if ($query != null && $query->imagen1 != '')
+                           <div class="col-12 col-md-4 mt-3">
+                            <img class="img-fluid" src="{{ asset('files/' . $query->imagen1) }}" alt="" />
+                            <div class="d-block mt-3">
+                                <button class="btn btn-outline-danger btn-block" onclick="deleteImage({{$query->id}}, 'Slider', 'imagen1')">Borrar</button>
+                            </div>
+                            </div>
+                           
+                            @else
                             <div class="form-group">
                                 <label for="InputWidget">Imagen1</label>
                                 <input type="file" class="form-control" name="imagen1">
                             </div>
-                            <div class="form-group">
+                           @endif
+
+                           @if ($query != null && $query->imagen2 != '')
+                           <div class="col-12 col-md-4 mt-3">
+                                <img class="img-fluid" src="{{ asset('files/' . $query->imagen2) }}" alt="" />
+                                <div class="d-block mt-3">
+                                    <button class="btn btn-outline-danger btn-block" onclick="deleteImage({{$query->id}}, 'Slider', 'imagen2')">Borrar</button>
+                                </div>
+                            </div>
+                           @else
+                           <div class="form-group">
                                 <label for="InputWidget">Imagen2</label>
                                 <input type="file" class="form-control" name="imagen2">
                             </div>
-                            <div class="form-group">
-                                <label for="InputWidget">Imagen3</label>
-                                <input type="file" class="form-control" name="imagen3">
+                           @endif
+                          @if ($query != null && $query->imagen3 != '')
+                          <div class="col-12 col-md-4 mt-3">
+                            <img class="img-fluid" src="{{ asset('files/' . $query->imagen3) }}" alt="" />
+                            <div class="d-block mt-3">
+                                <button class="btn btn-outline-danger btn-block" onclick="deleteImage({{$query->id}}, 'Slider', 'imagen3')">Borrar</button>
                             </div>
+                        </div>
+                          @else
+                          <div class="form-group">
+                            <label for="InputWidget">Imagen3</label>
+                            <input type="file" class="form-control" name="imagen3">
+                        </div>
+                          @endif
+                           
 
 
                             <div class="row" style="display: none" id="loading-carusel">

@@ -94,6 +94,9 @@ Route::group(['prefix' => 'admin'], function () {
     /* Route::post('/page/constructor/install-domain', [App\Http\Livewire\ConstructorComponent::class, 'installDomain']); */
     Route::resource('/domains', App\Http\Controllers\DomainController::class);
     Route::get('/domains/{domain_id}/delete', [App\Http\Controllers\DomainController::class, 'destroy']);
+
+    Route::get('image/{widget_id}/{name_widget}/{name_image}/delete', [App\Http\Livewire\ConstructorComponent::class, 'deleteImage']);
+
 });
 
 Route::group(['prefix' => 'api'], function () {

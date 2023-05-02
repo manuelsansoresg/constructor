@@ -310,7 +310,7 @@
                                                             </div>
                                                             <div class="card-body">
                                                                 <div class="row">
-                                                                    <div class="col-12  text-center">
+                                                                    <div class="col-12  text-center table-responsive">
                                                                         <?php $get_elements = $widget_builder->elementsProduct($query->id) ?>
                                                                
                                                                             <table class="table">
@@ -339,10 +339,10 @@
                                                                                         
                                                                                         <td>
                                                                                             <div class="col-12">
-                                                                                                <a class="btn btn-outline-primary btn-block" onclick="editProduct(6, {{ $query->id }}, {{ $element->id }}, {{ $page_actual->id }})">Editar</a>
+                                                                                                <a class="btn btn-outline-primary btn-block btn-sm" onclick="editProduct(6, {{ $query->id }}, {{ $element->id }}, {{ $page_actual->id }})">Editar</a>
                                                                                             </div>
                                                                                             <div class="col-12 mt-3">
-                                                                                                <button class="btn btn-outline-danger" wire:click="deleteElementProduct({{ $element->id }})">Borrar</button>
+                                                                                                <button class="btn btn-outline-danger btn-sm" wire:click="deleteElementProduct({{ $element->id }})">Borrar</button>
                                                                                             </div>
                                                                                         </td>
                                                                                     </tr>
