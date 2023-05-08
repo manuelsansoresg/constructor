@@ -11,13 +11,16 @@ use App\Models\WidgetBuilder;
 use App\Models\WidgetContact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class LandingController extends Controller
 {
     public function index(Request $request)
     {
         $domain = 'pruebamotosmexico.com';
-        $get_domain = Domain::where('name', $domain)->first();
+        /* 
+        $get_domain = Domain::where('name', $domain)->first(); */
+        $get_domain = Session::get('domain_id') != null  ? Domain::find(Session::get('domain_id')) : $get_domain = Domain::where('name', $domain)->first();;
         $domain_id = $get_domain->id;
         $page           = ($request->segment(1) === null) ? '/' : $request->segment(1);
         $setting        = Setting::get($domain_id);
