@@ -196,8 +196,13 @@
             <?php $parallax = $widget_builder->pageParallax($my_widget['widget_id'], 5, $domain_id); ?>
             <input type="hidden" id="parallax" value="true">
             @foreach ($parallax as $parallax)
-                <div class="parallax-window mt-5" data-parallax="scroll"
-                    data-image-src="{{ asset('files/' . $parallax->image) }}"></div>
+            <div class="parallax-container">
+                <div class="parallax-img" style="background-image: url('{{ asset('files/' . $parallax->image) }}')"></div>
+                <div class="parallax-overlay"></div>
+                <div class="parallax-content">
+                    <!-- Your content goes here... -->
+                </div>
+            </div>
             @endforeach
         @endif
         @if ($my_widget['id_rel'] == 6)

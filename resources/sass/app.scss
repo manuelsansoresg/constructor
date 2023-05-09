@@ -132,6 +132,40 @@
   .nav-item > a:hover{
     opacity: 0.6 !important;
   }
+
+
+.parallax-container {
+    position: relative;
+    overflow: hidden;
+    height: 500px; /* Set your own height here... */
+    margin-top: 50px; /* Set your own margin here... */
+}
+
+.parallax-img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    z-index: -1;
+}
+
+.parallax-overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Set your own overlay color here... */
+}
+
+.parallax-content {
+    position: relative;
+    z-index: 1;
+    /* Your content styles go here... */
+}
 // Bootstrap
 // Already imported by AdminLTE
 //@import '~bootstrap/scss/bootstrap';

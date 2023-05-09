@@ -13,9 +13,9 @@ require('./components/addImage')
 require('./components/addWidgets')
 require('./components/domain')
 
-if (document.getElementById('parallax')) {
+if ($(window).width() > 768) {
     $('.parallax-window').parallax();
-}
+  }
 
 function openModal() {
     if (document.getElementById('domain_id')) {

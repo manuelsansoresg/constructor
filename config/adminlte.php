@@ -491,24 +491,6 @@ return [
                     'asset' => false,
                     'location' => 'https://cdn.ckeditor.com/4.16.1/full-all/lang/es.js',
                 ],
-              /*   */
-                /* 
-                 */
-                /* [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => 'https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/font-size/build/ckeditor.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => 'https://cdn.ckeditor.com/ckeditor5/30.0.0/color/build/ckeditor.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => 'https://cdn.ckeditor.com/ckeditor5/30.0.0/ckfinder/build/ckeditor.js',
-                ], */
             ],
         ],
         'App' => [
@@ -522,7 +504,7 @@ return [
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => 'css/app.css',
+                    'location' => 'css/app.css?version='.time(),
                 ],
             ],
         ],
