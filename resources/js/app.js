@@ -13,9 +13,13 @@ require('./components/addImage')
 require('./components/addWidgets')
 require('./components/domain')
 
-if ($(window).width() > 768) {
-    $('.parallax-window').parallax();
-  }
+/* if (document.getElementsByClassName('parallax-window')) {
+    if ($(window).width() > 768) {
+        $('.parallax-window').parallax();
+      }
+} */
+
+
 
 function openModal() {
     if (document.getElementById('domain_id')) {
