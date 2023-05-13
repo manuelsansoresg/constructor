@@ -41,10 +41,23 @@
                                    <input type="text" class="form-control" name="data[order]" id="two-columns-order">
                                </div>
            
+                               @if ($query->image != null)
+                                   <div class="col-12 col-md-3">
+                                    <div class="text-center">
+                                         <img src="{{ asset('files/' . $query->image) }}" alt="Profiler"
+                                         class="preview_admin">
+                                    </div>
+                                     <div class="d-block mt-3">
+                                         <button class="btn btn-outline-danger btn-block" onclick="deleteImage({{$query->id}}, '2 columnas', 'image')">Borrar</button>
+                                     </div>
+                                 </div>
+                               @else
                                <div class="form-group">
-                                   <label for="InputWidget">Imagen</label>
-                                   <input type="file" class="form-control" name="image">
-                               </div>
+                                    <label for="InputWidget">Imagen</label>
+                                    <input type="file" class="form-control" name="image">
+                                </div>
+                               @endif
+                              
            
                                <div class="form-group">
                                    <label for="InputWidget">*Título</label>

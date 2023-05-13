@@ -41,7 +41,7 @@
                                     <input type="text" class="form-control" name="data[order]" id="texto-order">
                                 </div>
 
-                                <div class="form-group" wire:ignore>
+                               {{--  <div class="form-group" wire:ignore>
                                     <label for="InputWidget">Alineacion</label>
                                     <select name="data[align]" id="texto-align" class="form-control">
                                         <option value="">Seleccione una opción</option>
@@ -49,7 +49,7 @@
                                         <option value="text-right">Derecha</option>
                                         <option value="text-center">Centro</option>
                                     </select>
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group">
                                     <label for="InputWidget">Alto</label>

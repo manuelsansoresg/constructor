@@ -70,7 +70,7 @@ window.deleteImage = function(widget_id, name_widget, name_image) {
     axios
     .get("/admin/image/"+widget_id+"/"+name_widget+"/"+name_image+"/delete")
     .then(function (response) {
-        /* location.reload(); */
+        location.reload();
     })
     .catch(e => { });
 }

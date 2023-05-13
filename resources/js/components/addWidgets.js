@@ -283,10 +283,7 @@ function showInfo(redirect) {
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) { 
-            if (redirect == 1) { //*redirect back
-                window.history.back();
-            }
-            location.reload();
+            window.history.back();
         }
     })
 

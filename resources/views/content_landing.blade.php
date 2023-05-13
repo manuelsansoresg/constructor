@@ -178,18 +178,19 @@
         @if ($my_widget['id_rel'] == 4)
             <?php $two_columns = $widget_builder->pageTwoColumns($my_widget['widget_id'], 4, $domain_id); ?>
             @foreach ($two_columns as $two_column)
-                <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            {!! $two_column->title !!}
-                            {!! $two_column->subtitle !!}
-                            {!! $two_column->description !!}
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <img src="{{ asset('files/' . $two_column->image) }}" class="img-fluid">
-                        </div>
-                    </div>
+            <div class="container mt-5">
+                <div class="row align-items-center">
+                  <div class="col-6 d-flex flex-column justify-content-center">
+                    <h4>{!! $two_column->title !!}</h4>
+                    <h5>{!! $two_column->subtitle !!}</h5>
+                    <p>{!! $two_column->description !!}</p>
+                  </div>
+                  <div class="col-6 d-flex flex-column justify-content-center">
+                    <img src="{{ asset('files/' . $two_column->image) }}" class="img-fluid">
+                  </div>
                 </div>
+              </div>
+              
             @endforeach
         @endif
         @if ($my_widget['id_rel'] == 5)
@@ -283,13 +284,11 @@
         @if ($my_widget['id_rel'] == 8)
             <?php $gallery = $widget_builder->pageGallery($my_widget['widget_id'], 8, $domain_id); ?>
             {{-- <input type="hidden" id="gallery" value="true"> --}}
+            <div class="container-fluid mt-5">
+                <div class="row justify-content-center pb-5">
             @foreach ($gallery as $query)
-                <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="col-12 d-flex justify-content-center flex-wrap">
                                 @if ($query->imagen1 != '')
-                                    <div class="col-12 {{ ($query->size_col_image1 == null) ? 'col-md-3' : $query->size_col_image1 }} mt-4 offset-md-1">
+                                    <div class="col-12 {{ ($query->size_col_image1 == null) ? 'col-md-3' : $query->size_col_image1 }} mt-4">
                                        <a href="{{ $query->linkimagen1 !== '' ? $query->linkimagen1 : '#' }}">
                                             <img class="img-fluid" src="{{ asset('files/' . $query->imagen1) }}"
                                             alt="" />
@@ -297,7 +296,7 @@
                                     </div>
                                 @endif
                                 @if ($query->imagen2 != '')
-                                    <div class="col-12 {{ ($query->size_col_image2 == null) ? 'col-md-3' : $query->size_col_image2 }} mt-4 offset-md-1">
+                                    <div class="col-12 {{ ($query->size_col_image2 == null) ? 'col-md-3' : $query->size_col_image2 }} mt-4">
                                         <a href="{{ $query->linkimagen2 !== '' ? $query->linkimagen2 : '#' }}">
                                         </a>
                                         <img class="img-fluid" src="{{ asset('files/' . $query->imagen2) }}"
@@ -305,7 +304,7 @@
                                     </div>
                                 @endif
                                 @if ($query->imagen3 != '')
-                                    <div class="col-12 {{ ($query->size_col_image3 == null) ? 'col-md-3' : $query->size_col_image3 }} mt-4 offset-md-1">
+                                    <div class="col-12 {{ ($query->size_col_image3 == null) ? 'col-md-3' : $query->size_col_image3 }} mt-4">
                                         <a href="{{ $query->linkimagen3 !== '' ? $query->linkimagen3 : '#' }}">
                                             <img class="img-fluid" src="{{ asset('files/' . $query->imagen3) }}"
                                                 alt="" />
@@ -313,7 +312,7 @@
                                     </div>
                                 @endif
                                 @if ($query->imagen4 != '')
-                                    <div class="col-12 {{ ($query->size_col_image4 == null) ? 'col-md-3' : $query->size_col_image4 }} mt-4 offset-md-1">
+                                    <div class="col-12 {{ ($query->size_col_image4 == null) ? 'col-md-3' : $query->size_col_image4 }} mt-4">
                                         <a href="{{ $query->linkimagen4 !== '' ? $query->linkimagen4 : '#' }}">
                                             <img class="img-fluid" src="{{ asset('files/' . $query->imagen4) }}"
                                                 alt="" />
@@ -321,7 +320,7 @@
                                     </div>
                                 @endif
                                 @if ($query->imagen5 != '')
-                                    <div class="col-12 {{ ($query->size_col_image5 == null) ? 'col-md-3' : $query->size_col_image5 }} mt-4 offset-md-1">
+                                    <div class="col-12 {{ ($query->size_col_image5 == null) ? 'col-md-3' : $query->size_col_image5 }} mt-4">
                                         <a href="{{ $query->linkimagen5 !== '' ? $query->linkimagen5 : '#' }}">
                                             <img class="img-fluid" src="{{ asset('files/' . $query->imagen5) }}"
                                                 alt="" />
@@ -336,11 +335,9 @@
                                         </a>
                                     </div>
                                 @endif
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
-            @endforeach
         @endif
         @if ($my_widget['id_rel'] == 9)
             <?php $contacto = $widget_builder->pageContact($my_widget['widget_id'], 9, $domain_id); ?>

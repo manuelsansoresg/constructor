@@ -429,10 +429,59 @@ $(function () {
     /* Encabezado */
     
     if (document.getElementById('encabezado-title')) {
-        let ckeditor = CKEDITOR.replace('encabezado-title', {
-            language: 'es-mx',
+        CKEDITOR.replace( 'encabezado-title', {
+            toolbar: [
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Font', 'FontSize', 'TextColor', 'BGColor', 'RemoveFormat'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+                { name: 'insert', items: ['Image', 'Table'] }
+            ],
+            font_names: 'Arial/Arial, Helvetica, sans-serif;' +
+                'Comic Sans MS/Comic Sans MS, cursive;' +
+                'Courier New/Courier New, Courier, monospace;' +
+                'Georgia/Georgia, serif;' +
+                'Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;' +
+                'Tahoma/Tahoma, Geneva, sans-serif;' +
+                'Times New Roman/Times New Roman, Times, serif;' +
+                'Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;' +
+                'Verdana/Verdana, Geneva, sans-serif',
+            fontSize_sizes: '8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;',
+            language: 'es',
+            extraPlugins: 'image2,font',
+            image2_alignClasses: ['image-align-left', 'image-align-center', 'image-align-right'],
+            image2_captionedClass: 'image-captioned',
+            filebrowserUploadMethod: 'form',
+            removePlugins: 'elementspath',
+            allowedContent: true,
+            removeFormatAttributes: '',
+            removeButtons: '',
+            removeDialogTabs: '',
+            filebrowserImageUploadUrl: '/admin/texto/image/upload',
+            filebrowserImageBrowseUrl: '/admin/texto/image/server',
+            filebrowserWindowWidth: '800',
+            filebrowserWindowHeight: '500',
+            image2_prefillDimensions: true,
+            image2_disableResizer: false,
+            on: {
+                fileUploadRequest: function(evt) {
+                    var xhr = evt.data.fileLoader.xhr;
+                    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                },
+                fileUploadResponse: function(evt) {
+                    var response = JSON.parse(evt.data.fileLoader.xhr.responseText);
+                    if (response.uploaded) {
+                        $('#image-input').val(response.url);
+                    }
+                }
+            }
         });
-        CKEDITOR.config.extraPlugins = 'colorbutton';
+        
+        // Add an event listener for contentDom event
+        CKEDITOR.instances.encabezado-title.on('contentDom', function() {
+            // Get the editable element
+            var editable = CKEDITOR.instances.encabezado-title.editable();
+            // Attach a click listener to it
+            editable.attachListener(editable, 'click', onImageClick);
+        });
     }
     if (document.getElementById('encabezado-phone')) {
         let ckeditor = CKEDITOR.replace('encabezado-phone', {
@@ -453,7 +502,7 @@ $(function () {
         CKEDITOR.replace( 'texto-content', {
             toolbar: [
                 { name: 'basicstyles', items: ['Bold', 'Italic', 'Font', 'FontSize', 'TextColor', 'BGColor', 'RemoveFormat'] },
-                { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
                 { name: 'insert', items: ['Image', 'Table'] }
             ],
             font_names: 'Arial/Arial, Helvetica, sans-serif;' +
