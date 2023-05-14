@@ -890,22 +890,42 @@ $(function () {
     /* video */
     if (document.getElementById('video-title')) {
         let ckeditor = CKEDITOR.replace('video-title', {
+             toolbar: [
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Font', 'FontSize', 'TextColor', 'BGColor', 'RemoveFormat'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+                { name: 'insert', items: [ 'Table'] }
+            ],
             language: 'es-mx',
         });
     }
     if (document.getElementById('video-subtitle')) {
         let ckeditor = CKEDITOR.replace('video-subtitle', {
+             toolbar: [
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Font', 'FontSize', 'TextColor', 'BGColor', 'RemoveFormat'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+                { name: 'insert', items: [ 'Table'] }
+            ],
             language: 'es-mx',
         });
     }
     if (document.getElementById('video-description')) {
         let ckeditor = CKEDITOR.replace('video-description', {
+             toolbar: [
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Font', 'FontSize', 'TextColor', 'BGColor', 'RemoveFormat'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+                { name: 'insert', items: [ 'Table'] }
+            ],
             language: 'es-mx',
         });
     }
     
     if (document.getElementById('product-element-description')) {
         let ckeditor = CKEDITOR.replace('product-element-description', {
+            toolbar: [
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Font', 'FontSize', 'TextColor', 'BGColor', 'RemoveFormat'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+                { name: 'insert', items: [ 'Table'] }
+            ],
             language: 'es-mx',
         });
     }
