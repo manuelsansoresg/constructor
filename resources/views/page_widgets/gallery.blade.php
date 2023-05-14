@@ -46,7 +46,7 @@
                             </div>
         
                             <h5>Sección galería</h5>
-                            @if ($query->imagen1 != '')
+                            @if (isset($query->imagen1) && $query->imagen1 != '')
                             <div class="col-12 col-md-4">
                                 <img class="img-fluid" src="{{ asset('files/' . $query->imagen1) }}" alt="" />
                                 <div class="d-block mt-3">
@@ -84,7 +84,7 @@
                                 <label for="InputWidget">Enlace imagen1</label>
                                 <input type="text" class="form-control" name="data[linkimagen1]" value="{{ isset($query->linkimagen1) ? $query->linkimagen1 : null }}">
                             </div>
-                            @if ($query->imagen2 != '')
+                            @if (isset($query->imagen2) && $query->imagen2 != '')
                             <div class="col-12 col-md-4">
                                 <img class="img-fluid" src="{{ asset('files/' . $query->imagen2) }}" alt="" />
                                 <div class="d-block mt-3">
@@ -120,7 +120,7 @@
                                 <label for="InputWidget">Enlace imagen2</label>
                                 <input type="text" class="form-control" name="data[linkimagen2]" value="{{ isset($query->linkimagen2) ? $query->linkimagen2 : null }}">
                             </div>
-                            @if ($query->imagen3 != '')
+                            @if (isset($query->imagen3) && $query->imagen3 != '')
                             <div class="col-12 col-md-4">
                                 <img class="img-fluid" src="{{ asset('files/' . $query->imagen3) }}" alt="" />
                                 <div class="d-block mt-3">
@@ -156,7 +156,7 @@
                                 <label for="InputWidget">Enlace imagen3</label>
                                 <input type="text" class="form-control" name="data[linkimagen3]" value="{{ isset($query->linkimagen3) ? $query->linkimagen3 : null }}">
                             </div>
-                            @if ($query->imagen4 != '')
+                            @if (isset($query->imagen4) && $query->imagen4 != '')
                             <div class="col-12 col-md-4">
                                 <img class="img-fluid" src="{{ asset('files/' . $query->imagen4) }}" alt="" />
                                 <div class="d-block mt-3">
@@ -193,7 +193,7 @@
                                 <label for="InputWidget">Enlace imagen4</label>
                                 <input type="text" class="form-control" name="data[linkimagen4]" value="{{ isset($query->linkimagen4) ? $query->linkimagen4 : null }}">
                             </div>
-                            @if ($query->imagen5 != '')
+                            @if (isset($query->imagen5) && $query->imagen5 != '')
                             <div class="col-12 col-md-4">
                                 <img class="img-fluid" src="{{ asset('files/' . $query->imagen5) }}" alt="" />
                                 <div class="d-block mt-3">
@@ -229,7 +229,7 @@
                                 <label for="InputWidget">Enlace imagen5</label>
                                 <input type="text" class="form-control" name="data[linkimagen5]" value="{{ isset($query->linkimagen5) ? $query->linkimagen5 : null }}">
                             </div>
-                            @if ($query->imagen6 != '')
+                            @if (isset($query->imagen6) && $query->imagen6 != '')
                             <div class="col-12 col-md-4">
                                 <img class="img-fluid" src="{{ asset('files/' . $query->imagen6) }}" alt="" />
                                 <div class="d-block mt-3">
