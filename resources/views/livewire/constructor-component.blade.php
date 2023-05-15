@@ -306,7 +306,7 @@
                                                     @foreach ($products as $query)
                                                         <div class="card mt-5 shadow">
                                                             <div class="card-header">
-                                                                <h5>Sección Producto Orden({{ $query->order }})</h5>
+                                                                <h5>Sección Catálogo Orden({{ $query->order }})</h5>
                                                             </div>
                                                             <div class="card-body">
                                                                 <div class="row">

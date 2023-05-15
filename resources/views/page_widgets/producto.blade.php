@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Producto')
+@section('title', 'Catálogo')
 
 @section('content_header')
     <div class="content-header">
@@ -8,7 +8,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">
-                        Sección producto
+                        Sección catálogo
                     </h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -16,7 +16,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/admin/home">Páginas</a></li>
-                        <li class="breadcrumb-item active">PRODUCTO</li>
+                        <li class="breadcrumb-item active">Catálogo</li>
                     </ol>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <div class="card">
                     <div class="card-body">  
                         <form action="" id="frm-product">
-                            <h5>Sección Producto</h5>
+                            <h5>Sección Catálogo</h5>
 
                             <div class="form-group">
                                 <label for="InputWidget">Orden</label>
